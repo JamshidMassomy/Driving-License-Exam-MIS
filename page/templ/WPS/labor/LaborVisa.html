@@ -1,0 +1,46 @@
+﻿
+<div class="div-form" id="dvWPS_dbo_LaborVisa" parent="dvWPS_dbo_Labor">
+    <h2><img src="../../skin/icon/minus65.png" class="arrow" title="Show hide details" />معلومات ویزه و دوخلی کارگر</h2>
+
+    <!--<select id="uxLaborID" path="look.LaborID" rule="{fn:'required'}" vgroup="w"></select>-->
+
+    <div class="div-row">
+        <label> نوع ویزه </label>
+        <select id="uxVisaTypeID" path="WPS.look.VisaType" rule="{fn:'required'}" vgroup="w"></select>
+    </div>
+    <div class="div-row">
+        <label> تاریخ صدور </label>
+        <input type="text" id="uxVisaIssueDate" rule="{fn:'required'}" vgroup="w" class='date' />
+
+        <label> تاریخ انقضا </label>
+        <input type="text" id="uxVisaExpairDate" rule="{fn:'required'}" vgroup="w" class='date' />
+    </div>
+    <div class="div-row">
+        <label> تاریخ ورود به افغانستان </label>
+        <input type="text" id="uxEnteranceDate" rule="{fn:'required'}" vgroup="w" class='date' />
+
+        <label> ولایت دخولی </label>
+        <select id="uxEnteranceLocationID" path="look.vlocation" filter="ParentID:1" rule="{fn:'required'}" vgroup="w"></select>
+    </div>
+    <div class="div-row">
+        <label> طریق دخول شدن </label>
+        <select id="uxTypeOfEnteranceFilghtGroundID" path="WPS.look.TypeOfEnteranceFilghtGround" rule="{fn:'required'}" vgroup="w"></select>
+    </div>
+
+    <div class="div-form-control">
+        <input type="submit" action="create" value="جدید *" />
+        <input type="submit" action="search" value="جستجو" />
+        <input type="submit" action="save" vgroup="w" value="ثبت" />
+        <input type="submit" action="print" vgroup="w" value="چاپ" posturl="page/templ/FMIS/printout/FeeSlip.html" />
+        <div class="toggler"></div>
+    </div>
+    <grid id="gvWPS_dbo_vLaborVisa" load="true" style="height:200px;">
+        <column id="VisaType" caption=" نوع ویزه "></column>
+        <column id="VisaIssueDate" caption=" تاریخ صدور "></column>
+        <column id="VisaExpairDate" caption=" تاریخ انقضا  "></column>
+        <column id="EnteranceDate" caption=" تاریخ ورود به افغانستان "></column>
+        <column id="EnteranceLocation" caption=" ولایت ورود به افغانستان "></column>
+        <column id="TypeOfEnteranceFilghtGround" caption=" نوع ورود به افغانستان "></column>
+        <command action="remove" src="../../skin/icon/del1.png" />
+    </grid>
+</div>

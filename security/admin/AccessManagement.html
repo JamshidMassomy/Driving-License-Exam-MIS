@@ -1,0 +1,316 @@
+﻿
+<div id="sidebar" class="sidebar">
+    <ul id="uxSidebarUL">
+        <li class="search-bar">
+            <ul class="searcher">
+                <li>
+                    <input type="text" id="uxCriteria" searchcol="UserName" class="search" placeholder="جستجو (اسم رول)" />
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<style type="text/css">
+    .grid th {
+        padding: 5px;
+    }
+
+    .create {
+        display: none;
+    }
+</style>
+<div class="div-form">
+    <h2 class="title">فورم ثبت دسترسی (صفحات )</h2>
+
+    <div class="div-row">
+        <label>حقوق (Role)</label>
+        <div class="bind">
+            <select id="uxRole" path="perm.Role" rule="{fn:'required'}" vgroup="A_" class="w300" />
+        </div>
+    </div>
+    <div class="div-form-control" style="border-top: 0; margin: 0; position: absolute; width: 98%;">
+        <input type="submit" action="save" vgroup="A_" value="ثبت تغییرات" />
+    </div>
+    <h2>صلاحیت های دسترسی در صفحات </h2>
+    <div class="div-grid grid" id="dvRoleAccessParent" style="max-height: 350px; ">
+        <table id="dvRoleAccess">
+            <tbody></tbody>
+        </table>
+    </div>
+    <h2>صلاحیت های دسترسی در عناصر خارجی صفحات </h2>
+    <div class="div-grid grid" id="dvSEORoleAccessParent" style="max-height: 250px; ">
+        <table id="dvSEORoleAccess">
+            <tbody></tbody>
+        </table>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+	//Global variables
+
+    var Accesses = { "": null }, SubAccesses = { "": null }, _screenID = null;
+
+	//-------------------------------
+	// uxRole dropdown (fetch)
+    //-------------------------------
+    
+(function () {
+        var _urlDeserialized = plus.page.prototype.deserialize();
+        var screen = _urlDeserialized.path;
+		plus.data.ajax({
+			type: 'post',
+			url: plus.config.baseUrl + "json/pull.asmx/Fetch", async: false
+			, data: plus.json.write({
+				queries: [{
+                    path: 'perm.Role', screen: screen
+                }, { path: 'pol.Accessibility',sort:['AccessLevel'], screen: screen }
+				]
+			})
+			, success: function (msg) {
+				var output = plus.json.read(msg);
+				var table = output[0];
+				var $combo = $('#uxRole');
+				$combo.append('<option value="">' + ($combo.attr('emptyText') || "&nbsp;&nbsp;---") + '</option>');
+				for (var j = 0; j < table.rows.length; j++) {
+					var row = table.rows[j];
+					$combo.append('<option value="' + row[0] + '">' + row[1] + '</option>');
+				}
+				table = output[1];
+				var count = table.rows.length;
+				for (var i = 0; i < table.rows.length; i++) {
+					Accesses[(i + 3 + (count == 6 ? 0:1)) + ""] = table.rows[i][0];
+					SubAccesses[(i + 4 + (count == 6 ? 0:1)) + ""] = table.rows[i][0];
+				}
+			}
+		});
+	})();
+
+	///------------------------------------
+	// Screen And its External Objects Accessibilities Grid (Fetch, Add, Edit)
+	//-------------------------------------
+
+	$('#uxRole').change(fnBuildStructure);
+
+	$('.div-form-control [action="save"]')
+		.unbind('click')
+		.bind('click', function () {
+			var values = [], sevalues = [];
+
+			//Collect changes for Screen Accessibilities
+			$('#dvRoleAccess tr').each(function (index) {
+				if (index != 0) {
+					var def = "", change = "", changed = { screenid: $(this).attr('dataid'), del: [], insert: [] };
+					eval("def='" + $(this).attr('def') + "'");
+
+					$(this).find('input:radio:checked').each(function (i2) {
+						change = ($(this).attr('index') - 0);
+					});
+					if (def.length || change) {
+						// get deleted
+						if (change != def) {
+							changed.del.push(Accesses[def + ""]);
+							changed.insert.push(Accesses[change + ""]);
+						}
+						if (changed.del.length || changed.insert.length)
+							values.push(changed);
+					}
+				}
+			});
+
+			//Collect changes for Screen External Object Accessibilities
+			$('#dvSEORoleAccess tr').each(function (index) {
+				if (index != 0) {
+					var defsub = "", subchange = "", changed = { screenid: $(this).attr('screenid'), externalid: $(this).attr('subdataid'), del: [], insert: [] };
+					eval("defsub='" + $(this).attr('defsub') + "'");
+
+					$(this).find('input:radio:checked').each(function (i2) {
+						subchange = ($(this).attr('subindex') - 0);
+					});
+					if (defsub.length || subchange) {
+						// get deleted
+						if (subchange != defsub) {
+							changed.del.push(SubAccesses[defsub + ""]);
+							changed.insert.push(SubAccesses[subchange + ""]);
+						}
+						if (changed.del.length || changed.insert.length)
+							sevalues.push(changed);
+					}
+				}
+			});
+
+			//If no change in either of the grids, further actions will be stopped
+			if (!values.length && !sevalues.length) {
+				plus.widget.error("تغییرات در دسترسی ها وارد نگردیده است.");
+				return;
+			}
+
+			//Save changes for Screen Accessibilities
+			if (values.length) {
+				plus.data.post({
+					async: false, url: plus.config.baseUrl + 'json/push.asmx/saveAccesses'
+					, data: plus.json.write({ query: { values: values, RoleID: $('#uxRole').val(),screen: plus.page.prototype.deserialize().path } }),
+					success: function (msg) {
+						var response = plus.json.read(msg);
+						if ($.isArray(response)) response = response[0];
+						if (response.error || response.ResponseType != "SUCCESS") {
+							plus.widget.error(response.error || response.response);
+							return false;
+						}
+						plus.widget.success(response.response || 'معلومات موفقانه ثبت شد.');
+						fnBuildStructure($('#dvRoleAccessParent').scrollTop());
+					}
+				});
+			}
+
+			//Save changes for Screen External Object Accessibilities
+			if (sevalues.length) {
+				plus.data.post({
+					async: false, url: plus.config.baseUrl + 'json/push.asmx/saveSEAccesses'
+                    , data: plus.json.write({ query: { values: sevalues, RoleID: $('#uxRole').val(), screen: plus.page.prototype.deserialize().path } }),
+					success: function (msg) {
+						var response = plus.json.read(msg);
+						if ($.isArray(response)) response = response[0];
+						if (response.error || response.ResponseType != "SUCCESS") {
+							plus.widget.error(response.error || response.response);
+							return false;
+						}
+						plus.widget.success(response.response || 'معلومات موفقانه ثبت شد.');
+						fnBuildExternalObjectStructure($('#dvSEORoleAccessParent').scrollTop());
+					}
+				});
+			}
+
+		});
+
+	//Build Grid for main Screen Accessibilities
+	function fnBuildStructure(scroll) {
+		var _roleID = $('#uxRole').val();
+		if (!_roleID) _roleID = -1;
+		if (_roleID == -1 && $('#dvTconfsys_perm_spGetRoleAccessStructure tr').size()) {
+			// uncheck all
+			$('#dvRoleAccess tr img').attr('src', '../../skin/icon/checked_false-32.png');
+			return;
+		}
+		$('#dvRoleAccess tr').remove();
+		plus.data.ajax({
+			type: 'post',
+			url: plus.config.baseUrl + "json/pull.asmx/Fetch", async: false
+			, data: plus.json.write({
+				queries: [{
+					path: 'perm.spGetRoleAccessStructure', fetchColumns: true
+                    , commandType: 'sp', param: { RoleID: _roleID }
+                    , screen: plus.page.prototype.deserialize().path
+				}]
+			})
+			, success: function (msg) {
+				var output = plus.json.read(msg);
+				if (!output.length) return;
+				output = output[0];
+				var grid = $('#dvRoleAccess tbody');
+
+				var header = $('<tr></tr>').appendTo(grid);
+				header.append('<th></th>')
+
+				for (var i = 0; i < output.columns.length; i++) {
+					var column = output.columns[i];
+					if (column == "ID") continue;
+					$('<th style="' + (i > 2 ? "width:50px; text-align:center;" : "width:200px") + '">' + column + '</th>').appendTo(header);
+				}
+				//templ += '</tr>';
+				var sb = [], rows = output.rows;
+				for (var j = 0; j < rows.length; j++) {
+					var row = rows[j];
+					var sb2 = [], def = "";
+					sb2.push('<tr def="" class="grid-row" dataid="' + row[0] + '">');
+					sb2.push('<td style="width:20px"><img src="' + plus.config.baseUrl + 'skin/icon/edit-50.png" action="Edit" /></td>');
+					for (var i = 0; i < output.columns.length; i++) {
+						var column = output.columns[i], v = row[i];
+
+						if (column == "ID") continue;
+						if (i > 2 && v != "0")
+							def = i;
+						if (i > 2) sb2.push('<td style="text-align:center; width:50px;"><input type="radio" name="S' + j +'" index="' + i + '" ' + (v == "0" ? '' : 'checked="checked"') + ' /></td>');
+						else sb2.push('<td style="width:200px">' + v + '</td>');
+					}
+					sb2.push("</tr>");
+
+					sb.push(sb2.join("").replace('def=""', ('def="' + def + '"')));
+				}
+				grid.append(sb.join(""));
+				if (scroll) $('#dvRoleAccessParent').scrollTop(scroll);
+
+				//On click of button call function for building Screen's External Objects Grid
+				grid.unbind('click').bind('click', function (event) {
+					var target = $(event.target), item = target;
+					var tr = target.parents('tr');
+					if (target.is("IMG")) {
+						_screenID = tr.attr('dataid');
+						fnBuildExternalObjectStructure($('#dvSEORoleAccessParent').scrollTop());
+					}
+
+				});
+			}
+		});
+	}
+
+	//Build Grid for Screen External Objects Accessibilities
+	function fnBuildExternalObjectStructure(scroll) {
+		var _roleID = $('#uxRole').val();
+		if (!_roleID) _roleID = -1;
+		if (_roleID == -1 && $('#dvTconfsys_perm_spGetRoleAccessStructure tr').size()) {
+			// uncheck all
+			$('#dvSEORoleAccess tr img').attr('src', '../../skin/icon/checked_false-32.png');
+			return;
+		}
+		$('#dvSEORoleAccess tr').remove();
+		plus.data.ajax({
+			type: 'post',
+			url: plus.config.baseUrl + "json/pull.asmx/Fetch", async: false
+			, data: plus.json.write({
+				queries: [{
+					path: 'perm.spGetSEORoleAccessStructure', fetchColumns: true
+                    , commandType: 'sp', param: { RoleID: _roleID, ScreenID: _screenID }
+                    , screen: plus.page.prototype.deserialize().path
+				}]
+			})
+			, success: function (msg) {
+				var output = plus.json.read(msg);
+				if (!output.length) return;
+				output = output[0];
+				var subgrid = $('#dvSEORoleAccess tbody');
+
+				var subheader = $('<tr></tr>').appendTo(subgrid);
+
+				for (var i = 0; i < output.columns.length; i++) {
+					var column = output.columns[i];
+					if (column == "ID" || column == "ScreenID") continue;
+					$('<th style="' + (i > 3 ? "width:50px; text-align:center;" : "width:200px") + '">' + column + '</th>').appendTo(subheader);
+				}
+				//templ += '</tr>';
+				var sbSE = [], rows = output.rows;
+				for (var j = 0; j < rows.length; j++) {
+					var row = rows[j];
+					var sb3 = [], defsub = "";
+					sb3.push('<tr defsub="" class="grid-row" screenid="' + row[1] + '" subdataid="' + row[0] + '">');
+					for (var i = 0; i < output.columns.length; i++) {
+						var column = output.columns[i], v = row[i];
+
+						if (column == "ID" || column == "ScreenID") continue;
+						if (i > 3 && v != "0")
+							defsub = i;
+						if (i > 3) sb3.push('<td style="text-align:center; width:50px;"><input type="radio" name="SE' + j + '" subindex="' + i + '" ' + (v == "0" ? '' : 'checked="checked"') + ' /></td>');
+						else sb3.push('<td style="width:200px">' + v + '</td>');
+					}
+					sb3.push("</tr>");
+
+					sbSE.push(sb3.join("").replace('defsub=""', ('defsub="' + defsub + '"')));
+				}
+				subgrid.append(sbSE.join(""));
+				if (scroll) $('#dvSEORoleAccessParent').scrollTop(scroll);
+			}
+		});
+	}
+    //# sourceURL=http://192.168.1.4/app.js
+</script>

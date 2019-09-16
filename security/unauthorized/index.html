@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Traffic Archive  System </title>
+    <link rel="icon" type="image/png" href="http://192.168.1.2/skin/logo/apiplus.ico">
+    <link href="../../skin/style/default.css" rel="stylesheet" />
+    <script>
+        setTimeout(function () {
+            window.location.hash = "";
+            window.location.href = window.location.href.replace('unauthorized', 'login').replace("#", "");
+        }, 4000);
+
+    </script>
+</head>
+<body>
+    <div class="div-logo" id="logo">
+        <!-- <img src="../../skin/logo/Traffic.png" style="width: 40%; opacity: 0.9; margin: 8% 40% 5% 5%" /> -->
+		<img src="../../skin/logo/Traffic.png" style="width: 44%; opacity: 0.5;margin:  1% 2% 3% 4%;">
+    </div>
+    <div style="color: #888;font-size: 24px;position: fixed;right: 200px;text-shadow: 2px 1px 0 rgba(255, 211, 211, 0.4);top: 30%;">
+        <p>
+            <label style="font-size:22px">Your session has timed out.</label>
+        </p>
+        <p>
+            <label>
+                You will be redirected to login page in few seconds
+            </label>
+            <img src="../../skin/img/ajaxloader2.gif" />
+        </p>
+    </div>
+</body>
+</html>

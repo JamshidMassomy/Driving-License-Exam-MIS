@@ -1,0 +1,114 @@
+﻿<div id="sidebar" class="sidebar">
+    <ul id="uxSidebarUL">
+        <li class="search-bar">
+            <ul class="searcher">
+                <li>
+                    <input type="text" id="uxCriteria" searchcol="HRCode" class="search" placeholder="جستجو (کود کادری)" />
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div id="dvTconfsys_dbo_spAddScreen" post="proc" class="div-form " prefix="uxS" afterBind="fnAfterBind">
+    <h2 class="title">Tconfsys :: Screen Screen</h2>
+    <input type="hidden" id="uxSID" />
+    <div class="div-row">
+        <label>Name</label><input id="uxSName" class="search" type="text" rule="{fn:'required'}" vgroup="S" />
+        <label>Description</label><input id="uxSDescription" type="text" rule="{fn:'required'}" vgroup="S" />
+    </div>
+
+    <div class="div-row">
+        <label>Category</label><input id="uxSCategory" class="search" type="text" />
+        <label>Application</label><select class="search w200" id="uxSApplicationID" commandType="sp" path="Tconfsys.dbo.spGeTconfsysData" param="{TableName:'Application'}"></select>
+    </div>
+
+    <div class="div-row">
+        <label>Parent</label><select class="search w200" id="uxSParentID" path="Tconfsys.look.vScreen"></select>
+        <label>Path</label><input id="uxSPath" type="text" rule="{fn:'required'}" vgroup="S" />
+    </div>
+
+    <div class="div-row">
+        <label>Icon</label><input id="uxIconSelect" type="text" class="w200" />
+        <input type="hidden" id="uxSicon" />
+        <label>ObjectSchema</label><input id="uxSObjectSchema" class="search" type="text" rule="{fn:'required'}" vgroup="S" />
+    </div>
+
+    <div class="div-row">
+        <label>ObjectName</label><input id="uxSObjectName" type="text" class="search" rule="{fn:'required'}" vgroup="S" />
+        <label>Is Active</label><input id="uxSIsActive" class="search" type="checkbox" rule="{fn:'required'}" vgroup="S" />
+    </div>
+    <div class="div-row">
+        <label>Sorter</label><input id="uxSSorter" type="text"  rule="{fn:'required'}" vgroup="S" />
+
+    </div>
+    <div class="div-row">
+        <img id="uxPreviewImage" style="width:100px" />
+    </div>
+    <div class="div-form-control">
+        <input type="submit" action="search" value="Search" />
+        <input type="submit" action="create" value="New *" />
+        <input type="submit" action="save" vgroup="S" value="save" />
+        <div class="toggler"></div>
+    </div>
+
+    <grid id="gvTconfsys_reg_vScreen" style="max-height:300px" sort="['Category','Sorter']">
+        <column id="Name" caption="Name"></column>
+        <column id="Description" caption="Description"></column>
+        <column id="Category" caption="Category"></column>
+        <column id="Path" caption="Path"></column>
+        <column id="icon" caption="icon"></column>
+        <column id="ObjectSchema" caption="ObjectSchema"></column>
+        <column id="ObjectName" caption="ObjectName"></column>
+        <column id="IsActive" caption="Is Active"></column>
+        <column id="ApplicationName" caption="ApplicationName"></column>
+        <command action="remove" src="../../skin/icon/del1.png" />
+
+    </grid>
+</div>
+
+<div class="div-form" id="dvTconfsys_dbo_spSaveExternalObject" post="proc" parent="dvTconfsys_dbo_spAddScreen" prefix="uxSE" fkCol="ScreenID">
+    <h2 class="title">Tconfsys :: ScreenExternalObject Screen</h2>
+    <input type="hidden" id="uxSEID" />
+    <div class="div-row">
+        <label>Database</label><select class="search w200" id="uxSEDatabaseID" commandType="sp" path="Tconfsys.dbo.spGeTconfsysData" param="{TableName:'Database'}"></select>
+        <label>ObjectType</label><select class="search w200" id="uxSEObjectTypeID" path="Tconfsys.look.ObjectType"></select>
+    </div>
+
+    <div class="div-row">
+        <label>ObjectName</label><input id="uxSEObjectName" type="text" rule="{fn:'required'}" vgroup="S" />
+        <label>ObjectSchema</label><input id="uxSEObjectSchema" type="text" rule="{fn:'required'}" vgroup="S" />
+    </div>
+
+    <div class="div-row">
+        <label>Is Direct Relation</label><input id="uxSEIsDirectRelation"  type="checkbox" rule="{fn:'required'}" vgroup="S" />
+    </div>
+    <div class="div-form-control">
+        <input type="submit" action="search" value="Search" />
+        <input type="submit" action="create" value="New *" />
+        <input type="submit" action="save" vgroup="S" value="save" />
+        <div class="toggler"></div>
+    </div>
+
+    <grid id="gvTconfsys_reg_vScreenExternalObject" style="max-height:300px" sort="['ScreenID','DatabaseID']">
+        <column id="Screen" caption="Name"></column>
+        <column id="DatabaseName" caption="Description"></column>
+        <column id="ObjectType" caption="Category"></column>
+        <column id="ObjectSchema" caption="ObjectSchema"></column>
+        <column id="ObjectName" caption="ObjectName"></column>
+        <command action="remove" src="../../skin/icon/del1.png" />
+    </grid>
+</div>
+<script>
+    function fnAfterBind() {
+        var text = $('#uxSicon').val();
+        $('#uxIconSelect').val(text);
+        $('#uxPreviewImage').attr('src', plus.config.baseUrl + 'skin/cpanel/' + text + '.png');
+    }
+    $("#uxIconSelect").on('input',function () {
+        var text = $('#uxIconSelect').val();
+        $('#uxSicon').val(text);
+        $('#uxPreviewImage').attr('src', plus.config.baseUrl+'skin/cpanel/' + text + '.png');
+    });
+
+</script>

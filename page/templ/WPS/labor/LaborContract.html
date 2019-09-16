@@ -1,0 +1,37 @@
+﻿
+<div class="div-form" id="dvWPS_dbo_LaborContract" parent="dvWPS_dbo_Labor">
+    <h2><img src="../../skin/icon/minus65.png" class="arrow" title="Show hide details" />معلومات ویزه و دوخلی کارگر</h2>
+
+    <div class="div-row">
+        <label> موسسه </label>
+        <select id="uxOrganizationID" path="WPS.dbo.Organization" rule="{fn:'required'}" vgroup="a"></select>
+    </div>
+
+    <div class="div-row">
+        <label> تاریخ اغاز قرار داد </label>
+        <input type="text" id="uxContractStartDate" rule="{fn:'required'}" vgroup="a" class='date' />
+    </div>
+    <div class="div-row">
+        <label> تاریخ ختم قرار داد </label>
+        <input type="text" id="uxContractEndDate" rule="{fn:'required'}" vgroup="a" class='date' />
+    </div>
+    <div class="div-row">
+        <label> تشریح وظیفه </label>
+        <textarea id="uxJobDescription" rule="{fn:'required'}" vgroup="a"></textarea>
+    </div>
+
+    <div class="div-form-control">
+        <input type="submit" action="create" value="جدید *" />
+        <input type="submit" action="search" value="جستجو" />
+        <input type="submit" action="save" vgroup="w" value="ثبت" />
+        <input type="submit" action="print" vgroup="c" value="چاپ" posturl="page/templ/FMIS/printout/FeeSlip.html" />
+        <div class="toggler"></div>
+    </div>
+    <grid id="gvWPS_dbo_vLaborContract" load="true" style="height:200px;">
+        <column id="Organization" caption=" موسسه "></column>
+        <column id="ContractStartDate" caption=" تاریخ اغاز قرار داد "></column>
+        <column id="ContractEndDate" caption=" تاریخ ختم قرار داد "></column>
+        <column id="JobDescription" caption=" تشریح وظیفه "></column>
+        <command action="remove" src="../../skin/icon/del1.png" />
+    </grid>
+</div>

@@ -1,0 +1,57 @@
+﻿<div id="sidebar" class="sidebar">
+    <ul id="uxSidebarUL">
+        <li class="search-bar">
+            <ul class="searcher">
+                <li>
+                    <input type="text" id="uxCriteria" searchcol="Code" class="search" placeholder="جستجو (کود کادری)" />
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div id="dvPrM_dbo_Services" class="div-form ">
+    <h2 class="title">ثبت و مدیریت پروسه ها</h2>
+    <div class="div-row">
+        <label>کود</label><input id="uxCode" type="text" />
+    </div>
+
+    <div class="div-row">
+        <label>اسم</label><input id="uxName" type="text" rule="{fn:'required'}" vgroup="s" />
+    </div>
+
+    <div class="div-row">
+        <label>تفصیل</label><textarea id="uxDescription" rule="{fn:'required'}" vgroup="s" class="wfull"></textarea>
+    </div>
+
+    <div class="div-row">
+        <label>اداره مربوطه</label> <input id="uxEntityID" type="text" class="auto w400" path="hcm.org.OrgUnit" rule="{fn:'required'}" vgroup="s" />
+    </div>
+
+    <div class="div-row">
+        <label>حالت</label><select id="uxStatusID" path="look.status" fn="like" text="Dari" filter="category:'GE'" rule="{fn:'required'}" vgroup="s"></select>
+    </div>
+
+    <div class="div-row">
+        <label>نسخه</label><input id="uxVersion" type="text" rule="{fn:'required'}" vgroup="s" />
+    </div>
+
+    <div class="div-form-control">
+        <input type="submit" action="search" value="جستجو" />
+        <input type="submit" action="create" value="جدید *" />
+        <input type="submit" action="save" vgroup="s" value="ثبت" />
+        <input type="submit" action="print" vgroup="s" value="چاپ" posturl="page/templ/FMIS/printout/FeeSlip.html" />
+        <div class="toggler"></div>
+    </div>
+
+    <grid id="gvPrM_dbo_vServices">
+        <column id="Code" caption="کود"></column>
+        <column id="Name" caption="اسم"></column>
+        <column id="Description" caption="تفصیل"></column>
+        <column id="Entity" caption="پروسه اداره مربوطه"></column>
+        <column id="Status" caption="حالت"></column>
+        <column id="Version" caption="نسخه"></column>
+        <command action="remove" src="../../skin/icon/del1.png" />
+
+    </grid>
+</div>

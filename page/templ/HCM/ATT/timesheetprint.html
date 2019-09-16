@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html  dir="rtl">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+	<script src="http://172.16.19.121/apiplus/js/external/jquery/jquery-2.1.4.min.js"></script>
+    <style>
+        .printwrapper {
+            display: block;
+            position: relative;
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        td, th {
+            padding: 5px 4px;
+            margin: 0px;
+        }
+
+        .table {
+            width: 100%;
+            border-spacing: 0px;
+            border: 1px solid black;
+            text-align: center;
+        }
+
+            .table thead {
+                background-color: #efefef;
+            }
+        @media only print{
+            .table thead {
+                background-color: #efefef;
+            }
+        }
+        @media print  {
+            .table {
+                min-width: 12cm;
+                max-width: 12cm;
+            }
+            td,th{
+                padding: 1px 1px;
+                margin: 0px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="printwrapper">
+        <table id='table' class="table" border="1">
+            $body
+        </table>
+    </div>
+	
+	<script>
+	
+	</script>
+</body>
+</html>

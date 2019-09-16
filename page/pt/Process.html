@@ -1,0 +1,45 @@
+﻿<div id="sidebar" class="sidebar">
+    <ul id="uxSidebarUL">
+        <li class="search-bar">
+            <ul class="searcher">
+                <li>
+                    <input type="text" id="uxCriteria" searchcol="Code" class="search" placeholder="جستجو (کود کادری)" />
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div id="dvWMS_dbo_Process" class="div-form">
+    <h2 class="title">فورم ثبت پروسه ها</h2>
+    <div class="div-row">
+        <label>کود</label><input id="uxCode" type="text" />
+        <label class="w100">پروسه ی اول است</label><input type="checkbox" class="checkbox" id="uxIsFirstProcess" />
+        
+    </div>
+
+    <div class="div-row">
+        <label>نام دری</label><input id="uxDari" type="text" />
+        <label>نام</label><input id="uxName" type="text" />
+    </div>
+    <div class="div-row">
+        <label>مربوط صفحه</label>
+        <input id="uxScreenID" type="text" rule="{fn:'required'}" vgroup="s" class="auto search w500" path="WMS.dbo.vFMSActiveScreens" searchCol="Path" text="FullObjectPath" fn="like" placeholder="اسم ترتیب کننده " />
+    </div>
+
+
+    <div class="div-form-control">
+        <input type="submit" action="search" value="جستجو" />
+        <input type="submit" action="create" value="جدید *" />
+        <input type="submit" action="save" vgroup="s" value="ثبت" />
+        <div class="toggler"></div>
+    </div>
+
+    <grid id="gvWMS_dbo_vProcess" style="height:300px" >
+        <column id="Code" caption="کود"></column>
+        <column id="FullObjectPath" caption="صفحه"></column>
+        <column id="IsFirstProcess" class="checkBox" caption="پروسه اول است"></column>
+        <column id="Dari" caption="نام دری"></column>
+
+    </grid>
+</div>

@@ -1,0 +1,359 @@
+﻿
+/*
+ * Organogram
+ **/
+div.canvas, div#canvas {
+	padding:4px;
+}
+div.Org-node {
+	width: 215px;
+	background-color:#F4F5F7;
+	border:solid 1px silver;
+	padding:4px;
+}
+
+div.Org-node .node-header {
+	font-weight:bold;
+	font-size:12px;
+	padding:1px;
+	/*margin:4px;*/
+	border-bottom:solid #CCCCCC 1px;
+	cursor:pointer;
+}
+
+div.Org-node .node-header .pick {
+	float:right;
+	cursor:pointer;
+}
+
+div.Org-node .node-content {
+	padding:2px 4px 1px;
+	border-top:solid 1px #ffffff;
+	border-bottom:solid 1px #ffffff;
+	min-height:35px;
+}
+div.short div.Org-node .node-content {
+	display:none;
+}
+div.Org-node .node-content .node-photo {
+	float:left;
+	height:30px;
+}
+
+div.Org-node .node-content span {
+	color:#748484;
+}
+div.Org-node .node-content span.node-name {
+	display:block;
+	color:#2B9BC4;
+	font-weight:bold;
+	font-size:12px;
+}
+div.Org-node .node-footer {
+	border-top:solid #CCCCCC 1px;
+	padding:3px 2px 0px;
+}
+div.short div.Org-node .node-footer {
+	border-top:solid #fff 1px;
+	padding:3px 2px 1px;
+}
+div.Org-node .node-footer .tashkeel-info {
+	float:left;
+}
+div.Org-node .toggler-div {
+	font-weight:bold;
+	font-size:11px;
+	color:#FF7777;
+}
+div.Org-node .node-footer .tashkeel-info label {
+	padding:0px 2px;
+	font-weight:bold;
+	font-size:11px;
+	float:left;
+}
+div.Org-node .node-footer .tashkeel-planned{
+	border-left: solid 1px #ACB0B7;
+	color:#4682B4;
+}
+div.Org-node .node-footer .tashkeel-filled{
+	border-left: solid 1px #ACB0B7;
+	border-right: solid 1px #ffffff;
+	color:green;
+}
+div.Org-node .node-footer .tashkeel-vacant{
+	border-right: solid 1px #ffffff;
+	color:red;
+}
+
+/*
+ * Organogram container
+ **/
+.Organogram > tbody> tr > td, .Organogram > tr > td {
+	min-width:20px;
+	empty-cells:show;
+	padding-top:5px;
+	padding-bottom:5px;
+	padding-left:0px;
+	padding-right:0px;
+	
+	vertical-align: middle;
+}
+
+.node-dividing-top {
+	border-bottom:solid 1px silver;
+	
+}
+.node-dividing-bottom {
+	border-top:solid 1px transparent;
+}
+.node-divided-top {
+	border-bottom:solid 1px silver;
+	
+	border-right:solid 1px silver;
+}
+
+.node-divided-bottom {
+	border-top:solid 1px transparent;
+	border-right:solid 1px silver;
+}
+.last-child, .first-child {
+	border-right: solid 1px transparent;
+}
+
+/*
+ * Flyout dialog
+ */
+div.flyout {
+	position:absolute;
+	width: auto;
+	height:auto;
+	background: none repeat scroll 0 0 padding-box rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(100, 100, 100, 0.4);
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    z-index: 9;
+}
+
+div.flyout-Beeper-nub {
+	background-image: url("ui/organogram_temp/icons/arrow_right.png");
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    height: 16px;
+    position: absolute;
+    right:-10.5px;
+    width: 11px;
+}
+div.flyout-Beeper-nub.left {
+	left: auto;
+	background-image: url("ui/organogram_temp/icons/arrow_left.png");
+	right:-10.5px;
+}
+div.flyout-content {
+	padding:4px;
+	padding-left:10px;
+	min-height: 150px;
+    min-width: 200px;
+}
+div.flyout.draggable .flyout-content {
+	margin-top: 12px;
+}
+div.flyout-menu {
+	min-width:150px;
+	float:right;
+	display:inline-block;
+	margin:2px;
+	font-weight:bold;	
+}
+div.flyout-menu ul {
+	border:solid 1px silver;
+	border-radius: 2px 2px 2px 2px;
+	float:none;
+	display:block;
+	margin-top:5px;
+}
+
+div.flyout-menu ul.user-info, div.flyout-menu ul.user-info li {
+	float:none;
+	display:block;
+	position:relative;
+	height:auto;
+}
+div.flyout-menu ul.user-info li {
+	border-bottom: 0.1px dotted silver;
+	/*background: url('ui/organogram_temp/item-pointer-mover.gif') no-repeat right center;*/
+}
+div.flyout-menu ul.user-info li a {
+	border:0;
+}
+div.flyout-menu ul.user-info li:hover {
+	border: 0;
+	border-bottom: 0.1px dotted silver;
+}
+div.flyout-menu ul.user-info li:hover a {
+	background-color: transparent;
+    background-image: none;
+    border: 0;
+    color:#3072B3;
+}
+div.flyout-menu ul.user-info li:last-child {
+	border-bottom-color:transparent;
+}
+div.flyout-description {
+	width:340px;
+	display:inline-block;
+	float:right;
+	padding:4px 2px 2px 8px;
+	
+	overflow:auto;
+	height:286px;
+}
+img.cross {
+	float:right;
+	cursor:pointer;
+}
+.title {
+	font-weight:bold;
+	border-bottom:solid 1px silver;
+	padding-bottom:0;
+}
+.title h3, .title h2 {
+	line-height:0px;
+}
+.title span.data, .data, .data a {
+	color:#2B9BC4;
+	padding-left:4px;
+}
+.title span.caption {
+	color:black;
+}
+.bold {
+	font-weight:bold;
+}
+table.form  tr td {
+	vertical-align: top;
+}
+table.form.small > tr >td:first-child, table.form td.caption {
+	text-align: right;
+	color:#6F7275;
+}
+img.web {
+	float:left; 
+	margin-right:5px; 
+}
+div.search {
+	color:#173C59;
+	font-style:italic;
+}
+.search-empty {
+	position:absolute;
+	padding-left:4px;
+	padding-right:4px;
+	color:#A0A0A0;
+	left:3px;
+	z-index:-1;
+}
+div.search input[type=text] {
+	background-color:white;
+	border:solid 1px silver;
+	font-size:11px;
+	font-style: normal;
+	color:#173C59;
+}
+div.search input[value=""] {
+	background-color:transparent;
+}
+
+
+
+/*
+ * Organogram nodes coloring based on OrgUnit Type
+ */
+.canvas.coloring div.Directorate {
+	background-color:#E2FCB3;
+	border-color: #B3E25A;
+}
+.canvas.coloring div.Directorate div.node-content {
+	border-bottom-color: #F9FFEF;
+    border-top-color: #F9FFEF;
+}
+.canvas.coloring div.Directorate div.node-footer {
+	border-top-color: #B3E25A;
+}
+.canvas.coloring.short div.Directorate div.node-footer {
+	border-top-color: #F9FFEF;
+}
+.canvas.coloring div.Directorate div.node-header {
+	border-bottom-color:#B3E25A;
+}
+
+.canvas.coloring div.Deputy {
+	background-color: #FCE8B3;
+	border-color:#DBB860;
+}
+.canvas.coloring div.Deputy div.node-content {
+	border-bottom-color: #FFF8D3;
+    border-top-color: #FFF8D3;
+}
+.canvas.coloring div.Deputy div.node-footer {
+	border-top-color: #DBB860;
+}
+.canvas.coloring.short div.Deputy div.node-footer {
+	border-top-color: #FFF8D3;
+}
+.canvas.coloring div.Deputy div.node-header {
+	border-bottom-color:#DBB860;
+}
+
+.canvas.coloring div.GeneralDirectorate {
+	background-color: #C4DCFF;
+    border-color: #8DB8F4;
+}
+.canvas.coloring div.GeneralDirectorate div.node-content {
+	border-bottom-color: #EDF4FF;
+    border-top-color: #EDF4FF;
+}
+.canvas.coloring div.GeneralDirectorate div.node-footer {
+	border-top-color: #8DB8F4;
+}
+.canvas.coloring.short div.GeneralDirectorate div.node-footer {
+	border-top-color: #EDF4FF;
+}
+.canvas.coloring div.GeneralDirectorate div.node-header {
+	border-bottom-color:#8DB8F4;
+}
+
+.canvas.coloring div.Head {
+	background-color: #FFCECE;
+    border-color: #F7B4B4;
+}
+.canvas.coloring div.Head div.node-content {
+	border-bottom-color: #FFF2F2;
+    border-top-color: #FFF2F2;
+}
+.canvas.coloring div.Head div.node-footer {
+	border-top-color: #F7B4B4;
+}
+.canvas.coloring.short div.Head div.node-footer {
+	border-top-color: #FFF2F2;
+}
+.canvas.coloring div.Head div.node-header {
+	border-bottom-color:#F7B4B4;
+}
+
+.canvas.coloring div.Management {
+	background-color: #E9D7F7;
+    border-color: #E2BDFC;
+}
+.canvas.coloring div.Management div.node-content {
+	border-bottom-color: #F8EFFF;
+    border-top-color: #F8EFFF;
+}
+.canvas.coloring div.Management div.node-footer {
+	border-top-color: #E2BDFC;
+}
+.canvas.coloring.short div.Management div.node-footer {
+	border-top-color: #F8EFFF;
+}
+.canvas.coloring div.Management div.node-header {
+	border-bottom-color:#E2BDFC;
+}

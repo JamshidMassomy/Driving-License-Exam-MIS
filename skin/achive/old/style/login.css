@@ -1,0 +1,98 @@
+﻿/**
+ * @version: 1.0.0
+ * @author: reza.khawar@gmail.com
+ * @description: for use only in login page
+ *
+ */
+#login {
+    border: 1px solid #f8f8f8;
+    box-shadow: 2px 2px 5px #555;
+    height: 400px;
+    position: fixed;
+    right: 5%;
+    top: 25%;
+    width: 350px;
+    background: #fff;
+}
+
+    #login h1 {
+        color: #222;
+        font: 2.1em/30px cordiaUPC;
+        padding: 10px 10px 0 20px;
+        text-shadow: 0px 0px 2px #999;
+        text-align:right;
+        /**color selected 415560*/
+    }
+
+    #login p {
+        width: 82.8%;
+        border: solid 1px #e3e3e3;
+        padding: 15px 25px 15px 25px;
+        box-shadow: 0px 0px 3px #e3e3e3;
+        border-left: solid 10px #ff6600;
+        background: #f8f8f8;
+    }
+
+        #login p img {
+            float: left;
+        }
+
+        #login p:hover, #login p:focus {
+            background: #f5f5f5;
+        }
+
+        #login p input {
+            border: 1px solid #E7E7E7;
+            color: #222222;
+            font-size: 1em;
+            height: 30px;
+            padding: 5px 35px 5px 5px;
+            text-shadow: 0 0 3px #999999;
+            width: 250px;
+            background: #fff;
+            direction: ltr;
+        }
+
+    #login .Loginbtn {
+        cursor: pointer;
+        float: left;
+        margin: 10px;
+        width: 50px;
+    }
+
+    #login .home {
+        position: relative;
+        top: 8px;
+        left: 280px;
+        width: 20px;
+        cursor: pointer;
+    }
+
+    #login .setting {
+        position: relative;
+        top: 10px;
+        left: 290px;
+        width: 22px;
+        cursor: pointer;
+    }
+
+    #login span {
+        background: #ff6600 none repeat scroll 0 0;
+        bottom: 6px;
+        display: block;
+        float: left;
+        font-size: 1.2em;
+        height: 26px;
+        padding: 2px;
+        position: relative;
+        text-align: center;
+        width: 346px;
+    }
+
+.div-footer {
+    bottom: 10px;
+    float: left;
+    font: 1.1em/22px Calibri;
+    left: 10px;
+    position: absolute;
+}

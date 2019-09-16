@@ -1,0 +1,46 @@
+﻿<div id="sidebar" class="sidebar">
+    <ul id="uxSidebarUL">
+        <li class="search-bar">
+            <ul class="searcher">
+                <li>
+                    <input type="text" id="uxCriteria" searchcol="UserName" class="search" placeholder="جستجو (اسم کاربر)" />
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div id="dveconfsys_Pol_Owner" class="div-form">
+    <h2 class="title">فورم ثبت موقف ها</h2>
+    <div class="div-row">
+        <label>اداره</label>
+        <!--<select id="uxOrgUnitID" path="PPM.dbo.vOrganization"text="LabelDari" filter="OrganizationTypeID:1" class="w300" rule="{fn:'required'}" vgroup="s"></select>-->
+        <input id="uxOrgUnitID" type="text" path="PPM.dbo.vOrganization" columns="ID,LabelDari,ParentID,ChildNodes" class="tree w500" rule="{fn:'required'}" vgroup="s" />
+    </div>
+    <div class="div-row">
+        <label>عنوان موقف</label><input type="text" id="uxName" class="w500" rule="{fn:'required'}" vgroup="s" placeholder="عنوان موقف را درج نمایید" />
+    </div>
+    <div class="div-row">
+        <label>راپوردهی</label><input type="text" id="uxParentID" class="tree w500" path="pol.Owner" columns="ID,Name,ParentID" placeholder="انتخاب نمایید" />
+    </div>
+    <div class="div-row">
+        <label>نوعیت</label><select id="uxOwnerAccessibilityID" path="look.OwnerAccessibility" text="Dari"></select>
+    </div>
+    <div class="div-row">
+        <label>حالت</label><select id="uxStatusID" path="look.Status" text="Dari" filter="Category:'GE'"></select>
+    </div>
+    <div class="div-form-control">
+        <input type="submit" action="search" value="جستجو" />
+        <input type="submit" action="create" value="جدید*" />
+        <input type="submit" action="save" vgroup="s" value="ثبت" />
+        <div class="toggler"></div>
+    </div>
+
+    <grid id="gveconfsys_Pol_vOwnerList" style="max-height:300px">
+        <column id="Name" caption="عنوان موقف"></column>
+        <column id="Parent" caption="راپور دهی"></column>
+        <column id="Status" caption="حالت"></column>
+        <column id="Organization" caption="اداره"></column>
+        <column id="Dari" caption="نوعیت"></column>
+    </grid>
+</div>

@@ -1,0 +1,124 @@
+﻿
+<div id="sidebar" class="sidebar">
+    <ul id="uxSidebarUL">
+        <li class="search-bar">
+            <ul class="searcher">
+                <li>
+                    <input type="text" searchcol="Code" id="uxCriteria" class="search" placeholder="جستجو" />
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="div-form" id="dvWPS_dbo_Labor">
+    <h2><img src="../../skin/icon/minus65.png" class="arrow" title="Show hide details" />معلومات عمومی در باره کارگر</h2>
+    <div class="div-row" style="display:block">
+
+    </div>
+    <div class="div-row">
+        <label> نوع کارگر </label>
+        <select id="uxLaborTypeID" path="WPS.look.LaborType" rule="{fn:'required'}" vgroup="w"></select>
+    </div>
+    <div class="div-row">
+        <label> جنسیت </label>
+        <select id="uxGenderID" path="look.Gender" rule="{fn:'required'}" vgroup="w"></select>
+    </div>
+    <div class="div-row">
+        <label> اسم  </label>
+        <input type="text" id="uxFirstName" rule="{fn:'required'}" vgroup="w" />
+        <label> کود </label>
+        <input type="text" id="uxCode" class="search" />
+        <!--<label> اسم مابین </label>
+        <input type="text" id="uxMiddleName" rule="{fn:'required'}" vgroup="w" />-->
+    </div>
+
+    <div class="div-row">
+        <label> تخلص </label>
+        <input type="text" id="uxLastName" />
+
+        <!--<label> اسم های دیگر </label>
+        <input type="text" id="uxOtherNames" />-->
+    </div>
+    <div class="div-detail">
+        <br />
+
+        <div class="div-row">
+            <label> اسم پدر </label>
+            <input type="text" id="uxFatherName" />
+
+            <label>  اسم پدرکلان</label>
+            <input type="text" id="uxGrandFatherName" />
+        </div>
+
+        <hr /><br />
+        <div class="div-row">
+            <label> سطح تحصیل </label>
+            <select id="uxEducationTypeID" path="hcm.look.educationLevel" rule="{fn:'required'}" vgroup="w"></select>
+        </div>
+        <div class="div-row">
+            <label> تخصص </label>
+            <textarea id="uxSpecialities"></textarea>
+        </div>
+        <div class="div-row">
+            <label> تاریخ تولد </label>
+            <input type="text" id="uxDateOfBirth" rule="{fn:'required'}" vgroup="w" class='date' />
+        </div>
+        <div class="div-row">
+            <label> نمبر کارت هویت </label>
+            <input type="text" id="uxNIDNo" />
+        </div>
+        <div class="div-row">
+            <label> نمبر پاسپورت </label>
+            <input type="text" id="uxPassportNo" />
+        </div>
+        <div class="div-row">
+            <label> تاریخ صدور پاسپورت </label>
+            <input type="text" id="uxPassportIssueDate" rule="{fn:'required'}" vgroup="w" class='date' />
+
+            <label> تاریخ ختم پاسپورت  </label>
+            <input type="text" id="uxPassportExpairDate" rule="{fn:'required'}" vgroup="w" class='date' />
+        </div>
+        <hr /><br />
+        <div class="div-row">
+            <label> ملیت </label>
+            <select id="uxNationalityID" path="look.Nationality" rule="{fn:'required'}" vgroup="w"></select>
+
+            <label> کشور </label>
+            <select id="uxLocationID" path="look.Nationality" rule="{fn:'required'}" vgroup="w"></select>
+        </div>
+        <div class="div-row">
+            <label> آدرس در کشورش </label>
+            <textarea id="uxAddress" rule="{fn:'required'}" vgroup="w"></textarea>
+        </div>
+        <div class="div-row">
+            <label> ایمل ادرس </label>
+            <input type="text" id="uxEmail" />
+
+            <label> نمبر موبایل </label>
+            <input type="text" id="uxMobile" />
+        </div>
+    </div>
+    <div class="div-form-control">
+        <input type="submit" action="create" value="جدید *" />
+        <input type="submit" action="search" value="جستجو" />
+        <input type="submit" action="save" vgroup="w" value="ثبت" />
+        <input type="submit" action="print" vgroup="w" value="چاپ" posturl="page/templ/FMIS/printout/FeeSlip.html" />
+        <div class="toggler"></div>
+    </div>
+    <grid id="gvWPS_dbo_vLabor" noload="false" style="height:200px;">
+        <column id="Code" caption=" کود "></column>
+        <column id="LaborType" caption=" نوع کارگر "></column>
+        <column id="Gender" caption=" جنسیت "></column>
+        <column id="FirstName" caption=" اسم "></column>
+        <column id="LastName" caption=" تخلص "></column>
+        <column id="EducationType" caption=" سطح تحصیل "></column>
+        <column id="DateOfBirth" caption=" تاریخ تولد "></column>
+        <column id="NIDNo" caption=" نمبر کارت هویت  "></column>
+        <column id="PassportNo" caption=" نمبر پاسپورت "></column>
+        <column id="PassportExpairDate" caption=" تاریخ ختم "></column>
+        <column id="Location" caption=" کشور "></column>
+        <column id="Email" caption=" ایمل "></column>
+        <column id="Mobile" caption=" موبایل "></column>
+        <command action="remove" src="../../skin/icon/del1.png" />
+    </grid>
+</div>

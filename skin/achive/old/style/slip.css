@@ -1,0 +1,48 @@
+﻿body {
+    font-family: Calibri;
+    background-color:transparent;
+}
+
+.banner, #banner {
+    height:110px;
+    display:flex;
+    color:#444444 !important;
+    padding-bottom:20px;
+}
+.logo {
+    background:transparent url("../logo/logo.png") no-repeat scroll center 0px / 74px auto;
+    order:0;
+    width:100px;
+}
+.titles {
+    padding-top:10px;
+}
+.titles h1, .titles, h2, .titles, h3 {
+    /*line-height:10px;*/
+    color:#0314ad !important;
+}
+#content input[type=button], #content input[type=submit], #content button {
+    display:none;
+}
+.div-form-control, .grid {
+    display:none !important ;
+}
+
+#content h2 {
+    display:none;
+}
+hr {
+    background-color: #0314ad;
+    border-color: #0314ad;
+    color: #0314ad;
+    height: 3px;
+    margin-bottom: 20px;
+    width: 97%;
+}
+#content *, #content *:disabled {
+    border-color:transparent;
+    background-color:transparent;
+}
+#content select {
+    padding-right:12px;
+}

@@ -1,0 +1,61 @@
+﻿<style>
+  ._photo{
+      margin-top: -290px;
+      padding: 28em;
+  }
+</style>
+<div id="dveconfsys_xm_Question" class="div-form" prefix="uxL">
+    <h2 class="title"> Question management </h2>
+    <div class="div-row">
+        <label>Question </label>
+        <textarea id="uxLQuestion" rule="{fn:'required'}" vgroup="s"></textarea>   
+    </div>
+    <div class="div-row">
+        <label>Category</label>
+        <select id="uxLCategoryID" path="xm.Category" text="Name"></select>
+    </div>
+    <div class="_photo">
+        <div class="div-photo">
+            <photo dir="XMphoto" ></photo>
+            <input type="hidden" id="uxPStatusID" value="42" default="42" keep="true" />
+        </div>
+    </div>  
+    <div class="div-form-control">
+        <input type="submit" action="create" value="جدید" />
+        <input type="submit" action="save" vgroup="s" value="ثبت" />
+        <input type="submit" action="search" value="جستجو">
+        <div class="toggler"></div>
+    </div>
+    <grid id="gveconfsys_xm_vQuestion" style="max-height:200px;">
+        <column id="Question" caption="Question"></column>
+        <column id="Name" caption="Category"></column>
+    </grid>
+</div>
+<div id="dveconfsys_xm_Choice" class="div-form subform" parent="dveconfsys_xm_Question" prefix="uxM" style="top:10px;">
+    <h2 class="title">Options and Answers</h2>
+    <div class="div-row">
+        <label> Options </label>
+        <textarea type="text" id="uxMLabel" rule="{fn:'required'}" vgroup="s" class="w400"/>
+        
+    </div>
+    <div class="div-row">
+        <label> Score </label>
+        <input type="text" id="uxMPoint" rule="{fn:'phone'}" vgroup="s" />
+    </div>
+    <div class="div-form-control">
+        <input type="submit" action="create" value="جدید" />
+        <input type="submit" action="save" vgroup="s" value="ثبت" />
+        <div class="toggler"></div>
+    </div>
+    <grid id="gveconfsys_xm_vChoice" style="max-height:300px;">
+        <column id="Label" caption="Option"></column>
+        <column id="Point" caption="Score"></column>
+       
+    </grid>
+</div>
+<script>
+ 
+
+
+
+</script>

@@ -1,0 +1,24 @@
+﻿<div id="dvTconfsys_perm_ProcessRole" class="div-form subform" parent="dvWMS_dbo_Process" prefix="uxR">
+    <h2 class="title">فورم ثبت مسئول پروسه</h2>
+    <div class="div-row">
+        <label>حقوق</label>
+        <select path="Tconfsys.perm.Role" id="uxRRoleID" ></select>
+        <label>حالت</label>
+        <select path="Tconfsys.look.Status" id="uxRStatusID" text="Dari" filter="Category:'GE'"></select>
+    </div>
+    
+    
+    <div class="div-form-control">
+        <input type="submit" action="search" value="جستجو" />
+        <input type="submit" action="create" value="جدید *" />
+        <input type="submit" action="save" vgroup="s" value="ثبت" />
+        <div class="toggler"></div>
+    </div>
+
+    <grid id="gvTconfsys_perm_vProcessRole" style="max-height:300px">
+        <column id="ProcessName" caption="پروسه"></column>
+        <column id="RoleName" caption="حقوق"></column>
+        <column id="StatusName" caption="حالت"></column>
+
+    </grid>
+</div>

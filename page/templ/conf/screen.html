@@ -1,0 +1,143 @@
+﻿<script type="text/javascript">
+    $('#GenerateScreen').click(function () {
+        if (!$('#dvTconfsys_reg_spGenerateScreen').data('widget').validate('o')) return false;
+        var query = {};
+        query["dbName"] = $('#uxdbName').val();
+        query["ObjectName"] = $('#uxObjectName').val();
+        query["Prefix"] = $('#uxPrefix').val();
+        query["IsSubForm"] = $('#uxIsSubForm').prop('checked');
+        query["ParentObject"] = $('#uxParentObject').val();
+        query["ElPerRow"] = $('#uxElPerRow').val();
+        query["Lang"] = $('#uxLang').val();
+
+        plus.data.post({
+            service: 'json/pull.asmx/GenerateScreen'
+            , data: JSON.stringify({
+                _query: query
+            }
+
+                ), success: function (msg) {
+                    var output = plus.json.read(msg);
+
+                    $('#uxSourceCode').show();
+                    var j = output[0].rows[output[0].rows.length - 1];
+                    $('#uxViewQuery').val(j);
+                    output[0].rows[output[0].rows.length - 1] = '';
+                    $('#uxHtmlControl').val(output[0].rows.join(""))
+                }
+        });
+
+    })
+    $('#btnPreview').click(function () {
+        $('#uxPreview').show();
+        $('#htmlControl').html($('#uxHtmlControl').val()).show();
+    })
+
+    function setDefaults() {
+        $('#uxPrefix').val('ux');
+        $('#uxdbName').trigger('change');
+    }
+
+    $('#uxdbName').unbind('change').bind('change', function () {
+        var _v = $(this).find('option:selected').text();
+        if (_v) {
+            var _path = (_v == "Tconfsys" ? "" : (_v + ".")) + "INFORMATION_SCHEMA.TABLES";
+            plus.data.ajax({
+                type: 'post',
+                url: plus.config.baseUrl + "json/pull.asmx/Fetch", async: false,
+                data: plus.json.write({ queries: [{ path: _path, columns: ["Table_Name"] /*, filter: [{ Catalog: _v }] */ }] }), success: function (msg) {
+                    var response = plus.json.read(msg);
+                    for (var i = 0; i < response.length; i++) {
+                        var table = response[i], $combo = $('#uxObjectName').find('option').remove().end();
+                        $combo.append('<option value="">---</option>');
+                        for (var j = 0; j < table.rows.length; j++) {
+                            var row = table.rows[j];
+                            $combo.append('<option value="' + row[0] + '">' + row[0] + '</option>');
+                        }
+
+                    }
+
+                }
+            });
+        }
+    });
+</script>
+<style type="text/css">
+    .div-row label, .div-row select, .div-row input[type=text], .div-row input[type=checkbox] {
+        float: left !important;
+        text-align: left;
+    }
+
+    .div-row textarea {
+        text-align: left;
+        width: 100%;
+        min-height: 80px;
+    }
+
+    .div-row h2, h2 {
+        text-align: left;
+    }
+</style>
+
+<div id="sidebar" class="sidebar">
+    <ul id="uxSidebarUL">
+        <li class="search-bar">
+            <ul class="searcher">
+                <li>
+                    <input type="text" searchcol="Code" id="uxCriteria" class="search" placeholder="جستجو" />
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="div-form" id="dvTconfsys_reg_spGenerateScreen" style="direction:ltr; text-align:left " afterbind="setDefaults">
+    <h2><img src="../../skin/icon/minus65.png" class="arrow" title="Show hide details" />Generate Screen</h2>
+    <div class="div-row">
+        <label> Database Name </label>
+        <select id="uxdbName" rule="{fn:'required'}" text="Name" vgroup="o" path="reg.database" onchange="" />
+        <label> Object Name </label>
+        <select id="uxObjectName" rule="{fn:'required'}" vgroup="o" />
+
+        <!--<input type="text" id="uxObjectName" rule="{fn:'required'}" vgroup="o" placeholder="Object Name(table, view)" />-->
+    </div>
+    <div class="div-row">
+        <label> Prefix </label>
+        <input type="text" id="uxPrefix" placeholder="_ux.." />
+        <label> Is Sub form </label>
+        <input type="checkbox" id="uxIsSubForm" rule="{fn:'required'}" vgroup="o" />
+    </div>
+    <div class="div-row">
+        <label> Parental Table </label>
+        <input type="text" id="uxParentObject" />
+        <label> No of control in one row </label>
+        <input type="text" id="uxElPerRow" placeholder="Number only between 1-3" />
+    </div><div class="div-row">
+        <label> Language </label>
+        <select id="uxLang" noempty="true">
+            <option value="E" selected>English</option>
+            <option value="D">Dari</option>
+            <option value="P">Pashto</option>
+        </select>
+    </div>
+
+    <div class="div-form-control">
+
+        <input type="submit" id="GenerateScreen" vgroup="o" value="Generate" style="background:#ff6a00" />
+        <input type="submit" id="btnPreview" value="Perview " style="background:#b4b0b0" />
+    </div>
+
+    <div class="div-row" style="display:none " id="uxSourceCode">
+        <h2 style="margin:2px;">Generated Screen Source</h2>
+        <span style="color:#ff0000; padding:5px 10px; font-size:1.3em">* You can also modify the generated code in the box then run the perview </span>
+        <textarea id="uxHtmlControl" style="width:100%; min-height:400px; height:auto; direction:ltr; text-align:left;"></textarea>
+    </div>
+    <div class="div-row">
+        <h2 style="margin:2px;">Generated View Query</h2>
+        <textarea id="uxViewQuery" style="width:100%; min-height:150px; height:auto; direction:ltr; text-align:left;"></textarea>
+    </div>
+    <div class="div-row" style="display:none;  padding:0px" id="uxPreview" ondblclick="$(this).fadeOut();">
+        <h2>Test screen preview</h2>
+        <div id="htmlControl" style="position:relative; left:255px; ">    </div>
+    </div>
+</div>

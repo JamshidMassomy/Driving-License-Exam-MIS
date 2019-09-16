@@ -1,0 +1,45 @@
+﻿
+<div class="div-form" id="dvWPS_dbo_LaborLocalAddress" parent="dvWPS_dbo_Labor">
+    <h2><img src="../../skin/icon/minus65.png" class="arrow" title="Show hide details" />معلومات آدرس</h2>
+    <div class="div-row">
+        <label> ولایت </label>
+        <select id="uxLocationID" path="look.vLocation" filter="ParentID:1" rule="{fn:'required'}" vgroup="a"></select>
+    </div>
+    <div class="div-row">
+        <label> ناحیه/ولسوالی </label>
+        <select id="uxDistrictID" path="look.vLocation" filter="ParentID:3" rule="{fn:'required'}" vgroup="a"></select>
+    </div>
+    <div class="div-row">
+        <label> آدرس مکمل</label>
+        <textarea id="uxAddress" rule="{fn:'required'}" vgroup="a"></textarea>
+    </div>
+    <div class="div-row">
+        <label> نمبر سرک </label>
+        <input type="text" id="uxStreetNo" />
+    </div>
+    <div class="div-row">
+        <label> نمبر خانه </label>
+        <input type="text" id="uxHouseNo" />
+    </div>
+    <div class="div-row">
+        <label> موبایل </label>
+        <input type="text" id="uxMobile" rule="{fn:'required'}" vgroup="a" />
+    </div>
+
+    <div class="div-form-control">
+        <input type="submit" action="create" value="جدید *" />
+        <input type="submit" action="search" value="جستجو" />
+        <input type="submit" action="save" vgroup="a" value="ثبت" />
+        <input type="submit" action="print" vgroup="a" value="چاپ" posturl="page/templ/FMIS/printout/FeeSlip.html" />
+        <div class="toggler"></div>
+    </div>
+    <grid id="gvWPS_dbo_vLaborLocalAddress" load="true" style="height:200px;">
+        <column id="Location" caption=" ولایت "></column>
+        <column id="District" caption=" ناحیه/ولسوالی "></column>
+        <column id="Address" caption=" آدرس مکمل "></column>
+        <column id="StreetNo" caption=" نمبر سرک "></column>
+        <column id="HouseNo" caption=" نمبر خانه "></column>
+        <column id="Mobile" caption=" موبایل  "></column>
+        <command action="remove" src="../../skin/icon/del1.png" />
+    </grid>
+</div>

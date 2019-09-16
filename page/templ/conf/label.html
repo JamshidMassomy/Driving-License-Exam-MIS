@@ -1,0 +1,63 @@
+﻿<div id="sidebar" class="sidebar">
+    <ul id="uxSidebarUL">
+        <li class="search-bar">
+            <ul class="searcher">
+                <li>
+                    <input type="text" id="uxCriteria" searchcol="HRCode" class="search" placeholder="Search" />
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div id="dvTconfsys_dbo_spSaveLabel" class="div-form " post="proc">
+    <h2 class="title">{{{Tconfsys.LabelScreen.Title}}}</h2>
+    <div class="div-row">
+        <label>Key Name</label><input id="uxID" type="text" class="search" rule="{fn:'required'}" vgroup="s" />
+    </div>
+    <div class="div-row">
+        <label>English</label><input id="uxEnglish" type="text" rule="{fn:'required'}" vgroup="s" />
+    </div>
+
+    <div class="div-row">
+        <label>Dari</label><input id="uxDari" type="text" rule="{fn:'required'}" vgroup="s" />
+    </div>
+
+    <div class="div-row">
+        <label>{{{Tconfsys.LabelScreen.langPashto}}}</label><input id="uxPashto" type="text" />
+    </div>
+
+    <div class="div-form-control">
+        <input type="submit" action="search" value="Search" />
+        <input type="submit" action="create" value="New *" />
+        <input type="submit" action="save" vgroup="s" value="save" />
+        <div class="toggler"></div>
+    </div>
+
+    <grid id="gvDefault_look_Label" style="height:250px;">
+        <column id="ID"  caption="Column Name"></column>
+        <column id="English" caption="English"></column>
+        <column id="Dari" caption="Dari"></column>
+        <column id="Pashto" caption="Pashto"></column>
+        <command action="remove" src="../../skin/icon/del1.png" />
+    </grid>
+</div>
+
+<div class="div-form" id="dvTconfsys_dbo_spSaveScreenLabel" parent="dvTconfsys_dbo_spSaveLabel" fkCol="LabelID" post="proc">
+    <h2 class="title">Tconfsys :: Screen Label</h2>
+    <div class="div-row">
+        <label>Screen </label><select id="uxScreenID" class="" path="Tconfsys.look.vScreen"></select>
+    </div>
+    <div class="div-form-control">
+        <input type="submit" action="create" value="New *" />
+        <input type="submit" action="save" vgroup="s" value="save" />
+    </div>
+    <grid id="gvTconfsys_look_vScreenTranslation">
+        <column id="Screen" caption="Screen"></column>
+        <column id="LabelID" caption="Key Name"></column>
+        <column id="Dari" caption="Dari"></column>
+        <column id="Pashto" caption="Pashto"></column>
+        <column id="English" caption="English"></column>
+        <command action="remove" src="../../skin/icon/del1.png" />
+
+    </grid>
+</div>

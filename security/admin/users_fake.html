@@ -1,0 +1,204 @@
+﻿<div id="sidebar" class="sidebar">
+    <ul id="uxSidebarUL">
+        <li class="search-bar">
+            <ul class="searcher">
+                <li>
+                    <input type="text" id="uxCriteria" searchcol="UserName" class="search" placeholder="جستجو (اسم کاربر)" />
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<style type="text/css">
+    .audit {
+        background-color: #efefef;
+        border-color: #e0e0e0;
+        border: none;
+        background: transparent;
+        max-width: 230px;
+        font-size: 12px;
+        direction: ltr;
+    }
+
+    div.audit {
+        float: left;
+    }
+
+        div.audit::after {
+            content: " : تاریخ ثبت   ";
+            padding-left: 10px;
+            font-weight: bold;
+        }
+
+    .div-row input:disabled, .div-row select:disabled {
+        background: #f1f1f1;
+        border: solid 1px #ddd;
+    }
+
+    .password-button {
+        background-image: url("../../skin/icon/Password-white-32.png") !important;
+        background-position: left center !important;
+        background-repeat: no-repeat !important;
+        padding-left: 28px !important;
+        max-width: 180px !important;
+        width: auto !important;
+        background-size: 24px !important;
+    }
+</style>
+<div id="dvTconfsys_Perm_User" class="div-form" save="perm.spSaveUserStandalone" post="proc" afterbind="UserBound">
+    <h2 class="title">فورم ثبت کاربر<div class="audit"><input id="uxCreatedOn_Shamsi" type="text" disabled style="" class="audit" /></div></h2>
+
+    <strong style="padding-right:10px; font-size:20px; padding-bottom:20px; display:block;"> معلومات شخصی کارمند</strong>
+
+    <div class="div-row">
+        <label>اسم/نوم </label><input id="uxFirstName" type="text" rule="{fn:'required'}" vgroup="s" class="search" />
+        <label>تخلص</label><input id="uxLastName" type="text" class="search" />
+        <label>اسم پدر </label><input id="uxFatherName" type="text" class="search" />
+    </div>
+    <div class="div-row">
+        <label>جنسیت</label>
+        <input type="text" id="uxGenderID" class="alt-radio" path="look.Gender" rule="{fn:'required'}" vgroup="s" text="Dari" />
+    <!--</div>
+    <div class="div-row">-->
+        <label>   موبایل</label><input id="uxPhone" type="text" rule="{fn:'required'},{fn:'phone'}" vgroup="s" />
+        <label>ایمل/بریښنالیک</label><input id="uxEmail" type="text" rule="{fn:'required'}, {fn:'email'}" vgroup="s" />
+    </div>
+    <div class="div-separator"></div>
+    <strong style="padding-right:10px; font-size:20px; padding-bottom:20px; display:block; padding-top:10px;"> معلومات کاربر</strong>
+    <div class="div-row">
+        <label>اسم کاربر</label><input id="uxUserName" type="text" rule="{fn:'required'},{fn:'sec'}" vgroup="s" class="search" />
+        <label>منظور شده</label>
+        <input type="text" id="uxIsApproved" class="alt-radio" opt="['نه خیر','بلی']" />
+    </div>
+    <div class="div-row">
+        <label>تعداد دخول</label>
+        <input type="text" disabled id="uxLoginCount" />
+        <label>آخرین استفاده</label>
+        <input type="text" class="date" disabled id="uxLastLoginDate" />
+        <label>حالت</label><select disabled path="look.Status" id="uxStatusID" text="Dari" class="w150"></select>
+    </div>
+    <div class="div-row">
+        <label>موقف</label>
+        <input id="uxOwnerID" type="text" class="tree w500 search" label="noPath" path="pol.Owner" rule="{fn:'required'}" vgroup="s" columns="ID,Name,ParentID" />
+    </div>
+    <div class="div-row new-pass" style="display: none; background: #c94a4a; margin: 0; padding-top: 10px; width: 98.2%">
+        <label style="color: #fff; font-size: 17px; font-weight: bold;">رمز عبور جدید:</label>
+        <div><span style="font-family: calibri; font-size: 17px; font-weight:bold; background:#aaa;" id="uxNewPassword"></span></div>
+    </div>
+    <div class="div-form-control">
+        <input type="submit" action="search" value="جستجو" />
+        <input type="submit" action="create" value="جدید*" />
+        <input type="submit" action="save" vgroup="s" value="ثبت" />
+        <input type="submit" class="password-button" value="تجدید رمز عبور" id="resetPass" />
+        <div class="toggler"></div>
+    </div>
+
+    <grid id="gvTconfsys_Perm_vUserStandalone" style="max-height:300px">
+        <column id="UserName" caption="اسم کاربر"></column>
+        <column id="FirstName" caption="اسم"></column>
+        <column id="LastName" caption="تخلص"></column>
+        <column id="FatherName" caption="اسم پدر "></column>
+        <column id="Status" caption="حالت"></column>
+        <column id="IsApproved" caption="منظور شده" class="checkBox"></column>
+        <column id="LastLoginDate_Shamsi" caption="آخرین استفاده"></column>
+        <column id="LoginCount" caption="تعداد دخول"></column>
+    </grid>
+</div>
+
+
+
+<script type="text/javascript">
+    (function () {
+        window["UserBound"] = function () {
+            $('#uxNewPassword').text('');
+            $('.new-pass').hide();
+        }
+        window["fnEmployeeSelected"] = function () {
+            var v = $('#uxEmployeeID').data('widget').val();
+            if (v) {
+                var t = $('#uxEmployeeID').val();
+                if (t.indexOf("ولدیت") > 1) {
+                    $('#uxGrandFatherName').val(t.substr(t.indexOf("ولدیت") + 5).trim());
+                    t = t.substr(0, t.indexOf("ولدیت")).trim();
+                }
+                if (t.indexOf("فرزند") > 1) {
+                    $('#uxFatherName').val(t.substr(t.indexOf("فرزند") + 5).trim());
+                    t = t.substr(0, t.indexOf("فرزند")).trim();
+                }
+                if (t.indexOf("دختر") > 1) {
+                    $('#uxFatherName').val(t.substr(t.indexOf("دختر") + 5).trim());
+                    t = t.substr(0, t.indexOf("دختر")).trim();
+                }
+                $('#uxLastName').val(t.substr(t.indexOf(" ")).trim());
+            }
+        }
+        plus.validator.message.sec = "اسم کاربر باید دارای فاصله نباشد و حد اقل 6 حرف باشد.";
+        $('#resetPass').unbind('click').bind('click', function () {
+            var form = $('#dvTconfsys_Perm_User').data('widget');
+            if (!form.record) {
+                plus.widget.error('لطفاٌ کاربر را انتخاب نمایید.');
+                return;
+            }
+            if (plus.widget.confirm("آیا واقعاٌ میخواهید رمز عبور تجدید گردد.", function () {
+                plus.data.post({
+                async: false, url: plus.config.baseUrl + 'security/service/authentication.asmx/ResetPassword'
+                , data: plus.json.write({ UserID: form.record[0] })
+                , success: function (msg) {
+                    var response = plus.json.read(msg);
+                    if ($.isArray(response)) response = response[0];
+                    if (response.error || response.ResponseType != "SUCCESS") {
+                        plus.widget.error(response.error || response.response);
+                        return false;
+            }
+                    if (response.value) {
+                        $('#uxNewPassword').text(response.value);
+                        $('.new-pass').show();
+            }
+
+            }
+            });
+            }));
+        });
+        $('.pick').click(function () {
+            $('#dvAsanWazifa_prf_Profile.dialog .grid tbody').data('widget').clear();
+            $('#dvAsanWazifa_prf_Profile.dialog').show();
+
+
+            var widget = $('#dvAsanWazifa_prf_Profile.dialog .grid tbody').data('widget'), target = $('#' + $(this).attr('target'));
+            if (!target.data('widget')) {
+                var _widget = {
+                    val: function (v, t) {
+                        target.data('dataid', v);
+                        target.val(t);
+                        return v;
+                    }
+                }
+                target.data('widget', _widget);
+            }
+            if (!$(this).data('bound')) {
+                var _id = $('#dvTconfsys_Perm_User').data('widget').id;
+
+                widget.callbacks = {}; // clear call backs
+                widget.observers.remove('indexchanged');
+                widget.observers.add('indexchanged', _id, function () {
+                    var v = widget.selectedValue;
+                    var row = widget.rowOf(v);
+                    var t = row[1] + ' ' + row[2] + (row[12] == 1 ? ' فرزند ' : ' بنت ') + row[3];//+ " | " + row[5];
+                    $('#uxFirstName').val(row[1]);
+                    $('#uxLastName').val(row[2]);
+                    $('#uxFatherName').val(row[3]);
+                    $('#uxGrandFatherName').val(row[4]);
+                    target.data('widget').val(v, t);
+                    $('#dvAsanWazifa_prf_Profile.dialog').hide();
+
+                });
+                $('#dvAsanWazifa_prf_Profile.dialog [action="close"]').bind('click', function () {
+                    $('#dvAsanWazifa_prf_Profile.dialog').hide();
+                });
+            }
+
+            $(this).data('bound', 1);
+        });
+
+    })();
+</script>

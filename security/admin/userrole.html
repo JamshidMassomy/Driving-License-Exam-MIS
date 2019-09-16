@@ -1,0 +1,125 @@
+﻿<style>
+    #gveconfsys_perm_vUserRole {
+        display: block !important;
+    }
+
+    [action=close] {
+        float: left;
+        cursor: pointer;
+    }
+
+    #dveconfsys_perm_spGetRoleStructure .grid th {
+        padding: 5px;
+    }
+
+    #dveconfsys_perm_spGetRoleStructure .grid td {
+        max-width: 200px;
+    }
+
+    .dialog, .rtl .div-form.dialog {
+        right: 264px !important;
+    }
+</style>
+<div class="div-form sub-form" id="dveconfsys_Perm_UserRole" parent="dveconfsys_Perm_User" prefix="uxUR_">
+    <h2 class="title">حقوق کاربر</h2>
+    <div class="div-row">
+        <label>حقوق (Role)</label>
+        <select id="uxUR_RoleID" path="perm.Role" rule="{fn:'required'}" vgroup="A_" class="w300" /></select>
+        <img src="../../skin/icon/plus-50.png" style="margin: -7px 2px; cursor: pointer" id="uxAddRole" title="Add Role / علاوه کردن حقوق" />
+        <img src="../../skin/icon/Menu.png" style="margin: -7px 2px; cursor:pointer" id="uxViewRole" title="باز دید از شرح رول" />
+        <!--<span style="font-family: calibri; font-size: 11pt"> → علاوه کردن حقوق</span>-->
+        <input type="hidden" id="uxUR_IsActive" keep="true" default="1" />
+    </div>
+    <div class="div-form-control" style="display:none;">
+        <input type="submit" action="create" value="جدید *" style="display:none;" />
+        <input type="submit" action="save" vgroup="A_" value="ثبت" style="display:none" />
+    </div>
+    <div style="min-height: 30px; padding: 6px 16px; font-size: 14px;">
+        <label><strong>لست حقوق کاربر انتخاب شده</strong></label>
+    </div>
+    <grid id="gveconfsys_perm_vUserRole" style="display:block !important;">
+        <column id="Role" caption="حقوق (role)"></column>
+        <column id="IsActive" caption="آیا فعال است" class="checkBox"></column>
+        <command action="remove" src="../../skin/icon/del1.png" />
+    </grid>
+</div>
+
+<div class="div-form dialog" id="dveconfsys_perm_spGetRoleStructure">
+    <h2 class="title">صلاحیت های رول در صفحات<img src="../../skin/icon/close.png" action="close" /></h2>
+    <div class="div-row">
+        <label>رول انتخاب شده</label>
+        <label id="uxSelectedRole" style="font-weight:bold;"></label>
+    </div>
+
+    <div class="div-grid grid" style="height: 400px; display: block;">
+        <table>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#uxAddRole').unbind('click').bind('click', function () {
+        var _role = $('#uxUR_RoleID').val();
+        $('#dveconfsys_Perm_UserRole [action=create]').click();
+        $('#uxUR_RoleID').val(_role);
+        $('#dveconfsys_Perm_UserRole [action=save]').click();
+    });
+    $('#dveconfsys_perm_spGetRoleStructure [action="close"]').bind('click', function () {
+        $('#dveconfsys_perm_spGetRoleStructure tr').remove();
+        $('.dialog').hide();
+    });
+    $('#uxViewRole').unbind('click').bind('click', function () {
+        var _roleID = $('#uxUR_RoleID').val();
+        if (!_roleID) {
+            plus.widget.error('لطفاُ یکی از حقوق (رول) را از لست انتخاب نمایید.');
+            return;
+        }
+        $('#uxSelectedRole').text($('#uxUR_RoleID option:selected').text());
+        $('#dveconfsys_perm_spGetRoleStructure').show();
+
+        plus.data.ajax({
+            type: 'post',
+            url: plus.config.baseUrl + "json/pull.asmx/Fetch", async: false
+            , data: plus.json.write({
+                queries: [{
+                    path: 'perm.spGetRoleStructure', fetchColumns: true
+                    , commandType: 'sp', param: { RoleID: _roleID }
+                }]
+            })
+            , success: function (msg) {
+                var output = plus.json.read(msg);
+                if (!output.length) return;
+                output = output[0];
+                var grid = $('#dveconfsys_perm_spGetRoleStructure tbody');
+
+                var header = $('<tr></tr>').appendTo(grid);
+                var indexes = { id: 0 }, templ = '<tr class="grid-row">'
+
+                for (var i = 0; i < output.columns.length; i++) {
+                    var column = output.columns[i];
+                    if (column == "ID") continue;
+                    indexes[column] = i;
+                    if (i > 2) templ += '<td style="width:50px"><input type="checkbox" disabled checked="{' + column + '}" /></td>';
+                    else templ += '<td style="width:200px">{' + column + '}</td>';
+                    $('<th style="' + (i > 2 ? "width:50px;" : "width:200px") + '">' + column + '</th>').appendTo(header);
+                }
+                templ += '</tr>';
+                var sb = [], rows = output.rows;
+                for (var j = 0; j < rows.length; j++) {
+                    var row = rows[j];
+                    sb.push('<tr class="grid-row" dataid="' + row[0] + '">');
+                    for (var i = 0; i < output.columns.length; i++) {
+                        var column = output.columns[i], v = row[i];
+
+                        if (column == "ID") continue;
+                        //if (i > 2) sb.push('<td><input type="checkbox" disabled ' + (v=="0" ? "" : "checked") + ' /></td>');
+                        if (i > 2) sb.push('<td style="text-align:center; width:50px;"><img style="width:20px;float:none;" src="../../skin/icon/' + (v == "0" ? "checked_false" : "checked_true") + '-32.png" /></td>');
+                        else sb.push('<td style="width:200px">' + v + '</td>');
+                    }
+                    sb.push("</tr>");
+                }
+                grid.append(sb.join(""));
+            }
+        });
+    });
+</script>

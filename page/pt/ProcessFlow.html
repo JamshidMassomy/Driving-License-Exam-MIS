@@ -1,0 +1,59 @@
+﻿<div id="sidebar" class="sidebar">
+    <ul id="uxSidebarUL">
+        <li class="search-bar">
+            <ul class="searcher">
+                <li>
+                    <input type="text" id="uxCriteria" searchcol="Code" class="search" placeholder="جستجو (کود کادری)" />
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<style>
+    .grid table th,.grid table td{
+        text-align:center !important;
+    }
+</style>
+
+<div id="dvWMS_dbo_ProcessFlow" class="div-form fullscreen">
+    <h2 class="title">فورم ترتیت پروسه ها</h2>
+    <div class="div-row">
+        <label>پروسه اصلی</label>
+        <input id="uxProcessID" type="text" rule="{fn:'required'}" vgroup="s" class="auto search w500" path="WMS.dbo.vProcess" searchCol="FullProcessName" text="ProcessName" fn="like" placeholder="اسم ترتیب کننده " />
+    </div>
+    <div class="div-row">
+        <label>پروسه بعدی</label>
+        <input id="uxNextProcessID" type="text" vgroup="s" class="auto search w500" path="WMS.dbo.vProcess" searchCol="FullProcessName" text="NextProcessName" fn="like" placeholder="اسم ترتیب کننده " />
+    </div>
+    <div class="div-row">
+        <label>پروسه قبلی</label>
+        <input id="uxReverseProcessID" type="text"  vgroup="s" class="auto search w500" path="WMS.dbo.vProcess" searchCol="FullProcessName" text="ReverseProcessName" fn="like" placeholder="اسم ترتیب کننده " />
+    </div>
+    <div class="div-row">
+        <label>پیام موفقانه ثبت شدن</label><input id="uxSeccessMessage" type="text" />
+        <label>پیام خطا</label><input type="text" class="checkbox" id="uxFailedMessage" />
+    </div>
+
+    <div class="div-row">
+        <label>حالت</label>
+        <input id="uxStatusID" type="text" />
+    </div>
+
+
+    <div class="div-form-control">
+        <input type="submit" action="search" value="جستجو" />
+        <input type="submit" action="create" value="جدید *" />
+        <input type="submit" action="save" vgroup="s" value="ثبت" />
+        <div class="toggler"></div>
+    </div>
+
+    <grid id="gvWMS_dbo_vProcessFlow" style="height:300px" sort="['ObjectName','ProcessID']" >
+        <column id="ObjectName" caption="Object Name"></column>
+        <column id="ProcessName" caption="Process Name"></column>
+        <column id="ProcessID" caption="Process ID"></column>
+        <column id="NextProcessName" caption="Next Process Name"></column>
+        <column id="ReverseProcessName" caption="Reverse Process Name"></column>
+        <column id="StatusID" caption="Status"></column>
+
+    </grid>
+</div>

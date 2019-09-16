@@ -1,0 +1,107 @@
+﻿
+<div id="sidebar" class="sidebar">
+    <ul id="uxSidebarUL">
+        <li class="search-bar">
+            <ul class="searcher">
+                <li>
+                    <input type="text" searchcol="Code" id="uxCriteria" class="search" placeholder="جستجو" />
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="div-form" id="dvWPS_dbo_Organization">
+    <h2><img src="../../skin/icon/minus65.png" class="arrow" title="Show hide details" />ثبت و مدیریت معلومات موسسات</h2>
+   
+    <div class="div-row">
+        <label> اسم </label>
+        <textarea id="uxName" rule="{fn:'required'}" vgroup="o"></textarea>
+    </div>
+    <div class="div-row">
+        <label> نوع </label>
+        <select id="uxTypeID" path="look.Type" rule="{fn:'required'}" vgroup="o"></select>
+    </div>
+    <div class="div-row">
+        <label> حالت حقوق </label>
+        <textarea id="uxLegistelation" rule="{fn:'required'}" vgroup="o"></textarea>
+    </div>
+    <div class="div-detail">
+        <br />
+        <div class="div-row">
+            <label> موقعیت </label>
+            <select id="uxLocationID" path="look.vLocation" rule="{fn:'required'}" vgroup="o"></select>
+        
+            <label> ناحیه </label>
+            <select id="uxDistrictID" path="look.vLocation" rule="{fn:'required'}" vgroup="o"></select>
+        </div>
+        <div class="div-row">
+            <label> آدرس</label>
+            <textarea id="uxAddress" rule="{fn:'required'}" vgroup="o"></textarea>
+        </div>
+        <div class="div-row">
+            <label> نمبر سرک</label>
+            <input type="text" id="uxSteeetNo" />
+        </div>
+        <div class="div-row">
+            <label> نمبر خانه</label>
+            <input type="text" id="uxHouseNo" />
+        </div>
+        <div class="div-row">
+            <label> نوع فعالیت </label>
+            <select id="uxActivityTypeID" path="look.ActivityTypeID" rule="{fn:'required'}" vgroup="o"></select>
+        </div>
+        <div class="div-row">
+            <label> اسم ریس/مالک</label>
+            <textarea id="uxOwnerFullName" rule="{fn:'required'}" vgroup="o"></textarea>
+        </div>
+        <div class="div-row">
+            <label> نمبر لیسنس</label>
+            <input type="text" id="uxLicenseNo" />
+        </div>
+        <div class="div-row">
+            <label> تاریخ صدور لیسنس </label>
+            <input type="text" id="uxLicenseIsseDate" rule="{fn:'required'}" vgroup="o" class='date' />
+        </div>
+        <div class="div-row">
+            <label> نمبر تیلفون</label>
+            <input type="text" id="uxPhone" />
+        </div>
+        <div class="div-row">
+            <label> نمبر موبایل</label>
+            <input type="text" id="uxMobile" rule="{fn:'required'}" vgroup="o" />
+        </div>
+        <div class="div-row">
+            <label> ایمل</label>
+            <input type="text" id="uxEmail" rule="{fn:'required'}" vgroup="o" />
+        </div>
+        <div class="div-row">
+            <label>  تاریخ ایجاد</label>
+            <input type="text" id="uxFoundedDate" rule="{fn:'required'}" vgroup="o" class='date' />
+        </div>
+
+
+
+
+    </div>
+    <div class="div-form-control">
+        <input type="submit" action="create" value="جدید *" />
+        <input type="submit" action="search" value="جستجو" />
+        <input type="submit" action="save" vgroup="w" value="ثبت" />
+        <input type="submit" action="print" vgroup="w" value="چاپ" posturl="page/templ/FMIS/printout/FeeSlip.html" />
+        <div class="toggler"></div>
+    </div>
+    <grid id="gvWPS_dbo_vLabor" noload="false" style="height:200px;">
+    
+        <column id="Name" caption="  "></column>
+        <column id="Type" caption="  "></column>
+        <column id="Legistelation" caption="  "></column>
+        <column id="Location" caption="  "></column>
+        <column id="ActivityType" caption="  "></column>
+        <column id="OwnerFullName" caption="  "></column>
+        <column id="LicenseNo" caption="  "></column>
+        <column id="Phone" caption="  "></column>
+        <column id="Mobile" caption="  "></column>
+        <column id="Email" caption="  "></column>
+        <command action="remove" src="../../skin/icon/del1.png" />
+    </grid>
+</div>

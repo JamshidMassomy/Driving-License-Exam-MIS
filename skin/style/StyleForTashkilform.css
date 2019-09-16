@@ -1,0 +1,99 @@
+
+*{
+    margin:0px;
+    padding:0px;
+
+}
+/* .main-wrapper
+{
+ margin:0 auto;
+ max-width:150rem;
+ align-content:center;
+
+} */
+tr {
+    text-align: right;
+}
+#uxExtrawork{
+    position:relative;
+    left:50px;
+}
+
+.imageone,h4
+{
+    text-align: center;
+    position: relative;
+    padding-left: 26px;
+    left: 294px;
+}
+
+ .imageone {
+    position: absolute;
+    top: 50px;
+    left:180px;
+    text-align:center;
+
+}
+
+ .imageone img {
+        position: relative;
+        margin:0 auto;
+        align-content:center;
+        left:304px;
+    }
+.titleaflogo
+{
+    text-align:right;
+    position:relative;
+    top:10px;
+    margin-bottom:15px;
+    right: 10px;;
+}
+
+/*.formbarcode {
+    width: 204px;
+    position: relative;
+    top: 150px;
+    left: 50px;
+}*/
+.table{
+    text-align:right;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;    
+}
+.second_table td
+{
+ padding:10px;
+ border-bottom-style:hidden;
+}
+.third_table td
+{
+ width:40%;
+}
+.third_table th
+{
+ border-right-style:hidden;
+}
+.third_table th:nth-child(3)
+{
+ border-right-style:solid;
+}
+.fifth-table td
+{
+ border-right-style:hidden;
+}
+.fifth-table td:nth-child(3)
+{
+ border-right-style:solid;
+}
+
+li{
+    list-style-type: none;
+}
+@media print{
+    .imageone{
+        margin-left:-250px
+    }
+}

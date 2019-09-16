@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    Routing to your page...
+    <script type="text/javascript">
+        var href = window.location.href, l = href.length, hash = '#' + window.location.hash;
+        window.location.href = href.substr(0, l - hash.length).replace('#', '') + '/security/router/' + hash;
+
+    </script>
+</body>
+
+
+</html>

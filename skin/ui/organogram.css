@@ -1,0 +1,452 @@
+﻿
+/*
+ * ------------------------
+ * Organogram and others
+ * ------------------------
+ */
+/*organogram*/
+table.organogram {
+	vertical-align:middle;
+	text-align:center;
+	width:100%;
+	padding:0;
+	border:0;
+	border-collapse:collapse;
+}
+
+table.organogram tr td {
+	vertical-align:middle;
+	padding:0;
+	/*border:solid 1px red;*/
+	border-collapse:collapse;
+}
+
+table.organogram tr td.widthsub {
+	vertical-align: bottom;
+}
+table.organogram tr td.organogram-verticle-splitter {
+	/*background-image: url(img/organogram/vsplitter.gif);*/
+	background-position:center;
+	background-repeat: repeat-y;
+	min-height:25px;
+	max-width:0.1pt;
+	text-align:center;
+	empty-cells: show;
+    line-height:0;
+}
+table.organogram tr td.emptycell-verticle-splitter {
+	/*background-image: url(img/organogram/vsplitter.gif);*/
+	background-position:center;
+	background-repeat: repeat-y;
+	empty-cells: show;
+}
+table.organogram tr td.organogram-horizontal-splitter {
+	/*background-image: url(img/organogram/hsplitter.gif);
+	background-position:center;
+	background-repeat: repeat-x;*/
+	max-height:0.1px;
+	font-size:0.1px;
+	border-bottom:1px solid #C0C0C0;
+}
+.verticleArrow {
+    background-color: #C0C0C0;
+    border: 0 none;
+    display: inline-block;
+    height: 18px;
+    width: 1.2px;
+}
+table.organogram tr td.subItem-row {
+	vertical-align: top;
+}
+table.organogram tr td.mainItem-row {
+	vertical-align: bottom;
+    padding-left:2px;
+    padding-right:2px;
+}
+div.org.hasleft {
+	margin-left:0px;
+}
+div.org.hasright {
+	margin-right:0px;
+}
+table.organogram tr td.last {
+	vertical-align: bottom;
+} 
+.left {
+	text-align:left;
+}
+.right {
+	text-align:right;
+}
+img.bottomcleaner {
+	height:50%;
+}
+div#canvas, div.canvas {
+	text-align:center;
+	vertical-align: top;
+	overflow:auto;
+	padding:15px;
+}
+
+
+
+
+/*
+ * Organogram
+ **/
+
+div.Org-node {
+	width: 180px;
+	background-color:#F4F5F7;
+	border:solid 1px silver;
+	padding:4px;
+    display:inline-block;
+}
+
+div.Org-node .node-header {
+	font-weight:bold;
+	font-size:12px;
+	padding:1px;
+	/*margin:4px;*/
+	border-bottom:solid #CCCCCC 1px;
+	cursor:pointer;
+}
+
+div.Org-node .node-header .cut {
+	float:right;
+	cursor:pointer;
+}
+
+div.Org-node .node-content {
+	padding:2px 4px 1px;
+	border-top:solid 1px #ffffff;
+	border-bottom:solid 1px #ffffff;
+	min-height:35px;
+    font-size:12px;
+    line-height:1.4;
+}
+div.short div.Org-node .node-content {
+	display:none;
+}
+div.Org-node .node-content .node-photo {
+	float:right;
+	height:30px;
+}
+
+div.Org-node .node-content span {
+	color:#748484;
+}
+div.Org-node .node-content span.node-name {
+	display:block;
+	color:#2B9BC4;
+	font-weight:bold;
+	font-size:13px;
+}
+div.Org-node .node-footer {
+	border-top:solid #CCCCCC 1px;
+	padding:3px 2px 0px;
+    text-align:right;
+    font: 11px Arial;
+}
+div.short div.Org-node .node-footer {
+	border-top:solid #fff 1px;
+	padding:3px 2px 1px;
+}
+div.Org-node .node-footer .tashkeel-info {
+	float:left;
+}
+div.Org-node .toggler-div {
+	font-weight:bold;
+	font-size:11px;
+	color:#FF7777;
+}
+div.Org-node .toggler-div label {
+    width:auto;
+    font:bold 11px arial;
+}
+div.Org-node .node-footer .tashkeel-info label {
+	padding:0px 2px;
+	font-weight:bold;
+	font-size:11px;
+	float:right;
+    width:auto;
+    font:bold 11px Arial;
+}
+div.Org-node .node-footer .tashkeel-planned{
+	border-right: solid 1px #ACB0B7;
+	color:#4682B4;
+}
+div.Org-node .node-footer .tashkeel-filled{
+	border-right: solid 1px #ACB0B7;
+	border-left: solid 1px #ffffff;
+	color:green;
+}
+div.Org-node .node-footer .tashkeel-vacant{
+	border-left: solid 1px #ffffff;
+	color:red;
+}
+
+
+
+.pagination {
+    background: none repeat scroll 0 0 #EFEFEF;
+    border: 1px solid #CCCCCC;
+    font-size: 12px;
+}
+
+
+/*
+ * pagination
+ */
+
+.pagination {
+	background: none repeat scroll 0 0 #EFEFEF;
+    border: 1px solid #CCCCCC;
+    font-size:12px;
+}
+.pagination table {
+    float: left;
+    height: 30px;
+}
+.pagination td {
+    border: 0 none;
+    
+}
+.pagination-btn-separator {
+    border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #FFFFFF;
+    float: left;
+    height: 24px;
+    margin: 3px 1px;
+}
+.pagination-num {
+    border: 1px solid #CCCCCC;
+    margin: 0 2px;
+}
+.pagination-page-list {
+    margin: 0 6px;
+}
+.pagination-info {
+    float: right;
+    font-size: 12px;
+    padding-right: 6px;
+    padding-top: 8px;
+}
+.pagination span {
+    font-size: 12px;
+}
+.pagination-first {
+    background: url("organogram/pagination_first.gif") no-repeat scroll 0 0 transparent;
+}
+.pagination-prev {
+    background: url("organogram/pagination_prev.gif") no-repeat scroll 0 0 transparent;
+}
+.pagination-next {
+    background: url("organogram/pagination_next.gif") no-repeat scroll 0 0 transparent;
+}
+.pagination-last {
+    background: url("organogram/pagination_last.gif") no-repeat scroll 0 0 transparent;
+}
+.pagination-load {
+    background: url("organogram/pagination_load.png") no-repeat scroll 0 0 transparent;
+}
+.pagination-loading {
+    background: url("organogram/pagination_loading.gif") no-repeat scroll 0 0 transparent;
+}
+
+
+a.l-btn {
+    background: url("skin/img/easyui/button_a_bg.gif") no-repeat scroll right top transparent;
+    color: #444444;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    height: 24px;
+    outline: medium none;
+    padding-right: 18px;
+    text-decoration: none;
+}
+a.l-btn-plain {
+    background: none repeat scroll 0 0 transparent;
+    border: 1px solid transparent;
+    padding-right: 5px;
+}
+a.l-btn-disabled {
+    color: #CCCCCC;
+    cursor: default;
+    opacity: 0.5;
+}
+a.l-btn span.l-btn-left {
+    background: url("organogram/button_span_bg.gif") no-repeat scroll left top transparent;
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    padding: 4px 0 4px 18px;
+}
+a.l-btn-plain span.l-btn-left {
+    background: none repeat scroll 0 0 transparent;
+    padding-left: 5px;
+}
+a.l-btn span span.l-btn-text {
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    padding: 0;
+}
+a.l-btn span span span.l-btn-empty {
+    display: inline-block;
+    padding: 0;
+    width: 16px;
+}
+a.l-btn:hover {
+    background-position: right bottom;
+    outline: medium none;
+}
+a.l-btn:hover span.l-btn-left {
+    background-position: left bottom;
+}
+a.l-btn-plain:hover {
+    background: url("organogram/button_plain_hover.png") repeat-x scroll left bottom transparent;
+    border: 1px solid #7EABCD;
+    border-radius: 3px 3px 3px 3px;
+}
+a.l-btn-plain.selected {
+	background: url("organogram/button_plain_selected.png") repeat-x scroll left bottom transparent;
+    border: 1px solid #ADC8DB;
+    border-radius: 1px;
+}
+a.l-btn-disabled:hover {
+    background-position: right top;
+}
+a.l-btn-disabled:hover span.l-btn-left {
+    background-position: left top;
+}
+a.l-btn .l-btn-focus {
+    outline: thin dotted #0000FF;
+}
+
+
+
+
+/*
+ * Organogram nodes coloring based on OrgUnit Type
+ */
+.canvas  div.DELETED2 {
+	background-color:#E2FCB3;
+	border-color: #B3E25A;
+}
+.canvas div.DELETED2 div.node-content {
+	border-bottom-color: #F9FFEF;
+    border-top-color: #F9FFEF;
+}
+.canvas div.DELETED2 div.node-footer {
+	border-top-color: #B3E25A;
+}
+.canvas.short div.DELETED2 div.node-footer {
+	border-top-color: #F9FFEF;
+}
+.canvas div.DELETED2 div.node-header {
+	border-bottom-color:#B3E25A;
+}
+
+.canvas div.CREATED {
+	background-color: #FCE8B3;
+	border-color:#DBB860;
+}
+.canvas div.CREATED div.node-content {
+	border-bottom-color: #FFF8D3;
+    border-top-color: #FFF8D3;
+}
+.canvas div.CREATED div.node-footer {
+	border-top-color: #DBB860;
+}
+.canvas.short div.CREATED div.node-footer {
+	border-top-color: #FFF8D3;
+}
+.canvas div.CREATED div.node-header {
+	border-bottom-color:#DBB860;
+}
+
+.canvas div.GeneralDirectorate {
+	background-color: #C4DCFF;
+    border-color: #8DB8F4;
+}
+.canvas div.GeneralDirectorate div.node-content {
+	border-bottom-color: #EDF4FF;
+    border-top-color: #EDF4FF;
+}
+.canvas div.GeneralDirectorate div.node-footer {
+	border-top-color: #8DB8F4;
+}
+.canvas.short div.GeneralDirectorate div.node-footer {
+	border-top-color: #EDF4FF;
+}
+.canvas div.GeneralDirectorate div.node-header {
+	border-bottom-color:#8DB8F4;
+}
+
+.canvas div.DELETED {
+	background-color: #FFCECE;
+    border-color: #F7B4B4;
+}
+.canvas div.DELETED div.node-content {
+	border-bottom-color: #FFF2F2;
+    border-top-color: #FFF2F2;
+}
+.canvas div.DELETED div.node-footer {
+	border-top-color: #F7B4B4;
+}
+.canvas.short div.DELETED div.node-footer {
+	border-top-color: #FFF2F2;
+}
+.canvas div.DELETED div.node-header {
+	border-bottom-color:#F7B4B4;
+}
+
+.canvas div.Management {
+	background-color: #E9D7F7;
+    border-color: #E2BDFC;
+}
+.canvas div.Management div.node-content {
+	border-bottom-color: #F8EFFF;
+    border-top-color: #F8EFFF;
+}
+.canvas div.Management div.node-footer {
+	border-top-color: #E2BDFC;
+}
+.canvas.short div.Management div.node-footer {
+	border-top-color: #F8EFFF;
+}
+.canvas div.Management div.node-header {
+	border-bottom-color:#E2BDFC;
+}
+
+div.tree {
+    background: none repeat scroll 0 0 #F0F0F0;
+    border: 1px solid #D0D0D0;
+    font-family: Tahoma;
+    font-size: 13px;
+    width: 300px;
+    min-height:500px;
+}
+
+.treeButton {
+	margin-top:-4px;
+	margin-bottom:-4px;
+	cursor:pointer;
+	padding:0 1px 0 4px;
+    max-width:19px;
+}
+
+.treeButton {
+	/*visibility: hidden;*/
+	display:inline-block;
+}
+.hover .treeButton {
+	/*visibility:visible;*/
+	display:inline-block;
+}
+
+.node-dependent {
+    cursor:pointer;
+}

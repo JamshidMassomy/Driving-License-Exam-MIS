@@ -1,0 +1,403 @@
+/**
+ * @version: 1.0.12
+ * @author: reza.khawar@gmail.com
+ * @Edited By: zia shahizadeh
+ * @description: for control panel use only
+ *
+ */
+body {
+    font-family: Calibri;
+    background: #ebebeb;
+}
+
+
+.div-header {
+    background: #fff none repeat scroll 0 0;
+    border-bottom: 7px solid orange;
+    height: 35px;
+    left: 0;
+    padding: 10px 0;
+    position: fixed;
+    text-align: right;
+    top: 0;
+    width: 100%;
+}
+
+.div-cpanel {
+    float: left;
+    margin: 5% 10%;
+    text-align: left;
+    max-width: 1200px;
+}
+
+.rtl .div-cpanel {
+    float: right;
+    text-align: right;
+    direction:rtl;
+}
+
+.div-application {
+    border-bottom: 0.001em solid #aaa;
+    float: right;
+    height: auto;
+    margin: 10px 0 50px;
+    min-height: 100px;
+    width: 100%;
+}
+
+.rtl .div-application {
+    float: left;
+}
+
+.div-screen {
+    color: #415560;
+    cursor: pointer;
+    float: left;
+    height: auto;
+    margin: 0 10px;
+    min-height: 125px;
+    padding: 2px;
+    text-align: center;
+    width: 20%;
+}
+
+.rtl .div-screen {
+    float: right;
+}
+
+.div-screen a {
+    text-decoration: none;
+    color: #415560;
+}
+
+    .div-screen a:hover {
+        color: #ff6600 !important;
+    }
+
+.div-screen img {
+    width: 20%;
+}
+
+.div-screen label {
+    display: block;
+    width: 100%;
+    min-height: 30px;
+    font: bold 100%/33px calibri;
+}
+
+.div-screen span {
+    display: block;
+    width: 100%;
+    height: 30px;
+    font: normal 75%/20px calibri;
+    color: #555;
+}
+
+
+
+.div-footer {
+    background: rgba(0, 0, 0, 0) url("../logo/Transport.png") no-repeat scroll 1px 1px / 140px auto;
+    bottom: -1px;
+    float: right;
+    height: 20%;
+    left: -4px;
+    position: fixed;
+    width: 300px;
+    opacity: 0.5;
+	
+	
+	  /* background: rgba(0, 0, 0, 0) url("../logo/Traffic.png") no-repeat scroll 1px 1px / 140px auto; orginial*/
+    /* bottom: 1px; */
+    /* float: right; */
+    /* height: 48px; */
+    /* left: 1px; */
+    /* position: fixed; */
+    /* width: 300px; */
+    /* opacity: 0.5; */
+
+	
+	
+	
+}
+
+
+
+.side-panel {
+    width: 300px;
+    height: calc(calc(100%) - 65px);
+    overflow-y: auto;
+    background-color: white;
+    display: block;
+    border: 1px solid black;
+    position: fixed;
+    margin-top: 55px;
+    right: -300px;
+    box-sizing: border-box;
+	
+	
+	
+}
+
+    .side-panel .menu-header {
+        height: 35px;
+        border-bottom: grey solid 2px;
+        padding: 5px 0px;
+        align-content:;
+		
+		
+		
+    }
+
+        .side-panel .menu-header .close {
+            height: 35px;
+            cursor: pointer;
+        }
+
+        .side-panel .menu-header span {
+            display: inline-block;
+            height: 35px;
+            font-size: 30px;
+            float: right;
+            padding-right: 5px;
+        }
+
+    .side-panel .menu-logo {
+        height: 50px;
+        border-bottom: grey solid 2px;
+    }
+
+    .side-panel .menu-user {
+        position: relative;
+        height: 210px;
+        border-bottom: grey solid 2px;
+    }
+
+        .side-panel .menu-user .UserLogo {
+            width: calc(calc(46%) - 17px);
+            margin: 12px 10px 0px 79px;
+			
+			
+			 /* width: calc(calc(100%) - 20px); */
+            /* margin: 10px 10px 0px 10px; */
+			
+			 
+        }
+
+        .side-panel .menu-user .UserName {
+            height: 1.5em;
+            font-size: 2em;
+            width: 100%;
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            text-shadow: 0 0 2px #a5a5a5;
+        }
+
+        .side-panel .menu-user .Desc {
+            width: 100%;
+            display: block;
+            text-align: center;
+            text-shadow: 0 0 2px #a5a5a5;
+        }
+
+    .side-panel .icons-list {
+        height: 40px;
+        position: relative;
+        display: block;
+        width: clac(calc(100%) - 6px);
+        padding: 3px;
+        border-bottom: 2px solid #8A8181;
+    }
+
+        .side-panel .icons-list .icons {
+            width: 40px;
+            display: inline-block;
+            position: relative;
+            height: 40px;
+            padding: 0px 3px;
+        }
+
+            .side-panel .icons-list .icons:hover {
+                background-color: #f1f1f1;
+                box-shadow: 0 0 2px #010101;
+            }
+
+            .side-panel .icons-list .icons img {
+                width: 40px
+            }
+
+            .side-panel .icons-list .icons span {
+                position: absolute;
+                right: 3px;
+                top: 3px;
+                width: 20px;
+                height: 20px;
+                background-color: white;
+                text-align: center;
+                border: 1px solid black;
+                border-radius: 50%;
+                color: red;
+            }
+
+    .side-panel .div-notification-list div.notification {
+        position: relative;
+        cursor: pointer;
+        display: block;
+        background-color: white;
+        padding-left: 5px;
+        padding-right: 2px;
+        padding-bottom: 3px;
+        border-bottom: 1px solid black;
+        box-sizing: border-box;
+        height: 50px;
+    }
+
+    .side-panel .div-notification-list div .icon {
+        display: inline-block;
+        height: 40px;
+        float: right;
+        border: 1px solid black;
+        padding: 7px;
+        box-sizing: border-box;
+        border-radius: 50%;
+        z-index: 10;
+        margin: 4px;
+    }
+
+    .side-panel .div-notification-list div .info {
+        display: block;
+        box-sizing: border-box;
+        padding-top: 3px;
+        height: 25px;
+        margin-right: 50px;
+    }
+
+    .side-panel .div-notification-list div .Sender {
+        display: inline-block;
+        float: left;
+        font-weight: bold;
+        color: #6d6464;
+    }
+
+    .side-panel .div-notification-list div .Title {
+        display: inline-block;
+        float: right;
+        font-weight: bold;
+        color: #6d6464;
+    }
+
+    .side-panel .div-notification-list div .Description {
+        display: block;
+        text-align: right;
+        margin-right: 50px;
+    }
+
+    .side-panel .div-notification-list div.notification:hover {
+        background-color: #b3afaf80;
+    }
+
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+
+/* The Close Button */
+.closeModal {
+    color: #aaa;
+    float: left;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .closeModal:hover,
+    .closeModal:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+/* Modal Header */
+.modal-header {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+/* Modal Body */
+.modal-body {
+    padding: 2px 16px;
+}
+
+/* Modal Footer */
+.modal-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    margin-top: 40px;
+    padding: 0;
+    border: 1px solid #888;
+    width: 300px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Add Animation */
+@keyframes animatetop {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+.div-header .menuNotification {
+    border: 0 none;
+    cursor: pointer;
+    float: right;
+    height: auto;
+    margin: 0 1% 0 0;
+}
+
+a.menuNotification {
+    position: relative;
+}
+
+    a.menuNotification img {
+        width: 30px !important;
+    }
+
+    a.menuNotification .notification {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        border: 1px solid red;
+        border-radius: 50%;
+        width: 15px;
+        font-size: 13px;
+        text-align: center;
+        background-color: #fefefe;
+    }

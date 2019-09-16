@@ -1,0 +1,150 @@
+@media print {
+    .noprint {
+        display:none;
+    }
+}
+#heading {
+text-align: center;
+font-size: 15px;
+
+}
+.heading-text {
+    position: relative;
+    top: 7rem;
+    font-size: 13px;
+}
+img.mcitlogo {
+    width: 20%;
+    top: 7rem;
+    right: 53rem;
+    position: absolute;
+}
+.info ul li {
+    margin-top: 10px;
+}
+.logo_header {
+    display: inline-block;
+    width: 7rem;
+    height: auto;
+    align-self: center;
+    padding-left: 31rem;
+    position: relative;
+    top: 106px;
+    right: 3rem;
+}
+.right-heading-text {
+    position: relative;
+    left: 11rem;
+    bottom: 7rem;
+}
+
+.left-heading-text {
+
+    position: relative;
+    right: 15rem;
+    bottom: 12rem;
+    }
+.container
+{
+    max-width: 65rem;
+    margin: 0 auto;
+    border: 1px solid rgba(4, 1, 20, 0.2);
+    margin: 0 auto;
+    background: #fff;
+}
+img.photo{
+        height: 9rem;
+        position: relative;
+        bottom: 11.6rem;
+        right: 26rem;
+        width: 7rem;
+}
+.info {
+    text-align: right;
+    position: relative;
+    bottom: 126px;
+    right:15px;
+   
+}
+table{
+    
+    border-collapse: collapse;
+    border-spacing:0;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.404);
+}
+
+th, td {
+    text-align:center;
+    padding:8px;
+    border: 1px solid rgba(0, 0, 0, 0.404);
+    font-size: 14px;
+    
+}
+table tr th{
+    border: 1px solid rgba(0, 0, 0, 0.404);
+}
+table th{
+   background:  #f9f8f8;
+}
+
+label{
+    padding-right: 1.4rem;
+}
+.note {
+    text-align: center;
+}
+.note label {
+    position: relative;
+    bottom: 77px;
+    padding-left: 200px;
+    font-weight: bold;
+
+}
+.formidentity{
+    float: left;
+    position: relative;
+    bottom: 8rem;
+   text-align: right;
+   left:16px;
+   direction:ltr;
+}
+.identity
+{
+    padding-right:58px;
+    padding-top:110px;
+}
+.identity2{
+    margin-top:10px;
+}
+.logo-box {
+    position: absolute;
+    float: right;
+    left: 26.7rem;
+}
+.note2 {
+    position: relative;
+    bottom: 2.8rem;
+    float: right;
+    font-weight: bold;
+    font-size: 13px;
+}
+.signature {
+    position: relative;
+    text-align: right;
+    bottom: 8rem;
+    direction: rtl;
+    font-weight: bold;
+}
+.signature label{
+    margin-left:15rem;
+}
+
+
+img.imgbarcode {
+    width: 12rem;
+    position: relative;
+    bottom: 15rem;
+    left: 2rem;
+    float:left;
+}

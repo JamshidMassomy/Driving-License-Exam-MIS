@@ -1,0 +1,20 @@
+.btn-opt {
+    position: relative;
+    top: 9rem!important;
+    z-index: 22222;
+}
+
+.card-color
+{
+    background-color: #006fba;
+}
+
+.btn-asanone {
+
+    background-color: #0A70B8;
+
+}
+
+.btn-asantwo {
+    background-color: #2AC0EE;
+}

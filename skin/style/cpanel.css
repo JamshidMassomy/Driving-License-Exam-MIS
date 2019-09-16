@@ -1,0 +1,379 @@
+﻿/**
+ * @version: 1.0.12
+ * @author: reza.khawar@gmail.com
+ * @description: for control panel use only
+ *
+ */
+body {
+    font-family: Calibri;
+    background: #ebebeb;
+}
+
+
+.div-header {
+    background: #fff none repeat scroll 0 0;
+    border-bottom: 7px solid orange;
+    height: 35px;
+    left: 0;
+    padding: 10px 0;
+    position: fixed;
+    text-align: right;
+    top: 0;
+    width: 100%;
+}
+
+    .div-header .menu {
+        border: 0 none;
+        cursor: pointer;
+        float: right;
+        height: auto;
+        margin: 0 1%;
+        width: 2%;
+    }
+
+    .div-header .log { /*this log is only for index.html page*/
+        font: 100%/30px arial;
+        /* margin: -6px 10px !important; */
+		margin: -8px 10px !important;
+		font: 130%/63px Calibri;
+		    
+    
+    }
+
+    .div-header .home {
+        border: 0 none;
+        float: right;
+        height: auto;
+        margin: 10px 0;
+    }
+
+        .div-header .home img {
+            border: 0px !important;
+            height: 30px;
+            margin: -7px 20px;
+        }
+
+.div-menu {
+    background: #fff none repeat scroll 0 0;
+    border-left: 1px solid #aaa;
+    bottom: 0;
+    max-width: 300px;
+    opacity: 0.9;
+    position: fixed;
+    right: -20%;
+    top: 62px;
+    width: 20%;
+}
+
+    .div-menu .close {
+        width: 33px;
+        float: left;
+        height: auto;
+        border: 0px;
+        cursor: pointer;
+    }
+
+    .div-menu > div {
+        width: 100%;
+        min-height: 400px;
+    }
+
+        .div-menu > div .user {
+            width: 33px;
+            height: auto;
+            float: right;
+            opacity: 0.5;
+            margin: 0 0 -20px;
+        }
+
+        .div-menu > div .orgUnit {
+            background: #aaa none repeat scroll 0 0;
+            display: block;
+            font-size: 100%;
+            height: 30px;
+            padding: 10px;
+            text-align: center;
+            text-shadow: 0 0 2px #aaa;
+            width: 100%;
+        }
+
+        .div-menu > div .userName {
+            border-bottom: 1px solid #aaa;
+            display: block;
+            float: right;
+            height: 33px;
+            margin: -13px 0 0 0;
+            padding: 0 5%;
+            text-align: left;
+            width: 90%;
+            text-transform:capitalize;
+        }
+
+        .div-menu > div input[type=button] {
+            border: 0 none;
+            float: right;
+            height: 30px;
+            margin: 10px 5px;
+            min-width: 90px;
+            padding: 5px 2px;
+            width: 35%;
+            cursor: pointer;
+        }
+
+        .div-menu > div .icons {
+            display: inline-table;
+            margin: 10px;
+            float: left;
+        }
+
+            .div-menu > div .icons img {
+                width: 33px;
+                margin: 0 8px -10px 0;
+            }
+
+        .div-menu > div .notification {
+            background: #ebebeb none repeat scroll 0 0;
+            border-radius: 10px;
+            color: #ff0000;
+            display: block;
+            height: 20px;
+            margin: -37px 18px;
+            opacity: 0.7;
+            position: absolute;
+            text-align: center;
+            vertical-align: middle;
+            width: 20px;
+        }
+
+        .div-menu > div .div-notification-list {
+            display: block;
+            float: right;
+            width: 100%;
+        }
+
+            .div-menu > div .div-notification-list ul {
+                list-style: none;
+            }
+
+                .div-menu > div .div-notification-list ul li {
+                    background: rgba(0, 0, 0, 0) url("../icon/notification1.png") no-repeat scroll right center / 20px auto;
+                    border-bottom: 1px dotted #415560;
+                    direction: rtl;
+                    font: 70%/20px arial;
+                    margin: 0 4px 0 -40px;
+                    padding: 2px 25px 3px 0;
+                    width: 100%;
+                    cursor:pointer;
+                }
+                .div-menu > div .div-notification-list ul li:hover {
+                    background: #ebebeb url("../icon/notification1.png") no-repeat scroll right center / 20px auto;
+                }
+.div-screen-control .div-user-log {
+    color: #222;
+    float: left;
+    font: 120%/33px arial;
+    margin: 5px 0;
+    text-align: right;
+}
+
+.div-rate {
+    color: #415560;
+    float: right;
+    font: 0.9em/33px calibri;
+    left: -65px;
+    position: relative;
+    text-shadow: 0 0 1px;
+    top: 65px;
+    width: auto;
+}
+
+    .div-rate label {
+        float: left;
+        display: block;
+        width: auto;
+        padding: 2px 5px;
+        margin: 5px;
+    }
+
+.div-cpanel {
+    float: left;
+    /*margin: 4% 10%;*/
+    margin: 5% 10%;
+    text-align: left;
+    max-width: 1200px;
+}
+
+.rtl .div-cpanel {
+    float: right;
+    text-align: right;
+}
+
+.div-application {
+    border-bottom: 0.001em solid #aaa;
+    float: right;
+    height: auto;
+    margin: 10px 0 50px;
+    min-height: 100px;
+    width: 100%;
+}
+
+.rtl .div-application {
+    float: left;
+}
+
+.div-screen {
+    color: #415560;
+    cursor: pointer;
+    float: left;
+    height: auto;
+    margin: 0 10px;
+    min-height: 125px;
+    padding: 2px;
+    text-align: center;
+    width: 20%;
+}
+
+.rtl .div-screen {
+    float: right;
+}
+
+.div-screen a {
+    text-decoration: none;
+    color: #415560;
+}
+
+    .div-screen a:hover {
+        color: #ff6600 !important;
+    }
+
+.div-screen img {
+    width: 20%;
+}
+
+.div-screen label {
+    display: block;
+    width: 100%;
+    /*height: 30px;*/
+    min-height: 30px;
+    font: bold 100%/33px calibri;
+}
+
+.div-screen span {
+    display: block;
+    width: 100%;
+    height: 30px;
+    /*font: normal 1.1em/33px calibri;*/
+    font: normal 75%/20px calibri;
+    color: #555;
+}
+
+.Panel {
+    /*width: 89%;
+	height: 600px;
+	margin: 5% 8%;*/
+    border-bottom: 1px dotted #333;
+    height: auto;
+    margin: 8% 4% 5%;
+    min-height: 816px;
+    width: 1805px;
+    border-radius: 2px;
+}
+
+    .Panel h1 {
+        color: #222;
+        font: 1.8em/22px calibri;
+        margin: 10px;
+        text-shadow: 0 0 3px #aaa;
+    }
+
+.cPanel {
+    border-bottom: 1px solid #444;
+    border-radius: 2px;
+    float: left;
+    height: auto;
+    margin: 10px;
+    min-height: 786px;
+    padding: 10px;
+    text-align: right;
+    width: 560px;
+}
+
+    .cPanel h1 {
+        font: normal normal 2.3em/30px cordiaUPC;
+    }
+
+    .cPanel h2 {
+        font: normal normal 1.9em/22px cordiaUPC;
+    }
+
+    .cPanel div {
+        border: 1px solid #fff;
+        box-shadow: 0 0 4px #999999;
+        display: inline;
+        float: right;
+        height: 170px;
+        margin: 4px;
+        width: 120px;
+        background: #fff;
+        opacity: 0.5;
+        text-align: center;
+        cursor: pointer;
+    }
+
+        .cPanel div:hover {
+            opacity: 0.9;
+        }
+
+    .cPanel a {
+        text-decoration: none;
+        color: #222;
+    }
+
+    .cPanel div span {
+        background: none repeat scroll 0 0 #E3E3E3;
+        display: block;
+        font: 1.4em/16px cordiaupc;
+        height: 30px;
+        padding: 2px 0 0;
+        text-shadow: 0 0 3px #222222;
+        width: 100%;
+    }
+
+    .cPanel div img {
+        border: 0px;
+        width: 80px;
+    }
+
+    .cPanel div p {
+        background: #fff;
+        font: 1.6em/15px cordiaUPC;
+        margin: 2px;
+        display: block;
+        height: 35px;
+    }
+
+    .cPanel div div {
+        background: none repeat scroll 0 0 #999999;
+        height: 132px;
+        left: -5px;
+        opacity: 0.8;
+        position: relative;
+        top: -178px;
+        width: 130px;
+        cursor: pointer;
+    }
+
+        .cPanel div div img {
+            margin: 0px 5px 5px 5px;
+        }
+
+.div-footer {
+    background: rgba(0, 0, 0, 0) url("../logo/Traffic2.png") no-repeat scroll 1px 1px / 140px auto;
+    bottom: 4px;
+    float: right;
+    height: 20%;
+    left: 2px;
+    position: fixed;
+    width: 300px;
+    opacity: 0.5;
+}

@@ -27,9 +27,7 @@ public partial class EMS_Default : System.Web.UI.Page
                 GetUserInfo();
                 GenerateQuestion(sender,e);
             }
-
         }
-        
     }
     protected void GetUserInfo()
     {
@@ -49,7 +47,6 @@ public partial class EMS_Default : System.Web.UI.Page
     protected void GenerateQuestion(object o, EventArgs e)
     {
 
-        
         int CheckCounter = 0;
         var _Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };
         foreach (System.Data.DataRow row in plus.Data.DAL.GetTable("Default", "EXEC xm.spGetQuestions @CategoryID", "CategoryID", ViewState["CategoryID"] = (int)(ViewState["CategoryID"])+1).Rows)
@@ -69,66 +66,34 @@ public partial class EMS_Default : System.Web.UI.Page
             ViewState["Choice2"] = Options[1][0];
             ViewState["Choice3"] = Options[2][0];
             ViewState["Choice4"] = Options[3][0];
-            
-
         }
-        if ((int)ViewState["CategoryID"] > 7 || (int)ViewState["CategoryID"] == 7)
+        if ((int)ViewState["CategoryID"] >= 7 )
         {
-            Exit(o,e);
+            Session["IsAuthenticate"] = false;
+            Response.Redirect("Result.aspx");
         }
-
     }
-
     protected void Save(object o, EventArgs e)
     {
-        //int i = 1;
-        if (_1thBox.Checked)
+        var _Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };
+        for (int b = 0; b <4; b++)
         {
-            Response.Write("first");
-            HCHID.Value =  ViewState["Choice1"].ToString();
-            Response.Write(HCHID.Value);
+            if (_Boxes[b].Checked)
+            {
+                b++;
+                if(ViewState["Choice"+b+""] == null)
+                {
+                    Response.Write("NULL");
+                }
+                HCHID.Value = ViewState["Choice"+b+""].ToString();
+                //Response.Write("Options:"+ HCHID.Value);
+            }
+            
         }
-        if (_2thBox.Checked)
-        {
-            Response.Write("second");
-            HCHID.Value = ViewState["Choice2"].ToString();
-            Response.Write(HCHID.Value);
-            //HCHID.Value = ViewState["Choice1"].ToString();
-        }
-        if (_3thBox.Checked)
-        {
-            Response.Write("third");
-            HCHID.Value = ViewState["Choice3"].ToString();
-            Response.Write(HCHID.Value);
-            //HCHID.Value = ViewState["Choice1"].ToString();
-        }
-        if (_4thBox.Checked)
-        {
-            Response.Write("last");
-            //HCHID.Value = ViewState["Choice1"].ToString();
-        }
-
-        //var _Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };
-        //for (int b = 0; b <= 4; b++)
-        //{
-        //    if (_Boxes[b].Checked)
-        //    {
-        //        //Response.Write("selcted ITem is:Options" + Options[b][0]);
-        //        HCHID.Value = ViewState["Choice1"].ToString();
-        //    }
-        //}
+        plus.Data.DAL.Execute("Default", "EXEC xm.spSaveResult @QuestionID, @ChoiceID, @ApplicantCode, @Date", "QuestionID, ApplicantCode,ChoiceID, Date", HQID,HCHID,ApplicantCode,DateTime.Now);
         ///to save and return the reuslt from HCHID.Value and HQID.Value
-        Response.Write("Question ID :"+Convert.ToString(HQID.Value)+"and Check Box valu is :"+ Convert.ToString(HCHID.Value));
-        
-        Btn_Confirm.Attributes.Add("onclick", "this.disabled=true;");
-        Response.Write("dbl clicked");
-        //Btn_Confirm.
+        // Response.Write("Question ID :"+Convert.ToString(HQID.Value)+"and Check Box valu is :"+ Convert.ToString(HCHID.Value));
 
-
-        //Response.Write(row["ID"] + "_____" + Options[0][0] + "______" + Options[1][0] + "_____" + Options[2][0] + "___________" + Options[3][0]);
-
-        //Response.Write("Question ID: _"+QuestionID+"Choic ID is :"+ChoiceID+"Applicant OTP is :"+Session["OTP"] );
-        //Btn_Confirm.Attributes.Add("OnClick","return false");
     }
     protected void Next(object o, EventArgs e)
     {
@@ -148,22 +113,6 @@ public partial class EMS_Default : System.Web.UI.Page
         GenerateQuestion(o,e);
 
         //Response.Redirect("Next.aspx");
-    }
-
-    protected void Exit(object o, EventArgs args)
-    {
-        Response.Redirect("Result.aspx");
-        Session["IsAuthenticate"] = false;
-        //Response.Write("Greter then 7");
-        ViewState["CategoryID"] = 0;
-        Btn_Exit.Visible = true;
-        //HtmlGenericControl html = new HtmlGenericControl();
-        //html.InnerHtml = @"ختم 
-        // <i class='icon - backward2 mr - 3 icon - 2x'></i>
-        //    ";
-
-        ////LinkBtn.Controls.Add(html);
-        //‌Btn_Next.Controls.Add(html);
     }
 }
 

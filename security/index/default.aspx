@@ -72,7 +72,8 @@
                <input type="button" name="xm_Btn" value="امتحان" id="xm_Btn" class="btn btn-primary btn-block " style="font-size: 20px;">
            </li>            
             <li>
-                <input type="button" name="demo_Btn" id="demo_Btn" class="btn btn-primary btn-block" value="امتحان نمایشی"/>     
+                <input type="button" name="demo_Btn" id="demo_Btn" class="btn btn-primary btn-block" value="امتحان آزمایشی"/>     
+
             </li>              
         </ul>
     </div>

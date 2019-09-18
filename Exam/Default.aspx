@@ -107,8 +107,6 @@
          <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">6</a></li>
          <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">7</a></li>
          <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">8</a></li>
-         <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">9</a></li>
-         <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">10</a></li>
          <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">
                  <i class="icon-circle2"></i>
              </a>
@@ -130,16 +128,16 @@
              <i class="icon-checkmark4 mr-3 icon-2x"></i>
          </asp:LinkButton>
      </li>
-     <li class="list-inline-item">
-         <asp:LinkButton runat="server" ID="Btn_Exit" class="btn btn-primary ml-auto legitRipple" OnClick="Exit" Visible="False">
-             ختم
-             <i class="icon-checkmark4 mr-3 icon-2x"></i>
-         </asp:LinkButton>
-     </li>
+   
  </ul>
  </div>
 </footer>
-   
+<div id="noty_layout__topRight" runat="server" class="noty_layout" Visible="False">
+    <div id="noty_bar_85e63e18-6338-4801-afce-5c9671ff59cf" class="noty_bar noty_type__info noty_theme__limitless noty_close_with_click noty_has_timeout noty_has_progressbar">
+        <div runat="server" id="noti_message" class="noty_body">
+        </div>
+    </div>
+</div> 
 </form>
 </body>
 </html>
@@ -148,9 +146,15 @@
     $('input:checkbox').click(function () {
         $('input:checkbox').not(this).prop('checked', false);
     });
+    $('#noty_layout__topRight').fadeOut(3000);
+
     $('#Btn_Confirm').on({
-        click: function() {
-            alert('Are you sure ');
+        click: function (e) {
+            if ($(':input[type="checkbox"]:checked').length <= 0) {
+                e.preventDefault();
+                alert("please select one box at least");
+            }
+            //alert('Are you sure ');
         }
     });
     function fnClassChange() {
@@ -164,7 +168,7 @@
         // $next = $selected.find('li.page-item.active');
         // $next.removeClass("active");
         //$next.next('li').addClass('active');;
-        alert('client click');
+        //alert('client click');
     }
     
     

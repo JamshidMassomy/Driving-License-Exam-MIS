@@ -89,17 +89,9 @@ public partial class EMS_Default : System.Web.UI.Page
             }
             
         }
-        //plus.Data.DAL.valueOf("Default", "INSERT INTO xm.ApplicantAnswer(ApplicantCode,QuestionID,ChoiceID,Date) VALUES("+ApplicantCode+","+HQID+","+HCHID+" "+DateTime.Now+") " );
-        //plus.Data.DAL.Execute("Default","INSERT INTO xm.ApplicantAnswer(ApplicantCode,QuestionID,ChoiceID,Date) VALUES("+ApplicantCode+","+HQID+","+HCHID+",@Date)", "Date" ,DateTime.Now);
         plus.Data.DAL.valueOf("Default", "EXEC xm.spSaveApplicantAnswer '"+Session["OTP"]+"' ,'"+HQID.Value+"','"+HCHID.Value+"','"+DateTime.Now+"' ");
-        //plus.Data.DAL.Execute("Default", "INSERT INTO xm.ApplicantAnswer(ApplicantCode,QuestionID,ChoiceID,[Date]) VALUES('"+ApplicantCode+"','"+HQID.Value+"','"+HCHID.Value+"','"+DateTime.Now+"')");
-
         noti_message.Visible = true;
         noti_message.InnerHtml = "Saved Successfully ";
-
-        ///to save and return the reuslt from HCHID.Value and HQID.Value
-        // Response.Write("Question ID :"+Convert.ToString(HQID.Value)+"and Check Box valu is :"+ Convert.ToString(HCHID.Value));
-
     }
     protected void Next(object o, EventArgs e)
     {

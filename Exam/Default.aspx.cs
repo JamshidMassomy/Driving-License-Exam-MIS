@@ -46,7 +46,6 @@ public partial class EMS_Default : System.Web.UI.Page
     }
     protected void GenerateQuestion(object o, EventArgs e)
     {
-
         int CheckCounter = 0;
         var _Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };
         foreach (System.Data.DataRow row in plus.Data.DAL.GetTable("Default", "EXEC xm.spGetQuestions @CategoryID", "CategoryID", ViewState["CategoryID"] = (int)(ViewState["CategoryID"])+1).Rows)
@@ -90,7 +89,14 @@ public partial class EMS_Default : System.Web.UI.Page
             }
             
         }
-        plus.Data.DAL.Execute("Default", "EXEC xm.spSaveResult @QuestionID, @ChoiceID, @ApplicantCode, @Date", "QuestionID, ApplicantCode,ChoiceID, Date", HQID,HCHID,ApplicantCode,DateTime.Now);
+        //plus.Data.DAL.valueOf("Default", "INSERT INTO xm.ApplicantAnswer(ApplicantCode,QuestionID,ChoiceID,Date) VALUES("+ApplicantCode+","+HQID+","+HCHID+" "+DateTime.Now+") " );
+        //plus.Data.DAL.Execute("Default","INSERT INTO xm.ApplicantAnswer(ApplicantCode,QuestionID,ChoiceID,Date) VALUES("+ApplicantCode+","+HQID+","+HCHID+",@Date)", "Date" ,DateTime.Now);
+        plus.Data.DAL.valueOf("Default", "EXEC xm.spSaveApplicantAnswer '"+Session["OTP"]+"' ,'"+HQID.Value+"','"+HCHID.Value+"','"+DateTime.Now+"' ");
+        //plus.Data.DAL.Execute("Default", "INSERT INTO xm.ApplicantAnswer(ApplicantCode,QuestionID,ChoiceID,[Date]) VALUES('"+ApplicantCode+"','"+HQID.Value+"','"+HCHID.Value+"','"+DateTime.Now+"')");
+
+        noti_message.Visible = true;
+        noti_message.InnerHtml = "Saved Successfully ";
+
         ///to save and return the reuslt from HCHID.Value and HQID.Value
         // Response.Write("Question ID :"+Convert.ToString(HQID.Value)+"and Check Box valu is :"+ Convert.ToString(HCHID.Value));
 

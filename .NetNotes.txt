@@ -1,1 +1,43 @@
 Asp.Net Notes 
+
+-Logging : is log information when program runs
+we have different logs level and filteration of loggging it is effiecnet when we want
+to get information about the program and debug it 
+	
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ILoggerFactory loggerFactory = new LoggerFactory().AddConsole((_, __) => true);
+            ILogger logger = loggerFactory.CreateLogger<Program>();
+    
+            logger.LogInformation("Logging information.");
+            logger.LogCritical("Logging critical information.");
+            logger.LogDebug("Logging debug information.");
+            logger.LogError("Logging error information.");
+            logger.LogTrace("Logging trace");
+            logger.LogWarning("Logging warning.");
+        }
+    }
+
+
+
+
+
+Connection Resilice:
+	It use when we retry the failed command of databse to excute again
+	we have different configurations for this type
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+	{
+    optionsBuilder
+        .UseSqlServer(
+            @"Server=(localdb)\mssqllocaldb;Database=EFMiscellanous.ConnectionResiliency;Trusted_Connection=True;ConnectRetryCount=0",
+            options => options.EnableRetryOnFailure());
+	}
+	public void ConfigureServices(IServiceCollection services)
+	{
+    services.AddDbContext<PicnicContext>(
+        options => options.UseSqlServer(
+            "<connection string>",
+            providerOptions => providerOptions.EnableRetryOnFailure()));
+	}

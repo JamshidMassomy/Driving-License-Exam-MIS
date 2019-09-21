@@ -4,12 +4,14 @@ using System.Web.UI.WebControls;
 public partial class EMS_Default : System.Web.UI.Page
 {
     private string ApplicantCode { get; set; }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
+            Session["SessionStart"] = DateTime.Now.AddMinutes(2);
             ViewState["CategoryID"] = 1;
-            if (!Convert.ToBoolean(Session["IsAuthenticate"]))
+            if (!Convert.ToBoolean(Session["IsAuthenticate"]) || Session["SessionStart"]==null)
             {
                 Response.Redirect("~/security/index/");
             }
@@ -34,9 +36,16 @@ public partial class EMS_Default : System.Web.UI.Page
         }
         User_Bio.InnerHtml = _html;
     }
-    protected void GenerateQuestion(object o, EventArgs e)
+    protected void GenerateQuestion()
     {
-        int CheckCounter = 0;
+
+        //int CheckCounter = 0;
+        DateTime expiry = (DateTime)base.Context.Session["SessionStart"];
+        if (expiry < DateTime.Now)
+        {
+            Session.Abandon();
+            Response.Redirect("~/security/index/");
+        }
         var _Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };
         foreach (System.Data.DataRow row in plus.Data.DAL.GetTable("Default", "EXEC xm.spGetQuestions @CategoryID", "CategoryID", ViewState["CategoryID"] = (int)(ViewState["CategoryID"])+1).Rows)
         {
@@ -60,6 +69,7 @@ public partial class EMS_Default : System.Web.UI.Page
         {
             Session["IsAuthenticate"] = false;
             Response.Redirect("Result.aspx");
+            //Session.Abandon();
         }
     }
     protected void Save(object o, EventArgs e)
@@ -72,9 +82,10 @@ public partial class EMS_Default : System.Web.UI.Page
                 b++;
                 if(ViewState["Choice"+b+""] == null)
                 {
-                    Response.Write("NULL");
+                   Next(o,e);
                 }
-                HCHID.Value = ViewState["Choice"+b+""].ToString();
+                else { HCHID.Value = ViewState["Choice" + b + ""].ToString(); }
+                
             }
             
         }
@@ -84,6 +95,7 @@ public partial class EMS_Default : System.Web.UI.Page
     }
     protected void Next(object o, EventArgs e)
     {
+        
         var _Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };
         foreach (var check in _Boxes)
         {
@@ -92,14 +104,19 @@ public partial class EMS_Default : System.Web.UI.Page
                 check.Checked = false;
             }
         }
-        GenerateQuestion(o,e);
+        GenerateQuestion();
     }
 
     protected void Info_Skip(object obj, EventArgs eva)
     {
         xm.Visible = true;
         info.Visible = false;
-        GenerateQuestion(obj, eva);
+        GenerateQuestion();
+    }
+
+    protected void Timer_tick(object _o, EventArgs _e)
+    {
+        
     }
 }
 
@@ -107,3 +124,4 @@ public partial class EMS_Default : System.Web.UI.Page
 ﻿
 
 
+     

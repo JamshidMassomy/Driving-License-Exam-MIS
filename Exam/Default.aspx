@@ -2,47 +2,55 @@
 <!DOCTYPE html>
 <html lang="en" dir="rtl">
 <head runat="server">
-    <link href="../skin/Limitless/global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css" />
-    <link href="../skin/Limitless/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="../skin/Limitless/assets/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css" />
-    <link href="../skin/Limitless/assets/css/components.min.css" rel="stylesheet" type="text/css" />
-    <link href="../skin/Limitless/assets/css/colors.min.css" rel="stylesheet" type="text/css" />
-    <script src="../skin/Limitless/global_assets/js/main/jquery.min.js"></script>
-    
-    <title>Welcome</title>
-    <style>
-        .breadcrumb-item{
-            font-size: 17px;
-        }
-        .row{
-            margin-left:0px;
-        }
-        img.card-img.img-fluid{
-            max-height: 32em;
-            max-width: 35em;
-        }
-        #info_Skip{
-            margin: auto;
-        }
-    </style>
+<link href="../skin/Limitless/global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css" />
+<link href="../skin/Limitless/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="../skin/Limitless/assets/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css" />
+<link href="../skin/Limitless/assets/css/components.min.css" rel="stylesheet" type="text/css" />
+<link href="../skin/Limitless/assets/css/colors.min.css" rel="stylesheet" type="text/css" />
+<script src="../skin/Limitless/global_assets/js/main/jquery.min.js"></script>
+<title>Welcome</title>
+<style>
+    .breadcrumb-item{
+        font-size: 17px;
+    }
+    .row{
+        margin-left:0px;
+    }
+    img.card-img.img-fluid{
+        max-height: 32em;
+        max-width: 35em;
+    }
+    #info_Skip{
+        margin: auto;
+    }
+</style>
 </head>
 <body dir="rtl">
 <form runat="server" id="form1">
 <header>
 <div class="navbar navbar-expand-md navbar-dark bg-indigo navbar-static">
     <div class="navbar-brand">
-    <a href="index.html" class="d-inline-block">
 	    <img src="../skin/logo/AK_white_DA.png" alt="" style="height: 2rem;" />
-    </a>
     </div>
-    <div class="collapse navbar-collapse" id="navbar-mobile">
+    <div class="collapse navbar-collapse" >
         <ul class="navbar-nav ml-md-auto">
 	        <li class="nav-item dropdown">
-		        <a href="#" class="navbar-nav-link " data-toggle="dropdown">
-			        <i class="icon-watch2 mr-3 icon-2x">00:00</i>
-		        </a>	            
+           <%--     <asp:ScriptManager ID="ScriptManager1" runat="server">
+                </asp:ScriptManager>
+                <asp:Timer ID="Timer1" runat="server" Interval="2000">
+                </asp:Timer>
+                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                    <ContentTemplate>
+                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                    </ContentTemplate>
+                    <Triggers>
+
+                        <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick" />
+
+                    </Triggers>
+                </asp:UpdatePanel>--%>
+			     <i class="icon-watch2 mr-3 icon-2x" runat="server" ID="timer">00:00</i>    
 	        </li>
-         
         </ul>
     </div>
 </div>
@@ -52,8 +60,7 @@
     </div>
 </div>
 </div>  
-</header>
- 
+</header> 
 <div class="info" runat="server" ID="info">
 <div class="card col-md-10 offset-1">
 <div class="card-body">
@@ -70,10 +77,6 @@
 </div>
 </div>
 </div>
-    
-    
-    
-
 <div ID="xm" runat="server" Visible="False">
 <div class="row">
     <div class="col-md-4 offset-1">
@@ -157,9 +160,6 @@
 </div>
 </div>
 
-    
-    
-
 <div id="noty_layout__topRight" runat="server" class="noty_layout" Visible="False">
     <div id="noty_bar_85e63e18-6338-4801-afce-5c9671ff59cf" class="noty_bar noty_type__info noty_theme__limitless noty_close_with_click noty_has_timeout noty_has_progressbar">
         <div runat="server" id="noti_message" class="noty_body">
@@ -198,7 +198,4 @@
         //$next.next('li').addClass('active');;
         //alert('client click');
     }
-    
-    
-
 </script>

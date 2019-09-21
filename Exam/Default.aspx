@@ -21,6 +21,9 @@
             max-height: 32em;
             max-width: 35em;
         }
+        #info_Skip{
+            margin: auto;
+        }
     </style>
 </head>
 <body dir="rtl">
@@ -50,6 +53,28 @@
 </div>
 </div>  
 </header>
+ 
+<div class="info" runat="server" ID="info">
+<div class="card col-md-10 offset-1">
+<div class="card-body">
+	<div class="text-center mb-3 py-2">
+		<h4 class="font-weight-semibold mb-1">به امتحان نظری جواز راننده گی خوش امدید</h4>
+		<span class=" d-block"> امتحان شامل ۹ سوال بوده و ۱۰ دقیقه وقت دارد  
+		</span>
+        <br/>
+        <span>  برای ادامه روی ،ادامه، کلیک نموده و قت شما اغاز میگردد </span>
+	</div>
+	<div class="d-md-flex align-items-md-center flex-md-wrap text-center text-md-left">
+       <asp:Button runat="server" ID="info_Skip" CssClass="btn btn-primary btn-lg legitRipple" Text="ادامه" OnClick="Info_Skip" ></asp:Button>
+	</div>
+</div>
+</div>
+</div>
+    
+    
+    
+
+<div ID="xm" runat="server" Visible="False">
 <div class="row">
     <div class="col-md-4 offset-1">
         <div class="card">
@@ -67,7 +92,7 @@
                     <p class="mb-0 font-weight-black" runat="server" ID="Question"></p>
                     <br/>
                     <div class="form-check">
-                         <asp:CheckBox runat="server" ID="_1thBox" CssClass="form-check-input" onClick="Validate(id)"  />
+                        <asp:CheckBox runat="server" ID="_1thBox" CssClass="form-check-input" onClick="Validate(id)"  />
                     </div>
                     <br/>
                     <div class="form-check">
@@ -75,11 +100,11 @@
                     </div>
                     <br/>
                     <div class="form-check">
-                         <asp:CheckBox runat="server" ID="_3thBox" CssClass="form-check-input"  onClick="Validate(id)" />
+                        <asp:CheckBox runat="server" ID="_3thBox" CssClass="form-check-input"  onClick="Validate(id)" />
                     </div>
                     <br/>
                     <div class="form-check">
-                       <asp:CheckBox runat="server" ID="_4thBox"  class="form-check-input" onClick="Validate(id)" />
+                        <asp:CheckBox runat="server" ID="_4thBox"  class="form-check-input" onClick="Validate(id)" />
                     </div>
                 </blockquote>
             </div>
@@ -91,47 +116,50 @@
         <input type="hidden" runat="server" id="HCHID"/>
     </div>
 </div>
-<footer>
- <div class="d-flex justify-content-center mt-3 mb-3">
-     <ul class="pagination shadow-1">
-         <li class="page-item">
-             <a href="#" class="page-link page-link-white legitRipple">
-                 <i class="icon-arrow-left15"></i>
-             </a>
-         </li>
-         <li class="page-item active" runat="server" ID="Q1"><a href="#" class="page-link page-link-white legitRipple">1</a></li>
-         <li class="page-item" runat="server" ID="Q2"><a href="#" class="page-link page-link-white legitRipple">2</a></li>
-         <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">3</a></li>
-         <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">4</a></li>
-         <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">5</a></li>
-         <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">6</a></li>
-         <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">7</a></li>
-         <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">8</a></li>
-         <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">
-                 <i class="icon-circle2"></i>
-             </a>
+<div class="d-flex justify-content-center mt-3 mb-3">
+ <ul class="pagination shadow-1">
+     <li class="page-item">
+         <a href="#" class="page-link page-link-white legitRipple">
+             <i class="icon-arrow-left15"></i>
+         </a>
+     </li>
+     <li class="page-item active" runat="server" ID="Q1"><a href="#" class="page-link page-link-white legitRipple">1</a></li>
+     <li class="page-item" runat="server" ID="Q2"><a href="#" class="page-link page-link-white legitRipple">2</a></li>
+     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">3</a></li>
+     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">4</a></li>
+     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">5</a></li>
+     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">6</a></li>
+     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">7</a></li>
+     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">8</a></li>
+     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">
+             <i class="icon-circle2"></i>
+         </a>
 
-         </li>
-     </ul>
- </div>
- <div class="d-flex justify-content-center mt-3 mb-3">
- <ul class="list-inline mb-0">
-     <li class="list-inline-item">
-         <asp:LinkButton runat="server" ID="Btn_Next" class="btn btn-primary ml-auto legitRipple" OnClick="Next" OnClientClick="fnClassChange();">
-             بعدی 
-             <i class="icon-backward2 mr-3 icon-2x"></i>
-         </asp:LinkButton>
      </li>
-     <li class="list-inline-item">
-         <asp:LinkButton runat="server" ID="Btn_Confirm" class="btn btn-primary ml-auto legitRipple" OnClick="Save">
-             تایید 
-             <i class="icon-checkmark4 mr-3 icon-2x"></i>
-         </asp:LinkButton>
-     </li>
-   
  </ul>
- </div>
-</footer>
+</div>
+<div class="d-flex justify-content-center mt-3 mb-3">
+<ul class="list-inline mb-0">
+ <li class="list-inline-item">
+     <asp:LinkButton runat="server" ID="Btn_Next" class="btn btn-primary ml-auto legitRipple" OnClick="Next" OnClientClick="fnClassChange();">
+         بعدی 
+         <i class="icon-backward2 mr-3 icon-2x"></i>
+     </asp:LinkButton>
+ </li>
+ <li class="list-inline-item">
+     <asp:LinkButton runat="server" ID="Btn_Confirm" class="btn btn-primary ml-auto legitRipple" OnClick="Save">
+         تایید 
+         <i class="icon-checkmark4 mr-3 icon-2x"></i>
+     </asp:LinkButton>
+ </li>
+
+</ul>
+</div>
+</div>
+
+    
+    
+
 <div id="noty_layout__topRight" runat="server" class="noty_layout" Visible="False">
     <div id="noty_bar_85e63e18-6338-4801-afce-5c9671ff59cf" class="noty_bar noty_type__info noty_theme__limitless noty_close_with_click noty_has_timeout noty_has_progressbar">
         <div runat="server" id="noti_message" class="noty_body">

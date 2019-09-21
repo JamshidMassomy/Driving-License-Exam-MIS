@@ -1,14 +1,5 @@
 ﻿using System;
-using System.Activities.Statements;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using Spire.Pdf.General.Render.Font.OpenTypeFile;
 
 public partial class EMS_Default : System.Web.UI.Page
 {
@@ -25,7 +16,6 @@ public partial class EMS_Default : System.Web.UI.Page
             else
             {
                 GetUserInfo();
-                GenerateQuestion(sender,e);
             }
         }
     }
@@ -85,7 +75,6 @@ public partial class EMS_Default : System.Web.UI.Page
                     Response.Write("NULL");
                 }
                 HCHID.Value = ViewState["Choice"+b+""].ToString();
-                //Response.Write("Options:"+ HCHID.Value);
             }
             
         }
@@ -103,14 +92,14 @@ public partial class EMS_Default : System.Web.UI.Page
                 check.Checked = false;
             }
         }
-
-        //for (int n = 0; n <= _Boxes.Length; n++)
-        //{
-        //    _Boxes[n].Checked = false;
-        //}
         GenerateQuestion(o,e);
+    }
 
-        //Response.Redirect("Next.aspx");
+    protected void Info_Skip(object obj, EventArgs eva)
+    {
+        xm.Visible = true;
+        info.Visible = false;
+        GenerateQuestion(obj, eva);
     }
 }
 

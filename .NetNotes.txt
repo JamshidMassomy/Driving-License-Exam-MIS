@@ -113,6 +113,10 @@ State Management in Asp.Net
 	if use.record.ID = 100 :
 	user.record.ID
 	plus.scecurty.GetDetail('ID');
+	
+	Multi-Threading:
+		A thread is ligh weight sub process, Multi-Threading share same amount of memory,
+		Multi-Threading is commonly used in animations and games
 
 
 

@@ -1,3 +1,6 @@
+Scafolding? extension and guids
+
+
 Asp.Net Notes 
 
 -Logging : is log information when program runs
@@ -41,3 +44,6 @@ Connection Resilice:
             "<connection string>",
             providerOptions => providerOptions.EnableRetryOnFailure()));
 	}
+Using in C#
+	TO import namespae
+	TO cloase connection properly in SQL or databse

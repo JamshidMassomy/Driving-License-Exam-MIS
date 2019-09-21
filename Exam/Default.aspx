@@ -143,19 +143,12 @@
 </div>
 <div class="d-flex justify-content-center mt-3 mb-3">
 <ul class="list-inline mb-0">
- <li class="list-inline-item">
-     <asp:LinkButton runat="server" ID="Btn_Next" class="btn btn-primary ml-auto legitRipple" OnClick="Next" OnClientClick="fnClassChange();">
+<li class="list-inline-item">
+     <asp:LinkButton runat="server" ID="Btn_Next" class="btn btn-primary ml-auto legitRipple" OnClick="Next" >
          بعدی 
          <i class="icon-backward2 mr-3 icon-2x"></i>
      </asp:LinkButton>
- </li>
- <li class="list-inline-item">
-     <asp:LinkButton runat="server" ID="Btn_Confirm" class="btn btn-primary ml-auto legitRipple" OnClick="Save">
-         تایید 
-         <i class="icon-checkmark4 mr-3 icon-2x"></i>
-     </asp:LinkButton>
- </li>
-
+</li>
 </ul>
 </div>
 </div>
@@ -171,31 +164,32 @@
 </html>
 
 <script type="text/javascript">
+    function preBack() { window.history.forward(); }
+    setTimeout('preBack()', 0);
+    window.unload = function() { null; }
     $('input:checkbox').click(function () {
         $('input:checkbox').not(this).prop('checked', false);
     });
     $('#noty_layout__topRight').fadeOut(3000);
 
-    $('#Btn_Confirm').on({
+    $('#Btn_Next').on({
         click: function (e) {
             if ($(':input[type="checkbox"]:checked').length <= 0) {
                 e.preventDefault();
                 alert("please select one box at least");
             }
+            //e.preventDefault();
+            $('li.page-item.active').removeClass('active');
+            //$(this).addClass("active");
+            // var $next;
+            // var $selected = $("li.page-item.active");
+            // $next = $selected.next('li');
+
+            // $next = $selected.find('li.page-item.active');
+            // $next.removeClass("active");
+            //$next.next('li').addClass('active');;
+            //alert('client click');
             //alert('Are you sure ');
         }
     });
-    function fnClassChange() {
-        //e.preventDefault();
-        $('li.page-item.active').removeClass('active');
-        //$(this).addClass("active");
-        // var $next;
-        // var $selected = $("li.page-item.active");
-        // $next = $selected.next('li');
-
-        // $next = $selected.find('li.page-item.active');
-        // $next.removeClass("active");
-        //$next.next('li').addClass('active');;
-        //alert('client click');
-    }
 </script>

@@ -72,32 +72,29 @@ public partial class EMS_Default : System.Web.UI.Page
             //Session.Abandon();
         }
     }
-    protected void Save(object o, EventArgs e)
+    //protected void Save(object o, EventArgs e)
+    //{
+        
+    //}
+    protected void Next(object o, EventArgs e)
     {
         var _Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };
-        for (int b = 0; b <4; b++)
+        for (int b = 0; b < 4; b++)
         {
             if (_Boxes[b].Checked)
             {
                 b++;
-                if(ViewState["Choice"+b+""] == null)
+                if (ViewState["Choice" + b + ""] == null)
                 {
-                   Next(o,e);
+                    Response.Write("NULL passed");
+                    //Next(o, e);
                 }
                 else { HCHID.Value = ViewState["Choice" + b + ""].ToString(); }
-                
             }
-            
         }
-        plus.Data.DAL.valueOf("Default", "EXEC xm.spSaveApplicantAnswer '"+Session["OTP"]+"' ,'"+HQID.Value+"','"+HCHID.Value+"','"+DateTime.Now+"' ");
-        noti_message.Visible = true;
-        noti_message.InnerHtml = "Saved Successfully ";
-    }
-    protected void Next(object o, EventArgs e)
-    {
-        
-        var _Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };
-        foreach (var check in _Boxes)
+        plus.Data.DAL.valueOf("Default", "EXEC xm.spSaveApplicantAnswer '" + Session["OTP"] + "' ,'" + HQID.Value + "','" + HCHID.Value + "','" + DateTime.Now + "' ");
+        var _2Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };
+        foreach (var check in _2Boxes)
         {
             if (check.Checked)
             {
@@ -106,14 +103,12 @@ public partial class EMS_Default : System.Web.UI.Page
         }
         GenerateQuestion();
     }
-
     protected void Info_Skip(object obj, EventArgs eva)
     {
         xm.Visible = true;
         info.Visible = false;
         GenerateQuestion();
     }
-
     protected void Timer_tick(object _o, EventArgs _e)
     {
         

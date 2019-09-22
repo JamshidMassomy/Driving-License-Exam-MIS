@@ -11,4 +11,8 @@ public partial class Exam_Result : System.Web.UI.Page
     {
 
     }
+    protected void Print(object _o, EventArgs _E)
+    {
+
+    }
 }

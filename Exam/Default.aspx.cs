@@ -1,31 +1,23 @@
 ﻿using System;
-using System.Activities.Statements;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using Spire.Pdf.General.Render.Font.OpenTypeFile;
 
 public partial class EMS_Default : System.Web.UI.Page
 {
     private string ApplicantCode { get; set; }
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
+            Session["SessionStart"] = DateTime.Now.AddMinutes(2);
             ViewState["CategoryID"] = 1;
-            if (!Convert.ToBoolean(Session["IsAuthenticate"]))
+            if (!Convert.ToBoolean(Session["IsAuthenticate"]) || Session["SessionStart"]==null)
             {
                 Response.Redirect("~/security/index/");
             }
             else
             {
                 GetUserInfo();
-                GenerateQuestion(sender,e);
             }
         }
     }
@@ -44,9 +36,16 @@ public partial class EMS_Default : System.Web.UI.Page
         }
         User_Bio.InnerHtml = _html;
     }
-    protected void GenerateQuestion(object o, EventArgs e)
+    protected void GenerateQuestion()
     {
-        int CheckCounter = 0;
+
+        //int CheckCounter = 0;
+        DateTime expiry = (DateTime)base.Context.Session["SessionStart"];
+        if (expiry < DateTime.Now)
+        {
+            Session.Abandon();
+            Response.Redirect("~/security/index/");
+        }
         var _Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };
         foreach (System.Data.DataRow row in plus.Data.DAL.GetTable("Default", "EXEC xm.spGetQuestions @CategoryID", "CategoryID", ViewState["CategoryID"] = (int)(ViewState["CategoryID"])+1).Rows)
         {
@@ -70,47 +69,49 @@ public partial class EMS_Default : System.Web.UI.Page
         {
             Session["IsAuthenticate"] = false;
             Response.Redirect("Result.aspx");
+            //Session.Abandon();
         }
     }
-    protected void Save(object o, EventArgs e)
+    //protected void Save(object o, EventArgs e)
+    //{
+        
+    //}
+    protected void Next(object o, EventArgs e)
     {
         var _Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };
-        for (int b = 0; b <4; b++)
+        for (int b = 0; b < 4; b++)
         {
             if (_Boxes[b].Checked)
             {
                 b++;
-                if(ViewState["Choice"+b+""] == null)
+                if (ViewState["Choice" + b + ""] == null)
                 {
-                    Response.Write("NULL");
+                    Response.Write("NULL passed");
+                    //Next(o, e);
                 }
-                HCHID.Value = ViewState["Choice"+b+""].ToString();
-                //Response.Write("Options:"+ HCHID.Value);
+                else { HCHID.Value = ViewState["Choice" + b + ""].ToString(); }
             }
-            
         }
-        plus.Data.DAL.valueOf("Default", "EXEC xm.spSaveApplicantAnswer '"+Session["OTP"]+"' ,'"+HQID.Value+"','"+HCHID.Value+"','"+DateTime.Now+"' ");
-        noti_message.Visible = true;
-        noti_message.InnerHtml = "Saved Successfully ";
-    }
-    protected void Next(object o, EventArgs e)
-    {
-        var _Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };
-        foreach (var check in _Boxes)
+        plus.Data.DAL.valueOf("Default", "EXEC xm.spSaveApplicantAnswer '" + Session["OTP"] + "' ,'" + HQID.Value + "','" + HCHID.Value + "','" + DateTime.Now + "' ");
+        var _2Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };
+        foreach (var check in _2Boxes)
         {
             if (check.Checked)
             {
                 check.Checked = false;
             }
         }
-
-        //for (int n = 0; n <= _Boxes.Length; n++)
-        //{
-        //    _Boxes[n].Checked = false;
-        //}
-        GenerateQuestion(o,e);
-
-        //Response.Redirect("Next.aspx");
+        GenerateQuestion();
+    }
+    protected void Info_Skip(object obj, EventArgs eva)
+    {
+        xm.Visible = true;
+        info.Visible = false;
+        GenerateQuestion();
+    }
+    protected void Timer_tick(object _o, EventArgs _e)
+    {
+        
     }
 }
 
@@ -118,3 +119,4 @@ public partial class EMS_Default : System.Web.UI.Page
 ﻿
 
 
+     

@@ -1,4 +1,4 @@
-Scafolding? extension and guids
+
 
 
 Asp.Net Notes 

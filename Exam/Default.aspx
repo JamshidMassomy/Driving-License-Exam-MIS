@@ -8,6 +8,10 @@
 <link href="../skin/Limitless/assets/css/components.min.css" rel="stylesheet" type="text/css" />
 <link href="../skin/Limitless/assets/css/colors.min.css" rel="stylesheet" type="text/css" />
 <script src="../skin/Limitless/global_assets/js/main/jquery.min.js"></script>
+ 
+    
+ 
+
 <title>Welcome</title>
 <style>
     .breadcrumb-item{
@@ -117,10 +121,11 @@
         <input type="hidden" runat="server" id="HCounter"/>
         <input type="hidden" runat="server" id="HQID"/>
         <input type="hidden" runat="server" id="HCHID"/>
+        <input type="hidden" runat="server" id="Qselect" Value="0"/>
     </div>
 </div>
 <div class="d-flex justify-content-center mt-3 mb-3">
- <ul class="pagination shadow-1">
+ <ul class="pagination shadow-1" runat="server" ID="Q_counter">
      <li class="page-item">
          <a href="#" class="page-link page-link-white legitRipple">
              <i class="icon-arrow-left15"></i>
@@ -128,7 +133,7 @@
      </li>
      <li class="page-item active" runat="server" ID="Q1"><a href="#" class="page-link page-link-white legitRipple">1</a></li>
      <li class="page-item" runat="server" ID="Q2"><a href="#" class="page-link page-link-white legitRipple">2</a></li>
-     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">3</a></li>
+     <li class="page-item" runat="server" ID="Q3"><a href="#" class="page-link page-link-white legitRipple">3</a></li>
      <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">4</a></li>
      <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">5</a></li>
      <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">6</a></li>
@@ -152,7 +157,6 @@
 </ul>
 </div>
 </div>
-
 <div id="noty_layout__topRight" runat="server" class="noty_layout" Visible="False">
     <div id="noty_bar_85e63e18-6338-4801-afce-5c9671ff59cf" class="noty_bar noty_type__info noty_theme__limitless noty_close_with_click noty_has_timeout noty_has_progressbar">
         <div runat="server" id="noti_message" class="noty_body">
@@ -176,10 +180,15 @@
         click: function (e) {
             if ($(':input[type="checkbox"]:checked').length <= 0) {
                 e.preventDefault();
-                alert("please select one box at least");
+                alert(" گزینه ها خالی است ");
+                var select = $('li.page-item.active');
+                $("#<%= Qselect.ClientID %>").val(select);
+               
+                $('#myTab a[href="' + tab + '"]').tab('show');
+
             }
             //e.preventDefault();
-            $('li.page-item.active').removeClass('active');
+            //$('li.page-item.active').removeClass('active');
             //$(this).addClass("active");
             // var $next;
             // var $selected = $("li.page-item.active");
@@ -190,6 +199,10 @@
             //$next.next('li').addClass('active');;
             //alert('client click');
             //alert('Are you sure ');
+            
         }
     });
+    window.onload = function(e) {
+        e.preventDefault();
+    }
 </script>

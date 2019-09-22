@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Text;
 using System.Web.UI.WebControls;
 
 public partial class EMS_Default : System.Web.UI.Page
 {
     private string ApplicantCode { get; set; }
-
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         if (!IsPostBack)
         {
-            Session["SessionStart"] = DateTime.Now.AddMinutes(2);
+            Session["SessionStart"] = DateTime.Now.AddMinutes(30);
             ViewState["CategoryID"] = 1;
             if (!Convert.ToBoolean(Session["IsAuthenticate"]) || Session["SessionStart"]==null)
             {
@@ -17,6 +18,7 @@ public partial class EMS_Default : System.Web.UI.Page
             }
             else
             {
+  
                 GetUserInfo();
             }
         }
@@ -38,7 +40,29 @@ public partial class EMS_Default : System.Web.UI.Page
     }
     protected void GenerateQuestion()
     {
+        string active = "active";
+        string QCounter =
+            @"<li class='page-item'><a href= '#' class='page-link page-link-white legitRipple'>1</a></li>";
+        StringBuilder sb = new StringBuilder();
+        sb.AppendFormat(@"
+        <li class='page-item'>
+        <a href='#' class='page-link page-link-white legitRipple'>
+             <i class='icon-arrow-left15'></i>
+         </a>
+        </li>
+     {0}
+     <li class='page-item'><a href = '#' class='page-link page-link-white legitRipple'>
+             <i class='icon-circle2'></i>
+         </a>
 
+     </li>
+	 
+", QCounter);
+
+
+          
+       // Q_counter.InnerHtml = sb.ToString();
+        string _temp = ""; //String.Empty
         //int CheckCounter = 0;
         DateTime expiry = (DateTime)base.Context.Session["SessionStart"];
         if (expiry < DateTime.Now)
@@ -72,10 +96,6 @@ public partial class EMS_Default : System.Web.UI.Page
             //Session.Abandon();
         }
     }
-    //protected void Save(object o, EventArgs e)
-    //{
-        
-    //}
     protected void Next(object o, EventArgs e)
     {
         var _Boxes = new CheckBox[] { _1thBox, _2thBox, _3thBox, _4thBox };

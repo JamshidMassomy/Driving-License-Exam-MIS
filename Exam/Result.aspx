@@ -73,3 +73,11 @@
 </form>
 </body>
 </html>
+<script>
+    //reset timer 
+    $(function () {
+        localStorage.removeItem('end2');
+    })();
+
+
+</script>

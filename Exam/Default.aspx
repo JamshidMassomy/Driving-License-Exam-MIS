@@ -23,6 +23,9 @@
     #info_Skip{
         margin: auto;
     }
+    #Xm_Question{
+        margin-bottom: 50px;
+    }
 </style>
 </head>
 <body dir="rtl">
@@ -60,7 +63,7 @@
         <span>  برای ادامه روی ،ادامه، کلیک نموده و قت شما اغاز میگردد </span>
 	</div>
 	<div class="d-md-flex align-items-md-center flex-md-wrap text-center text-md-left">
-       <asp:Button runat="server" ID="info_Skip" CssClass="btn btn-primary btn-lg legitRipple" Text="ادامه" OnClick="Info_Skip"  ></asp:Button>
+       <asp:Button runat="server" ID="info_Skip" CssClass="btn btn-primary btn-lg legitRipple" Text="ادامه" OnClick="Info_Skip"   ></asp:Button>
 	</div>
 </div>
 </div>
@@ -83,19 +86,19 @@
                     <p class="mb-0 font-weight-black" runat="server" ID="Question"></p>
                     <br/>
                     <div class="form-check">
-                        <asp:CheckBox runat="server" ID="_1thBox" CssClass="form-check-input" onClick="Validate(id)"  />
+                        <asp:CheckBox runat="server" ID="_1thBox" CssClass="form-check-input"  />
                     </div>
                     <br/>
                     <div class="form-check">
-                        <asp:CheckBox runat="server" ID="_2thBox" CssClass="form-check-input"  onClick="Validate(id)" />
+                        <asp:CheckBox runat="server" ID="_2thBox" CssClass="form-check-input"  />
                     </div>
                     <br/>
                     <div class="form-check">
-                        <asp:CheckBox runat="server" ID="_3thBox" CssClass="form-check-input"  onClick="Validate(id)" />
+                        <asp:CheckBox runat="server" ID="_3thBox" CssClass="form-check-input"  />
                     </div>
                     <br/>
                     <div class="form-check">
-                        <asp:CheckBox runat="server" ID="_4thBox"  class="form-check-input" onClick="Validate(id)" />
+                        <asp:CheckBox runat="server" ID="_4thBox"  class="form-check-input"  />
                     </div>
                 </blockquote>
             </div>
@@ -106,6 +109,7 @@
         <input type="hidden" runat="server" id="HQID"/>
         <input type="hidden" runat="server" id="HCHID"/>
         <input type="hidden" runat="server" id="Qselect" Value="0"/>
+        <asp:HiddenField runat="server" ID="time" />
     </div>
 </div>
 <div class="d-flex justify-content-center mt-3 mb-3">
@@ -152,14 +156,10 @@
 </html>
 
 <script type="text/javascript">
-    function preBack() { window.history.forward(); }
-    setTimeout('preBack()', 0);
-    window.unload = function() { null; }
+    //==========================Validation============================
     $('input:checkbox').click(function () {
         $('input:checkbox').not(this).prop('checked', false);
     });
-    $('#noty_layout__topRight').fadeOut(3000);
-
     $('#Btn_Next').on({
         click: function (e) {
             if ($(':input[type="checkbox"]:checked').length <= 0) {
@@ -167,58 +167,79 @@
                 alert(" گزینه ها خالی است ");
 
             }
-            
+
         }
     });
+    $('#noty_layout__topRight').fadeOut(3000);
+    //=================================================================
+    
+    //=======================Clock===================================
+    var minutesleft = 40;
+    var secondsleft = 0;
+    var finishedtext = "وقت شما تمام گردید";
+    var end;
+    if (localStorage.getItem("end2")) {
+        end = new Date(localStorage.getItem("end2"));
+    } else {
+        end = new Date();
+        end.setMinutes(end.getMinutes() + minutesleft);
+        end.setSeconds(end.getSeconds() + secondsleft);
+    }
 
-            //var hoursleft = 0;
-            var minutesleft = 40;
-            var secondsleft = 0;
-            var finishedtext = "وقت شما تمام گردید";
-            var end;
-            if (localStorage.getItem("end2")) {
-                end = new Date(localStorage.getItem("end2"));
-            } else {
-                end = new Date();
-                end.setMinutes(end.getMinutes() + minutesleft);
-                end.setSeconds(end.getSeconds() + secondsleft);
+    var counter = function() {
+            var now = new Date();
+            var diff = end - now;
+            diff = new Date(diff);
+            var sec = diff.getSeconds();
+            var min = diff.getMinutes() - 6;
+            if (min < 10) {
+                min = "0" + min;
             }
-            var counter = function () {
-                var now = new Date();
-                var diff = end - now;
-                diff = new Date(diff);
-                var sec = diff.getSeconds();
-                var min = diff.getMinutes();
-                if (min < 10) {
-                    min = "0" + min;
-                }
-                if (sec < 10) {
-                    sec = "0" + sec;
-                }
-                if (min <= 0) {
-                    clearTimeout(interval);
-                    localStorage.setItem("end2", null)
-                    document.getElementById('timer').innerHTML = finishedtext;
-                    localStorage.removeItem('end2');
-                    self.location = "http://192.168.2.161/Exam/security/index/#";
-                }
-                else {
+            if (sec < 10) {
+                sec = "0" + sec;
+            }
+            if (min <= 1) {
+                document.getElementById('timer').style.backgroundColor = "red";
+            }
+            if (min <= 0) {
+                clearTimeout(interval);
+                localStorage.setItem("end2", null)
+                document.getElementById('timer').innerHTML = finishedtext;
+                localStorage.removeItem('end2');
+                <%--document.getElementById('<%=time.ClientID%>').value = "0";--%>
 
-                    var value = min + ":" + sec;
-                    localStorage.setItem("end2", end);
-                    document.getElementById('timer').innerHTML = value;
-                    
-                    
-                }
+                self.location = "http://192.168.2.161/Exam/Exam/Result.aspx";
             }
+            else {
+                var value = min + ":" + sec;
+                localStorage.setItem("end2", end);
+                document.getElementById('timer').innerHTML = value;
+            }
+        }
+    
     var interval = setInterval(counter, 1000);
-    window.addEventListener('beforeunload', function (e) {
-        alert('are you sure close');
-        e.preventDefault();
-        e.returnValue = '';
-    });
-    //window.onunload = function () {
-    //    alert('callef rom unload');
+
+  
+  
+    //============================================================================
+
+
+    //==============window control function====================
+    //window.unload = function () {
     //    localStorage.removeItem('end2');
     //}
+    //window.onbeforeunload = function () {
+    //    localStorage.removeItem('end2');
+    //}
+
+    //function preBack() { window.history.forward(); }
+    //setTimeout('preBack()', 0);
+    //window.unload = function() { null; }
+    //window.addEventListener('beforeunload', function (e) {
+    //    alert('are you sure close');
+    //    e.preventDefault();
+    //    e.returnValue = '';
+    //});
+    //=============================================================
+
 </script>

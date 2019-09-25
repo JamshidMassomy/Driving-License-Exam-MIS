@@ -7,6 +7,7 @@ public partial class EMS_Default : System.Web.UI.Page
     private string ApplicantCode { get; set; }
     protected void Page_Load(object sender, EventArgs e)
     {
+      
        
         if (!IsPostBack)
         {
@@ -18,8 +19,13 @@ public partial class EMS_Default : System.Web.UI.Page
             }
             else
             {
-              
-                // InitTimer(10);
+                //if (time.Value == "0")
+                //{
+                //    Session["IsAuthenticate"] = false;
+                //    Finish();
+                //    Response.Redirect("Result.aspx");
+                //    Session.Abandon();
+                //}
                 GetUserInfo();
             }
         }
@@ -73,12 +79,12 @@ public partial class EMS_Default : System.Web.UI.Page
             ViewState["Choice3"] = Options[2][0];
             ViewState["Choice4"] = Options[3][0];
         }
-        if ((int)ViewState["CategoryID"] >= 7 )
+        if ((int)ViewState["CategoryID"] >= 8 )
         {
             Session["IsAuthenticate"] = false;
             Finish();
             Response.Redirect("Result.aspx");
-            //Session.Abandon();
+            Session.Abandon();
         }
     }
     protected void Next(object o, EventArgs e)

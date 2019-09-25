@@ -9,8 +9,13 @@ public partial class Exam_Result : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         if (!IsPostBack)
         {
+            Session["IsAuthenticate"] = false;
+            Finish();
+            //Response.Redirect("Result.aspx");
+            Session.Abandon();
             string _Result = "";
             string _Result_Info = "";
             foreach (System.Data.DataRow row in plus.Data.DAL.GetTable("Default", "SELECT * FROM xm.vResult WHERE ApplicantCode = '" + Session["OTP"] + "' ").Rows)
@@ -56,6 +61,10 @@ public partial class Exam_Result : System.Web.UI.Page
         Session.Abandon();
         Response.Redirect("~/security/index/");
     }
+    protected void Finish()
+    {
+        plus.Data.DAL.valueOf("Default", "EXEC xm.spSaveResult '" + Session["OTP"] + "','" + DateTime.Now + "' ");
+    }
 
-    
+
 }

@@ -22,8 +22,11 @@
         max-height: 32em;
         max-width: 35em;
     }
-    #info_Skip{
+    #End_btn{
         margin: auto;
+    }
+    .bg-blue{
+        background-color: #3f51b5 !important;
     }
 </style>
 </head>
@@ -47,10 +50,22 @@
     <div class="card col-md-10 offset-1">
         <div class="card-body">
             <div class="text-center mb-3 py-2">
-                <h4 class="font-weight-semibold mb-1">پرنت نتیجه </h4>
+                <h4 class="font-weight-semibold mb-1"> نتیجه </h4>
+            </div>
+            <div class="table-responsive" runat="server" id="Result_Table">
+            </div>
+            <br/>
+            <div class="col-md-4 offset-4" runat="server" id="Result_Info">
+               <%-- <div class="card card-body border-top-1 border-top-pink">
+                    <div class="text-center">
+                        <h6 class="font-weight-bold mb-0">کامیاب</h6>
+                        <p class="mb-3">90</p>
+
+                    </div>
+                </div>--%>
             </div>
             <div class="d-md-flex align-items-md-center flex-md-wrap text-center text-md-left">
-                <asp:Button runat="server" ID="info_Skip" CssClass="btn btn-primary btn-lg legitRipple" Text="پرنت" OnClick="Print" ></asp:Button>
+                <asp:Button runat="server" ID="End_btn" CssClass="btn btn-primary btn-lg legitRipple" Text="ختم" OnClick="End" ></asp:Button>
             </div>
         </div>
     </div>

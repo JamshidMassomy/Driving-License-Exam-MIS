@@ -8,10 +8,6 @@
 <link href="../skin/Limitless/assets/css/components.min.css" rel="stylesheet" type="text/css" />
 <link href="../skin/Limitless/assets/css/colors.min.css" rel="stylesheet" type="text/css" />
 <script src="../skin/Limitless/global_assets/js/main/jquery.min.js"></script>
- 
-    
- 
-
 <title>Welcome</title>
 <style>
     .breadcrumb-item{
@@ -30,41 +26,29 @@
 </style>
 </head>
 <body dir="rtl">
+
+
 <form runat="server" id="form1">
 <header>
-<div class="navbar navbar-expand-md navbar-dark bg-indigo navbar-static">
-    <div class="navbar-brand">
-	    <img src="../skin/logo/AK_white_DA.png" alt="" style="height: 2rem;" />
+    <div class="navbar navbar-expand-md navbar-dark bg-indigo navbar-static">
+        <div class="navbar-brand">
+            <img src="../skin/logo/AK_white_DA.png" alt="" style="height: 2rem;" />
+        </div>
+        <div class="collapse navbar-collapse" >
+            <ul class="navbar-nav ml-md-auto">
+                <li class="nav-item dropdown">
+                    <i class="icon-watch2 mr-3 icon-2x" id="timer"></i>    
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="collapse navbar-collapse" >
-        <ul class="navbar-nav ml-md-auto">
-	        <li class="nav-item dropdown">
-           <%--     <asp:ScriptManager ID="ScriptManager1" runat="server">
-                </asp:ScriptManager>
-                <asp:Timer ID="Timer1" runat="server" Interval="2000">
-                </asp:Timer>
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                    <ContentTemplate>
-                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-                    </ContentTemplate>
-                    <Triggers>
-
-                        <asp:AsyncPostBackTrigger ControlID="Timer1" EventName="Tick" />
-
-                    </Triggers>
-                </asp:UpdatePanel>--%>
-			     <i class="icon-watch2 mr-3 icon-2x" runat="server" ID="timer">00:00</i>    
-	        </li>
-        </ul>
-    </div>
-</div>
-<div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
-<div class="d-flex offset-3">
-    <div class="breadcrumb" runat="server" id="User_Bio">
-    </div>
-</div>
-</div>  
-</header> 
+    <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+        <div class="d-flex offset-3">
+            <div class="breadcrumb" runat="server" id="User_Bio">
+            </div>
+        </div>
+    </div>  
+</header>
 <div class="info" runat="server" ID="info">
 <div class="card col-md-10 offset-1">
 <div class="card-body">
@@ -76,7 +60,7 @@
         <span>  برای ادامه روی ،ادامه، کلیک نموده و قت شما اغاز میگردد </span>
 	</div>
 	<div class="d-md-flex align-items-md-center flex-md-wrap text-center text-md-left">
-       <asp:Button runat="server" ID="info_Skip" CssClass="btn btn-primary btn-lg legitRipple" Text="ادامه" OnClick="Info_Skip" ></asp:Button>
+       <asp:Button runat="server" ID="info_Skip" CssClass="btn btn-primary btn-lg legitRipple" Text="ادامه" OnClick="Info_Skip"  ></asp:Button>
 	</div>
 </div>
 </div>
@@ -181,28 +165,60 @@
             if ($(':input[type="checkbox"]:checked').length <= 0) {
                 e.preventDefault();
                 alert(" گزینه ها خالی است ");
-                var select = $('li.page-item.active');
-                $("#<%= Qselect.ClientID %>").val(select);
-               
-                $('#myTab a[href="' + tab + '"]').tab('show');
 
             }
-            //e.preventDefault();
-            //$('li.page-item.active').removeClass('active');
-            //$(this).addClass("active");
-            // var $next;
-            // var $selected = $("li.page-item.active");
-            // $next = $selected.next('li');
-
-            // $next = $selected.find('li.page-item.active');
-            // $next.removeClass("active");
-            //$next.next('li').addClass('active');;
-            //alert('client click');
-            //alert('Are you sure ');
             
         }
     });
-    window.onload = function(e) {
+
+            //var hoursleft = 0;
+            var minutesleft = 40;
+            var secondsleft = 0;
+            var finishedtext = "وقت شما تمام گردید";
+            var end;
+            if (localStorage.getItem("end2")) {
+                end = new Date(localStorage.getItem("end2"));
+            } else {
+                end = new Date();
+                end.setMinutes(end.getMinutes() + minutesleft);
+                end.setSeconds(end.getSeconds() + secondsleft);
+            }
+            var counter = function () {
+                var now = new Date();
+                var diff = end - now;
+                diff = new Date(diff);
+                var sec = diff.getSeconds();
+                var min = diff.getMinutes();
+                if (min < 10) {
+                    min = "0" + min;
+                }
+                if (sec < 10) {
+                    sec = "0" + sec;
+                }
+                if (min <= 0) {
+                    clearTimeout(interval);
+                    localStorage.setItem("end2", null)
+                    document.getElementById('timer').innerHTML = finishedtext;
+                    localStorage.removeItem('end2');
+                    self.location = "http://192.168.2.161/Exam/security/index/#";
+                }
+                else {
+
+                    var value = min + ":" + sec;
+                    localStorage.setItem("end2", end);
+                    document.getElementById('timer').innerHTML = value;
+                    
+                    
+                }
+            }
+    var interval = setInterval(counter, 1000);
+    window.addEventListener('beforeunload', function (e) {
+        alert('are you sure close');
         e.preventDefault();
-    }
+        e.returnValue = '';
+    });
+    //window.onunload = function () {
+    //    alert('callef rom unload');
+    //    localStorage.removeItem('end2');
+    //}
 </script>

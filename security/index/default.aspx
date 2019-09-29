@@ -112,5 +112,7 @@
         $('.hide.card-tow').removeClass('hide');
         //$('.card-two.card').removeClass('.hide');
     });
+    localStorage.removeItem("end2");
+    localStorage.removeItem('active');
 </script>
 </html>

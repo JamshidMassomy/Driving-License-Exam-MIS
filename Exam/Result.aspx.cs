@@ -9,12 +9,14 @@ public partial class Exam_Result : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
-        if (!IsPostBack)
+        if ( Session["IsAuthenticate"] == null)
+        {
+            Response.Redirect("~/security/index/");
+        }
+        if (!IsPostBack && (bool)Session["IsAuthenticate"] == true  )
         {
             Session["IsAuthenticate"] = false;
             Finish();
-            //Response.Redirect("Result.aspx");
             Session.Abandon();
             string _Result = "";
             string _Result_Info = "";

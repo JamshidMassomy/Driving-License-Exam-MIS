@@ -108,8 +108,7 @@
         <input type="hidden" runat="server" id="HCounter"/>
         <input type="hidden" runat="server" id="HQID"/>
         <input type="hidden" runat="server" id="HCHID"/>
-        <input type="hidden" runat="server" id="Qselect" Value="0"/>
-        <asp:HiddenField runat="server" ID="time" />
+        <input type="hidden" runat="server" id="Qselect" Value=""/>
     </div>
 </div>
 <div class="d-flex justify-content-center mt-3 mb-3">
@@ -119,25 +118,24 @@
              <i class="icon-arrow-left15"></i>
          </a>
      </li>
-     <li class="page-item active" runat="server" ID="Q1"><a href="#" class="page-link page-link-white legitRipple">1</a></li>
-     <li class="page-item" runat="server" ID="Q2"><a href="#" class="page-link page-link-white legitRipple">2</a></li>
-     <li class="page-item" runat="server" ID="Q3"><a href="#" class="page-link page-link-white legitRipple">3</a></li>
-     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">4</a></li>
-     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">5</a></li>
-     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">6</a></li>
-     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">7</a></li>
-     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">8</a></li>
-     <li class="page-item"><a href="#" class="page-link page-link-white legitRipple">
+     <li id="tab1" class="page-item"><a href="#" class="page-link page-link-white legitRipple">1</a></li>
+    <li  id="tab2"  class="page-item" ><a href="#" class="page-link page-link-white legitRipple">2</a></li>
+     <li id="tab3" class="page-item"  ><a href="#" class="page-link page-link-white legitRipple">3</a></li>
+     <li id="tab4" class="page-item" ><a href="#" class="page-link page-link-white legitRipple">4</a></li>
+     <li id="tab5" class="page-item" ><a href="#" class="page-link page-link-white legitRipple">5</a></li>
+     <li id="tab6" class="page-item" ><a href="#" class="page-link page-link-white legitRipple">6</a></li>
+     <li id="tab7" class="page-item" ><a href="#" class="page-link page-link-white legitRipple">7</a></li>
+     <li id="tab8" class="page-item" ><a href="#" class="page-link page-link-white legitRipple">8</a></li>
+     <li id="tab9" class="page-item"><a href="#" class="page-link page-link-white legitRipple">
              <i class="icon-circle2"></i>
          </a>
-
      </li>
  </ul>
 </div>
 <div class="d-flex justify-content-center mt-3 mb-3">
 <ul class="list-inline mb-0">
 <li class="list-inline-item">
-     <asp:LinkButton runat="server" ID="Btn_Next" class="btn btn-primary ml-auto legitRipple" OnClick="Next" >
+     <asp:LinkButton runat="server" ID="Btn_Next" class="btn btn-primary ml-auto legitRipple" OnClick="Next" OnClientClick="fnQCounter()">
          بعدی 
          <i class="icon-backward2 mr-3 icon-2x"></i>
      </asp:LinkButton>
@@ -156,21 +154,29 @@
 </html>
 
 <script type="text/javascript">
+ 
+
     //==========================Validation============================
-    $('input:checkbox').click(function () {
-        $('input:checkbox').not(this).prop('checked', false);
-    });
-    $('#Btn_Next').on({
-        click: function (e) {
-            if ($(':input[type="checkbox"]:checked').length <= 0) {
-                e.preventDefault();
-                alert(" گزینه ها خالی است ");
-
-            }
-
+    (function() {
+        if (localStorage.getItem('active') >= 5) {
+            localStorage.removeItem('active');
+        } else {
+            $('#tab'+localStorage.getItem('active')+'').addClass('active');
         }
-    });
+    })();
     $('#noty_layout__topRight').fadeOut(3000);
+
+    function fnQCounter(e) {
+        if ($(':input[type="checkbox"]:checked').length <= 0) {
+            e.preventDefault();
+            alert(" گزینه ها خالی است ");
+        }
+        var active = document.getElementById('<%=Qselect.ClientID%>').value;
+        localStorage.setItem("active", active);
+        if (active == null ) {
+            alert('active is null');
+        }
+    }
     //=================================================================
     
     //=======================Clock===================================
@@ -187,50 +193,51 @@
     }
 
     var counter = function() {
-            var now = new Date();
-            var diff = end - now;
-            diff = new Date(diff);
-            var sec = diff.getSeconds();
-            var min = diff.getMinutes() - 6;
-            if (min < 10) {
-                min = "0" + min;
-            }
-            if (sec < 10) {
-                sec = "0" + sec;
-            }
-            if (min <= 1) {
-                document.getElementById('timer').style.backgroundColor = "red";
-            }
-            if (min <= 0) {
-                clearTimeout(interval);
-                localStorage.setItem("end2", null)
-                document.getElementById('timer').innerHTML = finishedtext;
-                localStorage.removeItem('end2');
-                <%--document.getElementById('<%=time.ClientID%>').value = "0";--%>
-
-                self.location = "http://192.168.2.161/Exam/Exam/Result.aspx";
-            }
-            else {
-                var value = min + ":" + sec;
-                localStorage.setItem("end2", end);
-                document.getElementById('timer').innerHTML = value;
-            }
+        var now = new Date();
+        var diff = end - now;
+        diff = new Date(diff);
+        var sec = diff.getSeconds();
+        var min = diff.getMinutes() - 6;
+        if (min < 10) {
+            min = "0" + min;
         }
+        if (sec < 10) {
+            sec = "0" + sec;
+        }
+        if (min <= 1) {
+            document.getElementById('timer').style.backgroundColor = "red";
+        }
+        if (min <= 0) {
+            clearTimeout(interval);
+            localStorage.setItem("end2", null)
+            document.getElementById('timer').innerHTML = finishedtext;
+            localStorage.removeItem('end2');
+            <%--document.getElementById('<%=time.ClientID%>').value = "0";--%>
+
+            self.location = "http://192.168.2.161/Exam/Exam/Result.aspx";
+        }
+        else {
+            var value = min + ":" + sec;
+            localStorage.setItem("end2", end);
+            document.getElementById('timer').innerHTML = value;
+        }
+    }
     
     var interval = setInterval(counter, 1000);
-
-  
-  
     //============================================================================
 
 
     //==============window control function====================
-    //window.unload = function () {
-    //    localStorage.removeItem('end2');
+    //window.onload = function (e) {
+    //    e.preventDefault();
     //}
-    //window.onbeforeunload = function () {
-    //    localStorage.removeItem('end2');
+    //window.location.reload(false);
+
+
+    //window.unload = function (e) {
+    //    e.preventDefault();
     //}
+
 
     //function preBack() { window.history.forward(); }
     //setTimeout('preBack()', 0);

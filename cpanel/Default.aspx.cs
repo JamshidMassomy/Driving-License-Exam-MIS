@@ -63,7 +63,7 @@ public partial class cpanel_Default : System.Web.UI.Page
     void LoadSideBar(plus.Security.Principal.Identity user) {
         
         string ustr = "";
-        ustr = "<img class='UserLogo' src='../skin/logo/Traffic2.png'>";
+        ustr = "<img class='UserLogo' src='../skin/logo/Transport1.png'>";
         ustr += "<span class='UserName'>" + " " + user.record.get("UserName").ToString().Replace('.', ' ') + "</span>";
         ustr += "<span class='Desc'>(Traffic archive)</span>";
         MenuUserDiv.InnerHtml = ustr;

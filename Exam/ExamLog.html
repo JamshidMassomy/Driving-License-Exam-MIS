@@ -1,0 +1,35 @@
+﻿<div id="dveconfsys_xm_Result" class="div-form" prefix="uxL">
+    <h2 class="title"> Exam Log </h2>
+    <div class="div-row">
+        <label>اسم </label>
+        <input type="text" id="uxLFirstName" rule="{fn:'required'}" vgroup="s"  placeholder="اسم درخواست کننده  " maxlength=18  class="search" >
+        <label>ولد</label>
+        <input type="text" id="uxLFatherName" rule="{fn:'required'}" vgroup="s"  placeholder="اسم پدر " class="search" />
+    </div>
+    <div class="div-row">
+        <label>نمبر تذکره</label>
+        <input type="text" id="uxLNID" rule="{fn:'required'}" vgroup="s"  placeholder=" نمبر تذکره" maxlength=18  class="search" >
+        <label>OTP</label>
+        <input type="text" id="uxLApplicantCode" rule="{fn:'required'}" vgroup="s"  placeholder="OTP" class="search" />
+    </div>
+    <div class="div-row">
+        <label>Score</label>
+        <input type="text" id="uxLScore" rule="{fn:'required'}" vgroup="s"  placeholder="اسم درخواست کننده  " maxlength=18  >
+        <label>نتیجه</label>
+        <input type="text" id="uxLResult" rule="{fn:'required'}" vgroup="s"  placeholder="اسم پدر " />
+    </div>
+    <div class="div-form-control">
+        <input type="submit" action="create" value="جدید" />
+        <!--<input type="submit" action="save" vgroup="s" value="ثبت" />-->
+        <input type="submit" action="search" value="جستجو">
+        <div class="toggler"></div>
+    </div>
+    <grid id="gveconfsys_xm_vResult" style="max-height:200px;">
+        <column id="FirstName" caption="اسم"></column>
+        <column id="FatherName" caption="اسم پدر"></column>
+        <column id="NID" caption="نمبر تذکره"></column>
+        <column id="ApplicantCode" caption="نمبر OTP"></column>
+        <column id="Score" caption="نمبر تذکره"></column>
+        <column id="Result" caption="نمبر تذکره"></column>
+    </grid>
+</div>

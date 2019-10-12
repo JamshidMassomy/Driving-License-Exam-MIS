@@ -55,6 +55,39 @@
     function fnCallMethods() {
         JsBarcode("#barcode1", $('#dveconfsys_xm_ApplicantOTP').data('widget').record[2]);
         var Printwindow = window.open("", "true");
+        //var _temp = `
+        //    <table>
+        //    <thead> 
+        //        <tr>
+        //            <th>ID</th>
+        //            <th>Name</th>
+        //            <th>FatherName</th>
+        //            <th>NID</th>
+        //            <th>OTP<th>
+        //        </tr>
+        //    </thead>
+        //    <tbody>
+        //        <tr>
+        //            <th>$ID</th>
+        //            <th>$FirstName</th>
+        //            <th>$LastName</th>
+        //            <th>$NID</th>
+        //            <th>$OTP</th>
+        //        </tr>
+        //    </tbody>
+        //    </table>
+        //    `;
+
+
+        //Printwindow.document.write(_temp.replace('$ID', 1).
+        //    replace("$FirstName", $('#uxFirstName').val()).
+        //    replace("$LastName", $('#uxLastName').val()).
+        //    replace("$NID", $('#uxLNID').val()).
+        //    replace("$OTP", $('#uxMOTP')).val());
+        //Printwindow.document.close();
+
+
+
         var templ =
             "<html>                                " +
                 "    <head>                            " +
@@ -67,13 +100,35 @@
                 "            }                         " +
                 "        </style>                      " +
                 "    </head>                           " +
-                "    <body>                            " +
-                "         $FirstName                       " +
-                "         $image                       " +
+            "    <body>                            " +
+                "  " +
+                "<form style='margin:auto;'> " +
+                "<fieldset style='position:relative;margin-left: 28em;margin-right: 31em;' >" +
+                "<legend>" +
+                "Info" +
+                "</legend>" +
+                "Name:$FirstName" +
+                "<br>" +
+                "FatherName: $FatherName" +
+                "<br>" +
+                "OTP:$image  " +
+                "</fieldset>" +
+                "" +
+                "" +
+                "" +
+                "</form>  " +
+                "" +
+                "" +
+                "" +
+                "" +
+                "" +
+                "                        " +
+                "                               " +
                 "    </body>                           " +
                 "</html>                               ";
         Printwindow.document.write(templ.replace(
-                '$FirstName', $('#uxLFirstName').val())
+            '$FirstName', $('#uxLFirstName').val())
+        .replace('$FatherName', $('#uxLFatherName').val())
             .replace('$image', $("#barcode1").get(0).outerHTML)
             .replace(/"/g, '\''));
         Printwindow.document.close();
@@ -98,8 +153,6 @@
 
         //}
     }
-
-
 
 
 

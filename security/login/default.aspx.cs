@@ -26,4 +26,8 @@ public partial class security_login_default : System.Web.UI.Page
         if (user.IsAuthenticated) Response.Redirect("~/cpanel/");
         
     }
+    protected  void uxHome_Click(object o, EventArgs e)
+    {
+        Response.Redirect("~/Exam/");
+    }
 }

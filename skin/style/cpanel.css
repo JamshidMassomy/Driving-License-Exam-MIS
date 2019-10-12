@@ -368,11 +368,11 @@ body {
         }
 
 .div-footer {
-    background: rgba(0, 0, 0, 0) url("../logo/Traffic2.png") no-repeat scroll 1px 1px / 140px auto;
-    bottom: 4px;
+    background: rgba(0, 0, 0, 0) url("../logo/Transport1.png") no-repeat scroll 1px 1px / 140px auto;
+    /*bottom: 0px;*/
     float: right;
-    height: 20%;
-    left: 2px;
+    height: 33%;
+    left: 24px;
     position: fixed;
     width: 300px;
     opacity: 0.5;

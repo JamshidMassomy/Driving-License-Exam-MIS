@@ -40,6 +40,15 @@
             <img src="../../skin/logo/AK_white_DA.png" alt="" style="height: 2rem;" />
         </a>
     </div>
+    <div class="collapse navbar-collapse" id="navbar-mobile">
+        <ul class="navbar-nav ml-md-auto">
+            <li class="nav-item dropdown">
+                <asp:LinkButton runat="server"  OnClick="uxHome_Click" class="navbar-nav-link"   >
+                    <i class="icon-home2 mr-3 icon-2x">Home</i>
+                </asp:LinkButton>	            
+            </li>
+        </ul>
+    </div>
 </div>
 </header>
 <div class="row" style="margin-left: 0px;">

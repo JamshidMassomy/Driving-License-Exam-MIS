@@ -5,8 +5,8 @@
     void Application_Start(object sender, EventArgs e) 
     {
         // Code that runs on application startup
-        plus._System.Configuration.Manager.Set(plus._System.Configuration.ConfigurationElement.BASE_URL, "http://192.168.2.161/Exam/");
-        plus._System.Configuration.Manager.Set(plus._System.Configuration.ConfigurationElement.SECURITY_PATH, "http://192.168.2.161/security/");
+        plus._System.Configuration.Manager.Set(plus._System.Configuration.ConfigurationElement.BASE_URL, "http://localhost/Exam/");
+        plus._System.Configuration.Manager.Set(plus._System.Configuration.ConfigurationElement.SECURITY_PATH, "http://localhost/security/");
         plus._System.Configuration.Manager.Set(plus._System.Configuration.ConfigurationElement.SYSTEM_LANGUAGE, plus.Util.Language.Dari);
 		plus._System.Configuration.Manager.Set(plus._System.Configuration.ConfigurationElement.AUTHENTICATION_MODE, plus._System.Configuration.AuthenticationMode.MOBILE);
 		plus._System.Configuration.Manager.Set(plus._System.Configuration.ConfigurationElement.CONFSYS_DB, "econfsys");

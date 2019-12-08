@@ -14,6 +14,7 @@ public partial class security_login_default : System.Web.UI.Page
     }
     protected void uxLogin_Click(object sender, EventArgs e)
     {
+        //for test purpose
         plus.Security.Principal.Identity user = plus.Security.Authentication.Authenticate("jamshid.massomy", "password4321", "8989");
         if (user.IsAuthenticated) Response.Redirect("~/cpanel/");
        
@@ -36,7 +37,7 @@ public partial class security_login_default : System.Web.UI.Page
             var _otp = Code.Text;
             Session["OTP"] = _otp;
             Session["IsAuthenticate"] = true;
-            Response.Redirect("~/Exam/");
+            Response.Redirect("~/Exam/intro/");
         }
         else
         {

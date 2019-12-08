@@ -1,27 +1,31 @@
 ﻿<style>
-  ._photo{
-      margin-top: -290px;
-      padding: 28em;
-  }
+    ._photo {
+        margin-top: -290px;
+        padding: 28em;
+    }
 </style>
 <div id="dveconfsys_xm_Question" class="div-form" prefix="uxL">
     <h2 class="title"> Question management </h2>
     <div class="div-row">
         <label>Question </label>
-        <textarea id="uxLQuestion" rule="{fn:'required'}" vgroup="s"></textarea>   
+        <textarea id="uxLQuestion" rule="{fn:'required'}" vgroup="s"></textarea>
+    </div>
+    <div class="div-row">
+        <label>Languague</label>
+        <select id="uxLLanguagueID" path="look.Language" text="Name" vgroup="s"></select>
     </div>
     <div class="div-row">
         <label>Category</label>
         <select id="uxLCategoryID" path="xm.Category" text="Name"></select>
         <label>isActive</label>
-        <input id="uxLIsActive"  type="checkbox"  />
+        <input id="uxLIsActive" type="checkbox" />
     </div>
     <div class="_photo">
         <div class="div-photo">
-            <photo dir="XMphoto" ></photo>
+            <photo dir="photos"></photo>
             <input type="hidden" id="uxPStatusID" value="42" default="42" keep="true" />
         </div>
-    </div>  
+    </div>
     <div class="div-form-control">
         <input type="submit" action="create" value="جدید" />
         <input type="submit" action="save" vgroup="s" value="ثبت" />
@@ -39,9 +43,9 @@
     <h2 class="title">Options and Answers</h2>
     <div class="div-row">
         <label> Options </label>
-        <textarea type="text" id="uxMLabel" rule="{fn:'required'}" vgroup="s" class="w400"/>
-        
-    </div>
+        <textarea type="text" id="uxMLabel" rule="{fn:'required'}" vgroup="s" class="w400" />
+
+        </div>
     <div class="div-row">
         <label> Score </label>
         <input type="text" id="uxMPoint" rule="{fn:'phone'}" vgroup="s" />
@@ -58,7 +62,7 @@
     </grid>
 </div>
 <script>
- 
+
 
 
 

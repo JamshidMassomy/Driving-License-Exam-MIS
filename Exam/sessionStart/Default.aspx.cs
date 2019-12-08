@@ -9,6 +9,7 @@ public partial class EMS_Default : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            
             if (!Convert.ToBoolean(Session["IsAuthenticate"]))
             {
                 Response.Redirect("~/security/index/");
@@ -18,6 +19,9 @@ public partial class EMS_Default : System.Web.UI.Page
                 ViewState["CategoryID"] = 0;
                 Session["SessionStart"] = DateTime.Now.AddMinutes(5);
                 GetUserInfo();
+                GenerateQuestion();
+
+
             }
         }
     }
@@ -50,7 +54,7 @@ public partial class EMS_Default : System.Web.UI.Page
             var Options = plus.Data.DAL.FindArrayList(plus.Data.DAL.GetSettings("Default"),
                 "SELECT * FROM xm.Choice where QuestionID = "+row["ID"]+" ");
             Question.InnerText =Convert.ToString(row["Question"]);
-            QImg.Src = "../Exam/XMphoto/"+row["FileName"] +"";
+            QImg.Src = "../../Exam/photos/" + row["FileName"] +"";
             _1thBox.Text = Convert.ToString(Options[0][2]);
             _2thBox.Text = Convert.ToString(Options[1][2]);
             _3thBox.Text = Convert.ToString(Options[2][2]);
@@ -97,16 +101,16 @@ public partial class EMS_Default : System.Web.UI.Page
         }
         
     }
-    protected void Info_Skip(object obj, EventArgs eva)
-    {
-        xm.Visible = true;
-        info.Visible = false;
-        GenerateQuestion();
-    }
+    //protected void Info_Skip(object obj, EventArgs eva)
+    //{
+    //    xm.Visible = true;
+    //    info.Visible = false;
+    //    GenerateQuestion();
+    //}
     protected void Finish()
     {
        // plus.Data.DAL.valueOf("Default", "EXEC xm.spSaveResult '" + Session["OTP"] + "','" + DateTime.Now + "' ");
-        Response.Redirect("Result.aspx");
+        Response.Redirect("~/Exam/result");
         Session.Abandon();
         
     }

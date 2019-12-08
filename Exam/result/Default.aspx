@@ -1,15 +1,15 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Result.aspx.cs" Inherits="Exam_Result" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="Default" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <link href="../skin/Limitless/global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css" />
-    <link href="../skin/Limitless/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="../skin/Limitless/assets/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css" />
-    <link href="../skin/Limitless/assets/css/components.min.css" rel="stylesheet" type="text/css" />
-    <link href="../skin/Limitless/assets/css/colors.min.css" rel="stylesheet" type="text/css" />
-    <script src="../skin/Limitless/global_assets/js/main/jquery.min.js"></script>
+    <link href="../../skin/Limitless/global_assets/css/icons/icomoon/styles.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../skin/Limitless/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../skin/Limitless/assets/css/bootstrap_limitless.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../skin/Limitless/assets/css/components.min.css" rel="stylesheet" type="text/css" />
+    <link href="../../skin/Limitless/assets/css/colors.min.css" rel="stylesheet" type="text/css" />
+    <script src="../../skin/Limitless/global_assets/js/main/jquery.min.js"></script>
     <title>Print</title>
     <style>
     .breadcrumb-item{
@@ -37,7 +37,7 @@
 <header>
     <div class="navbar navbar-expand-md navbar-dark bg-indigo navbar-static">
         <div class="navbar-brand">
-            <img src="../skin/logo/AK_white_DA.png" alt="" style="height: 2rem;" />
+            <img src="../../skin/logo/AK_white_DA.png" alt="" style="height: 2rem;" />
         </div>
         <div class="collapse navbar-collapse" >
             <ul class="navbar-nav ml-md-auto">

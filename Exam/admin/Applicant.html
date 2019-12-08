@@ -1,4 +1,4 @@
-﻿<script src="http://192.168.2.161/apis/js/external/JsBarcode.js"></script>
+﻿
 <div id="dveconfsys_xm_Applicant" class="div-form" prefix="uxL" >
     <h2 class="title"> Applicant Registration and Validation </h2>
     <div class="div-row">
@@ -41,50 +41,23 @@
         <svg id="barcode1" class="Print"></svg>
     </div>
     <div class="div-form-control">
+        <input type="submit" action="save" id="_genOPT" value="GEN-OTP" onclick="fnCallMethods()" />
         <input type="submit" action="create" value="جدید" id="_clrbarcode" />
         <!--<input type="submit" action="save" vgroup="s" value="ثبت" />-->
         <!--<input type="submit" id="Print" value="پرنت بارکد">-->
-        <input type="submit" action="save" id="_genOPT" value="GEN-OTP" onclick="fnCallMethods()"/>
+        <input type="submit" action="print" value="پرنت" id="_clrbarcode" />
         <div class="toggler"></div>
     </div>
     <grid id="gveconfsys_xm_vApplicantOTP" style="max-height:100px;">
         <column id="OTP" caption="OTP"></column>
+        <command action="print" src="../../skin/icon/printer.png" />
     </grid>
 </div>
 <script>
     function fnCallMethods() {
         JsBarcode("#barcode1", $('#dveconfsys_xm_ApplicantOTP').data('widget').record[2]);
         var Printwindow = window.open("", "true");
-        //var _temp = `
-        //    <table>
-        //    <thead> 
-        //        <tr>
-        //            <th>ID</th>
-        //            <th>Name</th>
-        //            <th>FatherName</th>
-        //            <th>NID</th>
-        //            <th>OTP<th>
-        //        </tr>
-        //    </thead>
-        //    <tbody>
-        //        <tr>
-        //            <th>$ID</th>
-        //            <th>$FirstName</th>
-        //            <th>$LastName</th>
-        //            <th>$NID</th>
-        //            <th>$OTP</th>
-        //        </tr>
-        //    </tbody>
-        //    </table>
-        //    `;
-
-
-        //Printwindow.document.write(_temp.replace('$ID', 1).
-        //    replace("$FirstName", $('#uxFirstName').val()).
-        //    replace("$LastName", $('#uxLastName').val()).
-        //    replace("$NID", $('#uxLNID').val()).
-        //    replace("$OTP", $('#uxMOTP')).val());
-        //Printwindow.document.close();
+       
 
 
 
@@ -103,7 +76,7 @@
             "    <body>                            " +
                 "  " +
                 "<form style='margin:auto;'> " +
-                "<fieldset style='position:relative;margin-left: 28em;margin-right: 31em;' >" +
+                "<fieldset style='position:relative;margin-left: 0em;margin-right: 1em;' >" +
                 "<legend>" +
                 "Info" +
                 "</legend>" +
@@ -160,34 +133,7 @@
 
 
 
-    //$('#_clrbarcode').click(function() {
-    //    $('#barcode1').innerHTML = "";
-    //});
-    
-    //function _fnDo() {
-    //    var digits = 'ABCD0123456789'; 
-    //    let OTP = ''; 
-    //    for (let i = 0; i <= 10; i++ ) { 
-    //        OTP += digits[Math.floor(Math.random() * 10)]; 
-    //    }
-    //    document.getElementById('uxMOTP').value = OTP;
-    //    $('#uxMOTP').val(OTP);
-    //    JsBarcode("#barcode1", OTP);
-    //}
-
-    //function fnBind() {
-        
-    //    var _v = $('#uxMOTP').val();
-    //    alert(_v);
-    //    //JsBarcode("#barcode1",_v.toString());
-    //}
-
-//    var tempoo = `
-
-//    s
-
-
-//`;
+  
 
 
     $("#Print").click(function () {

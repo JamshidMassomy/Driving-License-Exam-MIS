@@ -16,6 +16,7 @@ public partial class EMS_Default : System.Web.UI.Page
             }
             else
             {
+                //Qselect.Value = "1";
                 ViewState["CategoryID"] = 0;
                 Session["SessionStart"] = DateTime.Now.AddMinutes(5);
                 GetUserInfo();

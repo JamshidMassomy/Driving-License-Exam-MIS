@@ -267,7 +267,7 @@
             localStorage.removeItem('end2');
             <%--document.getElementById('<%=time.ClientID%>').value = "0";--%>
 
-            self.location = "http://192.168.2.198/Exam/Result.aspx";
+            self.location = "http://192.168.2.198/Exam/Exam/result";
         }
         else {
             var value = min + ":" + sec;

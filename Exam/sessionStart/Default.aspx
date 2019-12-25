@@ -50,22 +50,6 @@
         </div>
     </div>  
 </header>
-<%--<div class="info" runat="server" ID="info">
-<div class="card col-md-10 offset-1">
-<div class="card-body">
-	<div class="text-center mb-3 py-2">
-		<h4 class="font-weight-semibold mb-1">به امتحان نظری جواز راننده گی خوش امدید</h4>
-		<span class=" d-block"> امتحان شامل ۹ سوال بوده و ۱۰ دقیقه وقت دارد  
-		</span>
-        <br/>
-        <span>  برای ادامه روی ،ادامه، کلیک نموده و قت شما اغاز میگردد </span>
-	</div>
-	<div class="d-md-flex align-items-md-center flex-md-wrap text-center text-md-left">
-       <asp:Button runat="server" ID="info_Skip" CssClass="btn btn-primary btn-lg legitRipple" Text="ادامه" OnClick="Info_Skip"   ></asp:Button>
-	</div>
-</div>
-</div>
-</div>--%>
 <div ID="xm" runat="server" Visible="true">
 <div class="row">
     <div class="col-md-4 offset-1">
@@ -164,65 +148,9 @@
         }
     })();
     $('#noty_layout__topRight').fadeOut(3000);
-
-
-
-    $('#info_Skip').on({
-        click: function () {
-            alert('session has started');
-            var minutesleft = 40;
-            var secondsleft = 0;
-            var finishedtext = "وقت شما تمام گردید";
-            var end;
-            if (localStorage.getItem("end2")) {
-                end = new Date(localStorage.getItem("end2"));
-            } else {
-                end = new Date();
-                end.setMinutes(end.getMinutes() + minutesleft);
-                end.setSeconds(end.getSeconds() + secondsleft);
-            }
-            var counter = function () {
-                var now = new Date();
-                var diff = end - now;
-                diff = new Date(diff);
-                var sec = diff.getSeconds();
-                var min = diff.getMinutes() - 6;
-                if (min < 10) {
-                    min = "0" + min;
-                }
-                if (sec < 10) {
-                    sec = "0" + sec;
-                }
-                if (min <= 1) {
-                    document.getElementById('timer').style.backgroundColor = "red";
-                }
-                if (min <= 0) {
-                    clearTimeout(interval);
-                    localStorage.setItem("end2", null)
-                    document.getElementById('timer').innerHTML = finishedtext;
-                    localStorage.removeItem('end2');
-                    self.location = "http://192.168.2.198/Exam/Exam/result/";
-                }
-                else {
-                    var value = min + ":" + sec;
-                    localStorage.setItem("end2", end);
-                    document.getElementById('timer').innerHTML = value;
-                }
-            }
-
-            var interval = setInterval(counter, 1000);
-        }
-
-    });
-
-    //==========================Validation============================
-
-
-
-   
-    function fnQCounter(e) {
+    function fnQCounter() {
         if ($(':input[type="checkbox"]:checked').length <= 0) {
-            e.preventDefault();
+            //e.preventDefault();
             alert("گزینه ها خالی است ");
         }
         var active = document.getElementById('<%=Qselect.ClientID%>').value;
@@ -234,7 +162,7 @@
     //=================================================================
     
     //=======================Clock===================================
-    var minutesleft = 40;
+    var minutesleft = 49;
     var secondsleft = 0;
     var finishedtext = "وقت شما تمام گردید";
     var end;

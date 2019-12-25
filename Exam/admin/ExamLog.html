@@ -22,6 +22,7 @@
         <input type="submit" action="create" value="جدید" />
         <!--<input type="submit" action="save" vgroup="s" value="ثبت" />-->
         <input type="submit" action="search" value="جستجو">
+        <input type="submit" id="ExportToExcel" value="Export to Excel " />
         <div class="toggler"></div>
     </div>
     <grid id="gveconfsys_xm_vResult" style="max-height:200px;">
@@ -33,3 +34,10 @@
         <column id="Result" caption="نتیجه "></column>
     </grid>
 </div>
+<script>
+    $("#ExportToExcel").click(function (e)
+    {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('#gveconfsys_xm_vResult').html()));
+        e.preventDefault();
+    });
+</script>

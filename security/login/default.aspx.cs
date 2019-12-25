@@ -28,6 +28,6 @@ public partial class security_login_default : System.Web.UI.Page
     }
     protected  void uxHome_Click(object o, EventArgs e)
     {
-        Response.Redirect("~/Exam/");
+        Response.Redirect("~/security/index/");
     }
 }
